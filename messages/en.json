@@ -1,0 +1,372 @@
+{
+  "meta": {
+    "siteName": "Ajnix",
+    "tagline": "Reveal the truth of your campaigns",
+    "positioning": "The first WordPress plugin with real multi-touch attribution for WooCommerce.",
+    "homeTitle": "Ajnix — Multi-touch attribution for WooCommerce",
+    "homeDescription": "Reveal which channels actually drive your sales. 6 attribution models, native WooCommerce tracking, privacy-first. Free WordPress plugin.",
+    "wpTitle": "WordPress Plugin for Multi-touch Attribution — Ajnix",
+    "wpDescription": "Install Ajnix from WordPress.org. Multi-touch attribution, native WooCommerce revenue decomposition, privacy-first. Free, under 2 minutes setup.",
+    "waitlistTitle": "Pro Early Access — Ajnix",
+    "waitlistDescription": "Reserve your spot on the Ajnix Pro waitlist. 50% off for life for the first 100 members. Launch Q2 2026.",
+    "pricingTitle": "Pricing — Ajnix",
+    "pricingDescription": "Simple pricing for every stage. Free WordPress plugin, Starter, Pro and Agency tiers.",
+    "blogTitle": "Ajnix Insights — Attribution, WooCommerce, marketing",
+    "blogDescription": "Articles on multi-touch attribution, WooCommerce analytics, marketing measurement and privacy-first growth."
+  },
+  "nav": {
+    "product": "Product",
+    "blog": "Blog",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "signIn": "Sign in",
+    "installFree": "Install free"
+  },
+  "footer": {
+    "tag": "Multi-touch marketing attribution for WooCommerce. Made in Canada.",
+    "product": "Product",
+    "resources": "Resources",
+    "company": "Company",
+    "integrations": "Integrations",
+    "items": {
+      "product": ["Features", "Pricing", "Changelog", "Roadmap", "Status"],
+      "resources": ["Blog", "Docs", "Guides", "Comparisons"],
+      "company": ["About", "Privacy", "Terms", "Contact", "Press kit"]
+    },
+    "madeIn": "Made in Canada",
+    "copyright": "© 2026 Ajnix"
+  },
+  "home": {
+    "eyebrow": "FOR WOOCOMMERCE & WORDPRESS",
+    "h1a": "Know which channels",
+    "h1b": "actually drive",
+    "h1c": "your sales.",
+    "subtitle": "Multi-touch attribution, native WooCommerce tracking, privacy-first by default. Install the free WordPress plugin in under 2 minutes.",
+    "ctaPrimary": "Install free on WordPress",
+    "ctaSecondary": "See live demo →",
+    "trustLine": "Free forever · No credit card · GDPR compliant",
+    "problemTitle": "The last-click lie is costing you sales",
+    "problemLede": "You're spending on ads but you don't know what's working. Your dashboards contradict each other. Attribution is no longer a commodity — it's a competitive edge.",
+    "problems": [
+      { "h": "Broken attribution", "b": "GA4 credits everything to last-click. That Facebook ad that started the journey? Invisible." },
+      { "h": "Complex setup", "b": "Weeks to configure GA4, months for ad integrations. And it still works halfway." },
+      { "h": "Disconnected data", "b": "Google Ads in one tab, Meta in another, your store elsewhere. You're drowning in dashboards." }
+    ],
+    "solutionEyebrow": "THE SOLUTION",
+    "solutionTitle": "See the full customer journey, in one place",
+    "features": [
+      { "kicker": "01 · Attribution", "h": "6 attribution models, side by side", "b": "Compare Last-touch, First-touch, Linear, Time-decay, Position-based, and Data-driven (ML). Same conversion, different credit — pick the model that matches your reality." },
+      { "kicker": "02 · WooCommerce", "h": "Real revenue, not just page views", "b": "COGS, transaction fees, refunds, net profit — not just gross sales. Native decomposition, no extra setup required." },
+      { "kicker": "03 · Privacy", "h": "Compliant out of the box", "b": "IP truncation, email hashing, no consent banner required in most regions. PIPEDA, GDPR, CCPA ready from day one." },
+      { "kicker": "04 · Setup", "h": "From install to insights in under 5 minutes", "b": "Install the plugin, verify tracking, set your first goal, see data flow in. No GTM, no code, no consultants." }
+    ],
+    "modelsTitle": "6 models, 6 truths about your campaigns",
+    "modelsLede": "Each model distributes credit across touchpoints differently. Which one you pick changes which campaigns appear to \"work\".",
+    "models": [
+      { "k": "Last-touch", "plan": "Free", "desc": "All credit to the last channel before conversion. Simple, but biased toward bottom-of-funnel.", "when": "Best for short purchase cycles." },
+      { "k": "First-touch", "plan": "Pro", "desc": "All credit to the first discovering channel. Reveals where your audience begins their journey.", "when": "When optimizing top-of-funnel acquisition." },
+      { "k": "Linear", "plan": "Pro", "desc": "Equal credit across all touchpoints. Most democratic view, but not intent-aware.", "when": "For balanced channel evaluation." },
+      { "k": "Time-decay", "plan": "Pro", "desc": "More credit to touches closer to conversion. Exponential decay.", "when": "Short but multi-touch journeys." },
+      { "k": "Position-based", "plan": "Pro", "desc": "40% first, 40% last, 20% middle. Balances discovery and closing.", "when": "When both ends of the journey matter equally." },
+      { "k": "Data-driven", "plan": "Pro · ML", "desc": "A Markov model trained on your own journeys. Each credit based on real probabilistic lift.", "when": "100+ conversions/month for stable results." }
+    ],
+    "modelsWhenLabel": "WHEN TO USE",
+    "modelsJourneyLabel": "CUSTOMER JOURNEY · ONE CONVERSION",
+    "pricingTitle": "Start free, upgrade when ready",
+    "pricingSeeAll": "See full pricing →",
+    "pricingFreeTier": "Free",
+    "pricingFreeForever": "Forever",
+    "pricingFreeCta": "Install on WordPress",
+    "pricingFreeFeatures": [
+      "WordPress plugin",
+      "Last-touch attribution",
+      "WooCommerce tracking",
+      "Custom goals",
+      "Marketing costs"
+    ],
+    "pricingProBadge": "COMING Q2 2026",
+    "pricingProTier": "Pro",
+    "pricingProPriceSuffix": "/mo",
+    "pricingProCaption": "50% off for life for the first 100",
+    "pricingProCta": "Join waitlist",
+    "pricingProFeatures": [
+      "Everything in Free, plus:",
+      "5 additional attribution models",
+      "Native ads sync (Google, Meta, LinkedIn, TikTok)",
+      "Real-time visitors + event stream",
+      "AI insights & anomaly detection",
+      "Multi-site dashboard"
+    ],
+    "ctaTitle": "Ready to see your true ROI?",
+    "ctaSubtitle": "Join the free beta. 100% free, always.",
+    "ctaPrimary2": "Install on WordPress",
+    "ctaSecondary2": "Join Pro waitlist"
+  },
+  "wp": {
+    "eyebrow": "FREE WORDPRESS PLUGIN · AVAILABLE ON WP.ORG",
+    "h1a": "The WooCommerce analytics plugin that",
+    "h1b": "actually works",
+    "subtitle": "Real multi-touch attribution. Native WooCommerce revenue. Privacy-first by default. Built for operators, not GA4 power users.",
+    "ctaPrimary": "Install from WP.org",
+    "ctaSecondary": "Watch 90s demo",
+    "badges": ["5.0 · WP.org rating", "PIPEDA · GDPR · CCPA", "< 2 min install"],
+    "stepsTitle": "From install to insight in three steps",
+    "steps": [
+      { "n": "01", "h": "Install", "b": "Search 'Ajnix' in your WordPress admin or upload the .zip. Activate. We auto-detect WooCommerce." },
+      { "n": "02", "h": "Verify", "b": "Open any page on your store. Ajnix confirms tracking is live in real-time. No GTM, no code." },
+      { "n": "03", "h": "Analyze", "b": "Within 30 minutes you have your first attribution dashboard. Within 24h you have meaningful insights." }
+    ],
+    "featuresTitle": "Everything WooCommerce analytics should be",
+    "features": [
+      { "h": "WooCommerce native tracking", "b": "Orders, COGS, fees, refunds, net profit — not bolted on through GA4." },
+      { "h": "Multi-touch attribution", "b": "6 models including Markov-based data-driven. See which channels really drive sales." },
+      { "h": "UTM link builder", "b": "Generate consistent UTMs in one click. Saved presets for each campaign." },
+      { "h": "Custom goals builder", "b": "Track form submits, button clicks, scroll depth. Visual goal builder, no code." },
+      { "h": "Product COGS tracking", "b": "Per-product cost of goods. Net profit per channel, per product, per campaign." },
+      { "h": "Manual marketing costs", "b": "Add ad spend by hand or by CSV. Get true ROAS without ad platform integrations." },
+      { "h": "Form integrations", "b": "Native support for Contact Form 7, WPForms, Gravity Forms, Fluent Forms." },
+      { "h": "Privacy-first", "b": "IP truncation, email hashing, no fingerprinting. No consent banner required in most regions." },
+      { "h": "Developer API", "b": "Hooks, filters, REST endpoints. Extend, customize, automate everything." }
+    ],
+    "comparisonTitle": "How Ajnix compares",
+    "comparisonHeader": ["Feature", "Ajnix", "MonsterInsights", "GA4", "WC Analytics"],
+    "comparisonRows": [
+      ["Price", "Free (Pro from $39/mo)", "$99/yr", "Free", "Free"],
+      ["Real multi-touch attribution", "yes", "no", "no", "no"],
+      ["WooCommerce native", "yes", "partial", "no", "yes"],
+      ["Privacy-first by default", "yes", "no", "no", "yes"],
+      ["No consent banner needed", "yes", "no", "no", "yes"],
+      ["6 attribution models", "yes", "no", "partial", "no"],
+      ["COGS / net profit", "yes", "no", "no", "partial"],
+      ["French native UI", "yes", "no", "yes", "yes"],
+      ["Self-hosted data", "yes", "no", "no", "yes"]
+    ],
+    "devTitle": "Built for developers",
+    "devLede": "Hooks, filters and REST endpoints to extend Ajnix to your needs. Standard WordPress patterns.",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      { "q": "Does it work with HPOS (High-Performance Order Storage)?", "a": "Yes. Ajnix uses the WooCommerce Orders API, which is fully HPOS-compatible. Works on legacy posts-based stores too." },
+      { "q": "Does it slow down my WooCommerce store?", "a": "No. The tracker is a single async script (~9 KB gzipped) loaded from a CDN. All processing happens client-side or in async background jobs. Average impact on Lighthouse: 0." },
+      { "q": "Is my data sent to third-party servers?", "a": "No. Events are stored in your own WordPress database by default. The tracker script is served from cdn.ajnix.com but never sees user data — it just delivers JS." },
+      { "q": "What happens if I uninstall?", "a": "Uninstall is clean. We expose an option to either keep your historical data or wipe all Ajnix tables on uninstall — your choice." },
+      { "q": "Will it work with my caching plugin?", "a": "Yes. Tested with WP Rocket, LiteSpeed Cache, W3 Total Cache, FlyingPress, and SG Optimizer. The tracker is loaded outside of cached HTML." },
+      { "q": "Can I exclude admins from tracking?", "a": "Yes — admins, editors, or any custom role. Configurable in Settings → Privacy. Also excludable by IP." },
+      { "q": "Which form plugins are supported?", "a": "Contact Form 7, WPForms, Gravity Forms, and Fluent Forms out of the box. Custom integrations via the developer API." },
+      { "q": "What's different between Free and Pro?", "a": "Free includes last-touch attribution, WooCommerce tracking, custom goals, and unlimited sites. Pro adds the other 5 attribution models, native ads sync (Google, Meta, LinkedIn, TikTok), real-time visitor stream, AI insights, multi-site dashboard, and Slack/email alerts." },
+      { "q": "Can I use it on multiple sites?", "a": "Yes. The Free plugin is unlimited sites. Paid tiers have site limits (Starter 1, Pro 5, Agency 25)." },
+      { "q": "Do I need a consent banner?", "a": "In most regions, no. We truncate IP addresses, hash emails, and don't use cross-site cookies. Always check with your legal team for your specific jurisdiction." }
+    ],
+    "ctaTitle": "Install Ajnix in under 2 minutes",
+    "ctaSubtitle": "Free forever, no credit card, no consultants needed.",
+    "ctaPrimary2": "Install from WP.org",
+    "ctaSecondary2": "See full feature list"
+  },
+  "waitlist": {
+    "eyebrow": "PRO · COMING Q2 2026",
+    "h1": "Early access to the Pro version",
+    "subtitle": "The first 100 waitlist members get 50% off for life. Real multi-touch attribution, native ads sync, AI insights — built on top of the free plugin.",
+    "emailPlaceholder": "you@yourstore.com",
+    "submit": "Reserve my spot",
+    "claimed": "of {total} claimed",
+    "launching": "Launching Q2 2026",
+    "trustLine": "No spam · Unsubscribe anytime · Priority access",
+    "successTitle": "You're in.",
+    "successBody": "Check your inbox for confirmation. We'll email you the moment Pro is available — and you'll lock in 50% off for life.",
+    "errorGeneric": "Something went wrong. Try again or email us at hello@ajnix.com.",
+    "errorEmail": "Please enter a valid email address.",
+    "unlocksTitle": "What Pro unlocks",
+    "unlocks": [
+      { "h": "5 attribution models", "b": "First-touch, Linear, Time-decay, Position-based, and Data-driven (Markov ML)." },
+      { "h": "Native ads sync", "b": "Pull spend from Google, Meta, LinkedIn, TikTok, Microsoft, Pinterest. Auto-matched ROAS per channel." },
+      { "h": "Real-time visitors", "b": "Live event stream. See who's on your store, what they're doing, what just converted." },
+      { "h": "Customer Journey Sankey", "b": "Visualize every path your customers take across channels and touchpoints." },
+      { "h": "AI insights & alerts", "b": "Anomaly detection on key metrics. Slack and email alerts when something matters." },
+      { "h": "Cohorts, funnels, heatmaps", "b": "Standard product analytics built on top of attribution data, in one place." }
+    ],
+    "whyTitle": "Why join the waitlist now",
+    "why": [
+      { "h": "LIFETIME 50% OFF", "b": "Locked in for the life of your account, even after the price goes up." },
+      { "h": "PRIORITY ACCESS", "b": "Beta seat the moment Pro is ready. No queue, no gatekeeping." },
+      { "h": "INFLUENCE THE ROADMAP", "b": "Direct line to the founder. Your feedback shapes what ships first." },
+      { "h": "FREE BETA PERIOD", "b": "Use Pro free during beta. Pay nothing until we ship V1." }
+    ],
+    "matrixTitle": "Free vs Pro vs Agency",
+    "matrixCategories": [
+      {
+        "name": "Tracking",
+        "rows": [
+          ["WooCommerce orders + COGS", "yes", "yes", "yes"],
+          ["Form submits, custom goals", "yes", "yes", "yes"],
+          ["Manual marketing costs", "yes", "yes", "yes"],
+          ["Real-time visitors", "no", "yes", "yes"]
+        ]
+      },
+      {
+        "name": "Attribution",
+        "rows": [
+          ["Last-touch", "yes", "yes", "yes"],
+          ["First-touch + Linear + Time-decay + Position", "no", "yes", "yes"],
+          ["Data-driven (Markov ML)", "no", "yes", "yes"]
+        ]
+      },
+      {
+        "name": "Dashboards",
+        "rows": [
+          ["Channel + campaign breakdown", "yes", "yes", "yes"],
+          ["Customer Journey Sankey", "no", "yes", "yes"],
+          ["Cohorts + funnels + heatmaps", "no", "yes", "yes"],
+          ["Multi-site dashboard", "no", "no", "yes"],
+          ["White-label reports", "no", "no", "yes"]
+        ]
+      },
+      {
+        "name": "Ads sync",
+        "rows": [
+          ["Google + Meta", "no", "yes", "yes"],
+          ["LinkedIn + TikTok + Microsoft + Pinterest", "no", "yes", "yes"]
+        ]
+      },
+      {
+        "name": "AI & alerts",
+        "rows": [
+          ["Anomaly detection", "no", "yes", "yes"],
+          ["Slack + email alerts", "no", "yes", "yes"],
+          ["AI explanations", "no", "yes", "yes"]
+        ]
+      },
+      {
+        "name": "Operations",
+        "rows": [
+          ["Sites included", "Unlimited", "5", "25"],
+          ["Team members", "1", "3", "Unlimited"],
+          ["API access", "no", "yes", "yes"],
+          ["Support SLA", "Community", "24h", "4h"]
+        ]
+      }
+    ],
+    "matrixHeader": ["Capability", "Free", "Pro", "Agency"],
+    "founderEyebrow": "FROM THE FOUNDER",
+    "founderTitle": "Why I built Ajnix",
+    "founderName": "Eric St-Amant",
+    "founderRole": "Founder, Ajnix",
+    "founderStory": "I was running e-commerce campaigns and realized GA4 was lying to me about which channels were driving sales. Ajnix was born because the tools on the market were either too basic (WooCommerce Analytics is last-touch only) or too expensive ($500+/mo for enterprise analytics like Northbeam or Hyros). Built in Canada, privacy-first, designed for real operators.",
+    "secondCtaTitle": "Reserve your spot before the first 100 fill up",
+    "secondCtaSubtitle": "50% off for life. Launches Q2 2026.",
+    "secondCtaFallback": "Or install the free plugin →"
+  },
+  "pricing": {
+    "title": "Simple pricing for every stage",
+    "subtitle": "Start free with the WordPress plugin. Upgrade when you want full multi-touch attribution and ads sync.",
+    "earlyBirdBanner": "50% off for life for the first 100 waitlist members",
+    "monthly": "/mo",
+    "tiers": [
+      {
+        "name": "Free",
+        "price": "$0",
+        "earlyBird": null,
+        "tagline": "WordPress plugin, forever",
+        "cta": "Install on WordPress",
+        "features": [
+          "Last-touch attribution",
+          "Native WooCommerce tracking (COGS, fees, refunds, net)",
+          "Custom goals (5 max)",
+          "Manual marketing costs",
+          "Form integrations (CF7, WPForms, Gravity, Fluent)",
+          "90 days event retention",
+          "Unlimited sites"
+        ]
+      },
+      {
+        "name": "Starter",
+        "price": "$39",
+        "earlyBird": "$29 for life · first 100",
+        "tagline": "For small WooCommerce stores",
+        "cta": "Join waitlist",
+        "features": [
+          "Everything in Free, plus:",
+          "Multi-touch attribution (all 6 models)",
+          "Unlimited event retention",
+          "Ads sync: Google + Meta",
+          "Unlimited goals",
+          "Email support 48h",
+          "1 site"
+        ]
+      },
+      {
+        "name": "Pro",
+        "price": "$99",
+        "earlyBird": "$69 for life · first 100",
+        "tagline": "Sweet spot for SMB e-commerce",
+        "cta": "Join waitlist",
+        "highlight": true,
+        "features": [
+          "Everything in Starter, plus:",
+          "Ads sync: LinkedIn, TikTok, Microsoft, Pinterest",
+          "Real-time visitors + event stream",
+          "Customer Journey Sankey",
+          "AI insights & anomaly detection",
+          "Slack + email alerts",
+          "Cohorts, funnels, heatmaps",
+          "Priority support 24h",
+          "5 sites"
+        ]
+      },
+      {
+        "name": "Agency",
+        "price": "$299",
+        "earlyBird": "$199 for life · first 100",
+        "tagline": "For agencies, multi-clients",
+        "cta": "Contact sales",
+        "features": [
+          "Everything in Pro, plus:",
+          "Multi-sites centralized dashboard",
+          "Team members + roles",
+          "White-label",
+          "Automated client reports",
+          "API access",
+          "Support SLA 4h",
+          "25 sites"
+        ]
+      }
+    ],
+    "faqTitle": "Pricing questions",
+    "faq": [
+      { "q": "Is the WordPress plugin really free forever?", "a": "Yes. The Ajnix WordPress plugin (last-touch attribution + WooCommerce tracking + custom goals + manual costs) will always be free, on unlimited sites." },
+      { "q": "How does the early-bird discount work?", "a": "The first 100 people who join the Pro waitlist get 50% off for life — for any paid tier they pick. Lock in $29, $69 or $199/mo and never pay full price as long as your account is active." },
+      { "q": "Can I switch tiers later?", "a": "Yes — upgrade or downgrade at any time. Pro-rated billing." },
+      { "q": "Do you offer annual pricing?", "a": "Yes. Annual billing gets you ~17% off (2 months free). Available at launch." }
+    ]
+  },
+  "blog": {
+    "title": "Ajnix Insights",
+    "subtitle": "Articles on multi-touch attribution, WooCommerce analytics, and privacy-first marketing.",
+    "filterAll": "All",
+    "categories": ["Attribution", "WooCommerce", "Marketing", "Privacy", "Tutorials", "Comparisons", "Product"],
+    "readArticle": "Read article →",
+    "readingTime": "{minutes} min read",
+    "tocLabel": "Table of contents",
+    "publishedOn": "Published",
+    "by": "By",
+    "relatedTitle": "Related articles",
+    "newsletterTitle": "Get one article like this per week",
+    "newsletterSubtitle": "No spam. Just attribution thinking, in your inbox.",
+    "newsletterPlaceholder": "you@yourstore.com",
+    "newsletterCta": "Subscribe"
+  },
+  "comparison": {
+    "eyebrow": "COMPARISON",
+    "verdictTitle": "Our take",
+    "chooseAjnixIf": "Choose Ajnix if",
+    "chooseThemIf": "Choose {name} if",
+    "tableTitle": "Feature-by-feature comparison",
+    "pricingTitle": "Pricing",
+    "ctaTitle": "Try Ajnix for free",
+    "ctaSubtitle": "Install the WordPress plugin in under 2 minutes. No credit card."
+  },
+  "common": {
+    "checkmark": "yes",
+    "cross": "no",
+    "partial": "partial",
+    "skipToContent": "Skip to content"
+  }
+}
