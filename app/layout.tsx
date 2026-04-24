@@ -4,11 +4,11 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://ajnix.com'),
   title: {
-    default: 'Ajnix — Multi-touch attribution for WooCommerce',
-    template: '%s · Ajnix',
+    default: 'Ajnix, Multi-touch Attribution & Conversion Analytics for E-commerce',
+    template: '%s | Ajnix',
   },
   description:
-    'The first WordPress plugin with real multi-touch attribution for WooCommerce. Install free in under 2 minutes.',
+    'Find out which channels actually drive your sales. Multi-touch attribution, server-side tracking, conversion analytics. Transparent, privacy-first, no bullshit.',
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', sizes: 'any' },

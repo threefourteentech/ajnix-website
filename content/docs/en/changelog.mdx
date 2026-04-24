@@ -1,0 +1,130 @@
+---
+title: "Changelog"
+description: "Version history and changes for Ajnix."
+category: "meta"
+updatedAt: "2026-04-23"
+---
+
+> Ajnix follows [semantic versioning](https://semver.org/). Major changes are announced at least 30 days in advance.
+
+## [0.1.0] · 2026-04-XX
+
+First public release.
+
+### Added
+
+**Tracking**
+- Lightweight JavaScript tracker (6.8 KB gzipped)
+- UTM and 6 click ID capture (Google, Meta, TikTok, Microsoft, LinkedIn, X)
+- Automatic touchpoint and session detection
+- Built-in bot detection (canvas fingerprinting excluded)
+
+**Attribution**
+- Last-touch attribution engine with 30-day window
+- Future-proof `attribution_results` table for Pro models
+
+**WooCommerce**
+- Automatic purchase and refund tracking
+- Revenue breakdown: gross, net, COGS, fees, refunded, gross profit
+- Inline COGS editing per product with margin calculation
+- Transaction fee detection for Stripe, PayPal, Square
+
+**Custom goals**
+- Visual builder for 6 types: URL, click, form submit, custom event, scroll, time
+- Up to 5 active goals on free (filter `ajnix_goals_free_limit` to adjust)
+
+**Form integrations (auto-detected)**
+- Contact Form 7
+- WPForms
+- Gravity Forms
+- Fluent Forms
+
+**Costs and ROI**
+- Manual costs with prorating across overlapping periods (up to 10 on free)
+- Product COGS with margin calculation
+- Aggregated transaction fees
+- ROI summary per channel
+
+**UTM Link Builder**
+- UTM link creation with live preview
+- Autocomplete based on history
+- SVG QR code export
+- Conversion counter per link
+
+**Consent integrations**
+- Complianz
+- CookieYes
+- Cookiebot
+- Iubenda
+- Custom event hook
+
+**Developer API**
+- Public PHP functions (13 documented functions)
+- Hooks (13 actions)
+- Filters (20 filters)
+- Full REST API under `/wp-json/ajnix/v1/`
+- Public JS API via `window.ajnix()` and `window.AjnixTracker`
+
+**Privacy**
+- IP truncated before storage (IPv4 /24, IPv6 /48)
+- No PII stored
+- Do Not Track respected
+- JS tracker self-hosting (one toggle)
+
+**Operations**
+- Daily aggregation via wp-cron
+- Weekly retention purge (events 90d, sessions 180d)
+- Multisite: each site has its own independent `site_id`
+
+### Requirements
+
+- WordPress 5.8+
+- PHP 7.4+
+- MySQL 5.7+ / MariaDB 10.3+ with InnoDB
+
+### Documentation
+
+- Full documentation published at [ajnix.com/docs](https://ajnix.com/docs)
+- Developer reference in `docs/developers.md`
+- Security audit published
+
+---
+
+## Coming up
+
+### [0.2.0] · planned
+
+- Goal Builder UX improvements
+- New "Top Conversion Paths" view
+- Additional form plugins (Elementor Pro Forms in preview)
+
+### [1.0.0] · at Pro launch
+
+- Marks public API stability
+- Activates Pro SaaS features
+
+---
+
+## Versioning policy
+
+- **MAJOR** (1.0 → 2.0): breaking changes to the public API (rare, 30d notice)
+- **MINOR** (1.0 → 1.1): new features, compatibility preserved
+- **PATCH** (1.0.0 → 1.0.1): bug fixes only
+
+Functions, hooks, and filters documented in the [Developer Reference](/docs/reference/php-api) are **stable** within a major version.
+
+Anything prefixed `_ajnix_internal_*` or flagged "Phase 2" can change between minor versions.
+
+---
+
+## Subscribe to updates
+
+To get notified about new releases:
+
+<Card title="Join the Pro waitlist" href="/pro-waitlist">
+  Get announcement emails for every release.
+</Card>
+
+<Card title="wp.org forum" href="https://wordpress.org/support/plugin/ajnix/">
+  Discussion and version announcements.
+</Card>

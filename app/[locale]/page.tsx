@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { JsonLd, organizationJsonLd, websiteJsonLd } from '@/components/seo/JsonLd';
+import { buildMetadata } from '@/components/seo/buildMetadata';
 import { HomeHero } from '@/components/home/HomeHero';
 import { HomeProblem } from '@/components/home/HomeProblem';
 import { HomeSolution } from '@/components/home/HomeSolution';
@@ -17,10 +18,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
-  return {
+  return buildMetadata({
     title: t('homeTitle'),
     description: t('homeDescription'),
-  };
+    locale: locale as 'en' | 'fr',
+    canonicalPath: locale === 'en' ? '/' : `/${locale}`,
+  });
 }
 
 export default async function HomePage({

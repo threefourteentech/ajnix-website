@@ -1,0 +1,112 @@
+---
+title: "Vérifier que le tracking fonctionne"
+description: "S'assurer qu'Ajnix capture bien tes visiteurs et tes événements."
+tier: "free"
+category: "getting-started"
+updatedAt: "2026-04-23"
+---
+
+> Temps : 1 minute. Aucun code requis.
+
+## Méthode rapide (visuelle)
+
+1. Ouvre ton site dans un **onglet privé** (incognito)
+2. Visite 2-3 pages
+3. Va dans **Ajnix > Overview** dans ton admin WordPress
+4. Vérifie que "Visiteurs aujourd'hui" affiche au moins 1
+
+Si oui, le tracking fonctionne. Tu peux arrêter ici.
+
+## Méthode technique (developer tools)
+
+Pour vérifier plus en détail :
+
+1. Ouvre ton site dans un onglet privé
+2. Ouvre les developer tools du navigateur (F12 ou cmd+option+I)
+3. Va dans l'onglet **Network**
+4. Filtre par "track" ou "ajnix"
+5. Navigue entre quelques pages de ton site
+6. Tu devrais voir des requêtes POST vers `/wp-json/ajnix/v1/track` avec status 200
+
+<Callout type="tip">
+Dans la console, tape `ajnix('ready', () => console.log('Ajnix OK'))`. Si tu vois "Ajnix OK", le tracker est initialisé.
+</Callout>
+
+## Vérifier des événements spécifiques
+
+### Page view
+
+Automatique sur toutes les pages. Visible dans **Ajnix > Events** avec `event_name = page_view`.
+
+### WooCommerce purchase
+
+Si WooCommerce est actif :
+
+1. Passe une commande test (ou utilise ton mode staging)
+2. Finalise la commande jusqu'au statut "Terminée"
+3. Va dans **Ajnix > Ecommerce**
+4. Tu devrais voir la commande dans "Ventes récentes"
+
+Le purchase est tracké **côté serveur** via le hook WooCommerce `woocommerce_order_status_completed`, pas côté JavaScript. Ça garantit qu'il est toujours capturé, même si l'utilisateur a un adblocker.
+
+### Soumission de formulaire
+
+Pour Contact Form 7, WPForms, Gravity Forms, Fluent Forms :
+
+1. Va dans **Ajnix > Goals**
+2. Cherche "Objectifs détectés" (auto-detection des formulaires existants)
+3. Active un objectif pour un formulaire de test
+4. Soumets le formulaire sur ton site
+5. Vérifie que l'événement `form_submit` apparaît dans **Ajnix > Events**
+
+## Qu'est-ce qui empêche le tracking ?
+
+### Ton propre tracking est exclu
+
+Par défaut, Ajnix ne trackes PAS les utilisateurs connectés en admin. C'est voulu pour éviter de polluer tes données avec tes propres visites.
+
+Si tu veux tester en tant que toi-même :
+- Soit déconnecte-toi
+- Soit utilise un onglet privé
+- Soit va dans **Ajnix > Settings > Exclusions** et décoche "Exclure les admins"
+
+### Environnement staging détecté
+
+Si ton site est sur un domaine staging (contenant "staging", "dev", ".local", "localhost"), Ajnix désactive automatiquement le tracking.
+
+Pour forcer le tracking en staging, va dans **Ajnix > Settings > Environnement** et active "Tracker cet environnement".
+
+### Plugin de consentement actif
+
+Si tu as Complianz, CookieYes, Cookiebot, ou Iubenda, Ajnix respecte leur état par défaut. Si le visiteur n'a pas accepté les cookies marketing/analytics, le tracker ne se charge pas.
+
+Pour tester :
+- Utilise un onglet privé pour reset le consentement
+- Ou désactive temporairement l'intégration dans **Ajnix > Settings > Privacy > Respecter le bandeau**
+
+### Adblocker
+
+Le tracker JavaScript peut être bloqué par uBlock Origin, AdGuard, Brave. Dans ce cas :
+
+- Les events JS (page_view, clicks, scroll) sont perdus
+- Mais les events serveur (purchases WooCommerce, form submits) sont **toujours** trackés
+
+<Callout type="note">
+Ajnix est listé par défaut dans aucune blocklist adblocker connue. Si tu constates un blocage, signale-le sur le [forum wp.org](https://wordpress.org/support/plugin/ajnix/).
+</Callout>
+
+### Problème de cache
+
+Si tu as un plugin de cache agressif (WP Rocket, WP Super Cache, W3 Total Cache, LiteSpeed), le script Ajnix devrait être chargé normalement car il est asynchrone et ne nécessite pas de contournement.
+
+Si tu as un doute, vide le cache et rafraîchis.
+
+## Voir aussi
+
+<Card title="Troubleshooting : events ne remontent pas" href="/fr/docs/guides/troubleshooting/events-ne-remontent-pas">
+  Guide détaillé pour les cas où le tracking semble cassé.
+</Card>
+
+<Card title="Configurer WooCommerce" href="/fr/docs/guides/tracking/configurer-woocommerce">
+  Setup spécifique pour débloquer le tracking e-commerce.
+</Card>

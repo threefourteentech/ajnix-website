@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Section } from '@/components/ui/Section';
@@ -8,7 +9,28 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Checkmark, CrossMark } from '@/components/ui/Icon';
 import { WaitlistForm } from '@/components/waitlist/WaitlistForm';
+import { StickyWaitlistBar } from '@/components/waitlist/StickyWaitlistBar';
 import { getWaitlistCount } from '@/lib/waitlist';
+import {
+  Activity,
+  ArrowRight,
+  BarChart3,
+  GitBranch,
+  GitMerge,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+} from 'lucide-react';
+
+const UNLOCK_ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
+  'git-branch': GitBranch,
+  zap: Zap,
+  activity: Activity,
+  'git-merge': GitMerge,
+  sparkles: Sparkles,
+  'bar-chart-3': BarChart3,
+  'shield-check': ShieldCheck,
+};
 
 export async function generateMetadata({
   params,
@@ -17,21 +39,58 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
+  const ogImage = locale === 'fr' ? '/og_image_fr_waitlist.png' : '/og_image_en_waitlist.png';
   return {
     title: t('waitlistTitle'),
     description: t('waitlistDescription'),
+    openGraph: {
+      title: t('waitlistTitle'),
+      description: t('waitlistDescription'),
+      images: [{ url: ogImage, width: 1200, height: 630, alt: t('waitlistTitle') }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('waitlistTitle'),
+      description: t('waitlistDescription'),
+      images: [ogImage],
+    },
   };
 }
 
+type MatrixCell = string | { v: string; note: string };
+type MatrixRow = MatrixCell[];
 type MatrixCategory = {
   name: string;
-  rows: string[][];
+  rows: MatrixRow[];
 };
 
-function MatrixCell({ value }: { value: string }) {
-  if (value === 'yes') return <span className="text-ok"><Checkmark size={15} strokeWidth={3} /></span>;
-  if (value === 'no') return <span className="text-bad opacity-60"><CrossMark size={15} /></span>;
-  return <span className="font-mono text-[12px]">{value}</span>;
+function MatrixValue({ cell }: { cell: MatrixCell }) {
+  const value = typeof cell === 'string' ? cell : cell.v;
+  const note = typeof cell === 'string' ? null : cell.note;
+
+  let indicator: React.ReactNode;
+  if (value === 'yes') {
+    indicator = <span className="text-ok"><Checkmark size={15} strokeWidth={3} /></span>;
+  } else if (value === 'no') {
+    indicator = <span className="text-bad opacity-60"><CrossMark size={15} /></span>;
+  } else if (value === 'partial') {
+    indicator = (
+      <span
+        aria-label="partial"
+        className="inline-block h-[2px] w-3 rounded-full bg-ink-5 opacity-70"
+      />
+    );
+  } else {
+    indicator = <span className="font-mono text-[12px]">{value}</span>;
+  }
+
+  if (!note) return indicator;
+  return (
+    <div className="flex flex-col gap-1">
+      <div>{indicator}</div>
+      <div className="font-mono text-[11px] leading-[1.3] text-ink-5">{note}</div>
+    </div>
+  );
 }
 
 export default async function ProWaitlistPage({
@@ -44,13 +103,15 @@ export default async function ProWaitlistPage({
   const t = await getTranslations({ locale, namespace: 'waitlist' });
   const counter = await getWaitlistCount();
 
-  const unlocks = t.raw('unlocks') as { h: string; b: string }[];
+  const unlocks = t.raw('unlocks') as { icon: string; h: string; b: string }[];
+  const unlocksCtaTitle = t('unlocksCtaTitle');
   const why = t.raw('why') as { h: string; b: string }[];
   const categories = t.raw('matrixCategories') as MatrixCategory[];
   const matrixHeader = t.raw('matrixHeader') as string[];
 
   return (
     <>
+      <StickyWaitlistBar initialCount={counter.count} target={counter.target} />
       <Header />
       <main id="main">
         <section className="relative overflow-hidden">
@@ -86,18 +147,34 @@ export default async function ProWaitlistPage({
             <h2 className="max-w-[22ch] text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px]">
               {t('unlocksTitle')}
             </h2>
-            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {unlocks.map((u) => (
-                <Card key={u.h} className="p-6">
-                  <div className="flex size-9 items-center justify-center rounded-[6px] bg-ajx-gradient text-white">
-                    <Checkmark size={16} strokeWidth={2.5} />
-                  </div>
-                  <h3 className="mt-4 text-[18px] font-semibold tracking-[-0.01em]">
-                    {u.h}
+            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {unlocks.map((u) => {
+                const IconCmp = UNLOCK_ICONS[u.icon] ?? GitBranch;
+                return (
+                  <Card key={u.h} className="p-6">
+                    <div className="flex size-9 items-center justify-center rounded-[6px] bg-ajx-gradient text-white">
+                      <IconCmp size={16} strokeWidth={2.2} />
+                    </div>
+                    <h3 className="mt-4 text-[18px] font-semibold tracking-[-0.01em]">
+                      {u.h}
+                    </h3>
+                    <p className="mt-2 text-[14px] leading-[1.6] text-ink-4">{u.b}</p>
+                  </Card>
+                );
+              })}
+              <a
+                href="#matrix"
+                className="group flex flex-col justify-between rounded-card border border-dashed border-indigo-200 bg-ajx-gradient-soft p-6 transition-colors hover:border-indigo-400"
+              >
+                <div className="flex size-9 items-center justify-center rounded-[6px] border border-indigo-200 bg-white text-indigo-700">
+                  <ArrowRight size={16} strokeWidth={2.2} />
+                </div>
+                <div>
+                  <h3 className="mt-4 text-[18px] font-semibold tracking-[-0.01em] text-indigo-800">
+                    {unlocksCtaTitle}
                   </h3>
-                  <p className="mt-2 text-[14px] leading-[1.6] text-ink-4">{u.b}</p>
-                </Card>
-              ))}
+                </div>
+              </a>
             </div>
           </Section>
         </section>
@@ -118,7 +195,7 @@ export default async function ProWaitlistPage({
           </div>
         </Section>
 
-        <section className="border-y border-rule bg-canvas">
+        <section id="matrix" className="scroll-mt-24 border-y border-rule bg-canvas">
           <Section as="div">
             <h2 className="max-w-[22ch] text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px]">
               {t('matrixTitle')}
@@ -156,7 +233,7 @@ export default async function ProWaitlistPage({
                             return (
                               <td
                                 key={ci}
-                                className={`border-b border-rule-2 px-4 py-3.5 ${
+                                className={`border-b border-rule-2 px-4 py-3.5 align-top ${
                                   ci === 0 ? 'text-ink-2' : ''
                                 }`}
                                 style={
@@ -168,7 +245,7 @@ export default async function ProWaitlistPage({
                                     : undefined
                                 }
                               >
-                                {ci === 0 ? cell : <MatrixCell value={cell} />}
+                                {ci === 0 ? (typeof cell === 'string' ? cell : cell.v) : <MatrixValue cell={cell} />}
                               </td>
                             );
                           })}
@@ -184,15 +261,15 @@ export default async function ProWaitlistPage({
         <Section>
           <div className="grid items-start gap-12 lg:grid-cols-[320px_1fr] lg:gap-16">
             <div>
-              <div
-                className="aspect-[4/5] rounded-hero bg-ajx-gradient-soft border border-indigo-100 flex items-center justify-center"
-                aria-hidden
-              >
-                <div
-                  className="flex size-24 items-center justify-center rounded-full bg-ajx-gradient text-white text-[32px] font-semibold"
-                >
-                  EA
-                </div>
+              <div className="aspect-[4/5] overflow-hidden rounded-hero border border-indigo-100 bg-ajx-gradient-soft">
+                <Image
+                  src="/eric-stamant-ajnix.webp"
+                  alt={t('founderName')}
+                  width={640}
+                  height={800}
+                  className="h-full w-full object-cover"
+                  priority={false}
+                />
               </div>
               <div className="mt-5">
                 <div className="text-[16px] font-semibold">{t('founderName')}</div>
@@ -204,10 +281,12 @@ export default async function ProWaitlistPage({
               <h2 className="mt-4 text-[32px] leading-[1.15] tracking-[-0.025em] md:text-[40px]">
                 {t('founderTitle')}
               </h2>
-              <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.65] text-ink-3 md:text-[18px]">
-                {t('founderStory')}
-              </p>
-              <div className="mt-6 font-mono text-[13px] text-ink-5">— {t('founderName')}</div>
+              <div className="mt-6 max-w-[62ch] space-y-4 text-[17px] leading-[1.65] text-ink-3 md:text-[18px]">
+                {t('founderStory').split('\n\n').map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+              <div className="mt-6 font-mono text-[13px] text-ink-5">{t('founderName')}</div>
             </div>
           </div>
         </Section>

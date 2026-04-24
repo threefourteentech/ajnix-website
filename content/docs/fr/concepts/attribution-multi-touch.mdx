@@ -1,0 +1,118 @@
+---
+title: "Attribution multi-touch"
+description: "Pourquoi le dernier clic est un mensonge et comment le multi-touch change tes décisions."
+category: "concepts"
+updatedAt: "2026-04-23"
+---
+
+> L'attribution répond à une seule question : "à qui dois-je attribuer le crédit de cette vente ?" Mais selon le modèle que tu choisis, la réponse change radicalement.
+
+## Le problème
+
+Imagine un parcours client réel :
+
+```
+Jour 1 : Marie découvre ta marque via une pub Meta.
+Jour 3 : Elle revient via ton email newsletter.
+Jour 5 : Elle cherche "ton produit review" sur Google et clique un résultat organique.
+Jour 7 : Elle clique une annonce Google Ads et achète.
+```
+
+**Quel canal mérite le crédit de cette vente ?**
+
+- Google Analytics 4 (et la plupart des outils par défaut) dit : **Google Ads, 100%**.
+- Mais si tu avais coupé Meta il y a 7 jours, Marie ne t'aurait jamais connu.
+- Si tu avais arrêté ta newsletter, elle t'aurait oublié.
+- Si tu n'avais pas bien SEO, elle n'aurait pas trouvé les reviews.
+
+C'est ça, **le mensonge du dernier clic**.
+
+## Qu'est-ce que le multi-touch attribution ?
+
+L'attribution multi-touch distribue le crédit d'une conversion **entre plusieurs touchpoints** du parcours client, au lieu de tout attribuer à un seul.
+
+Avec le même parcours de Marie :
+
+| Modèle | Meta | Email | Google Organic | Google Ads |
+|---|---|---|---|---|
+| Last-touch (défaut GA4) | 0% | 0% | 0% | 100% |
+| First-touch | 100% | 0% | 0% | 0% |
+| Linear | 25% | 25% | 25% | 25% |
+| Time-decay | 10% | 20% | 30% | 40% |
+| Position-based | 40% | 10% | 10% | 40% |
+| Data-driven (ML) | 35% | 25% | 10% | 30% |
+
+**Même parcours, 6 réalités différentes.** Le modèle que tu choisis détermine où tu mettras ton budget marketing le mois prochain.
+
+## Pourquoi ça change tes décisions
+
+Si tu crois que Google Ads génère 100% de tes ventes (vue last-touch) :
+- Tu augmentes le budget Google Ads
+- Tu coupes Meta parce que "ça ne convertit pas"
+- Tu arrêtes ta newsletter
+
+Résultat 3 mois plus tard : tes ventes Google Ads chutent, parce que plus personne ne découvre ta marque. Tu as cassé ton top-of-funnel.
+
+**Le multi-touch révèle la vraie contribution de chaque canal.** Tu arrêtes de couper les canaux de découverte qui, en apparence, "ne convertissent pas directement".
+
+## Comment Ajnix implémente l'attribution
+
+Ajnix capture chaque **touchpoint** d'un visiteur :
+
+- URL d'arrivée avec UTMs
+- Source, medium, campaign (classification automatique)
+- Click IDs de 6 plateformes : Google (`gclid`), Meta (`fbclid`), TikTok (`ttclid`), Microsoft (`msclkid`), LinkedIn (`li_fat_id`), X (`twclid`)
+- Referrer, landing page, device, timestamp
+
+Un visiteur peut avoir plusieurs touchpoints sur plusieurs sessions. Quand il convertit, Ajnix regarde tous les touchpoints dans une fenêtre de 30 jours et applique le modèle d'attribution choisi.
+
+### Version gratuite : last-touch
+
+Par défaut, Ajnix attribue 100% du crédit au dernier touchpoint avant la conversion (fenêtre 30 jours). C'est le modèle le plus commun, utilisé par GA4 et la plupart des outils.
+
+### Version Pro : 5 modèles additionnels
+
+- **First-touch** : 100% au premier canal découvert
+- **Linear** : crédit égal entre tous les touchpoints
+- **Time-decay** : plus de crédit aux touchpoints proches de la conversion
+- **Position-based** : 40% au premier, 40% au dernier, 20% répartis au milieu
+- **Data-driven (ML)** : algorithme Markov appris sur tes propres parcours
+
+[Voir le détail de chaque modèle](/fr/docs/concepts/modeles-attribution)
+
+## Quel modèle choisir ?
+
+Il n'y a pas UNE bonne réponse. Ça dépend de ton business.
+
+### Last-touch suffit si
+
+- Cycle d'achat court (quelques minutes à quelques heures)
+- Un seul canal d'acquisition principal
+- Peu de retargeting, peu d'email marketing
+- Produit d'impulsion (accessoire mode à 20 €)
+
+### Multi-touch est essentiel si
+
+- Cycle d'achat long (plusieurs jours ou semaines)
+- Plusieurs canaux actifs (Meta + Google + email + SEO)
+- Retargeting actif
+- Produit à considération (>100 €, ou B2B)
+- Tu veux optimiser un mix de canaux
+
+<Callout type="tip">
+Ma recommandation : compare plusieurs modèles pour le même période. Si les top canaux diffèrent beaucoup d'un modèle à l'autre, c'est le signe que ton parcours est complexe et que le multi-touch apporte vraiment de la valeur.
+</Callout>
+
+## Voir aussi
+
+<Card title="Les 6 modèles en détail" href="/fr/docs/concepts/modeles-attribution">
+  Plongée dans chaque modèle avec exemples visuels.
+</Card>
+
+<Card title="Choisir son modèle" href="/fr/docs/guides/attribution/choisir-son-modele">
+  Matrice de décision selon ton business.
+</Card>
+
+<Card title="Touchpoints vs sessions" href="/fr/docs/concepts/touchpoints-vs-sessions">
+  Comprendre la différence pour bien interpréter tes rapports.
+</Card>

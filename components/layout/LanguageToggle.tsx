@@ -1,6 +1,7 @@
 'use client';
 
 import { useLocale } from 'next-intl';
+import { useParams } from 'next/navigation';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 import type { Locale } from '@/i18n/routing';
@@ -9,10 +10,18 @@ export function LanguageToggle({ variant = 'pill' }: { variant?: 'pill' | 'inlin
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
+  const rawParams = useParams();
 
   const switchTo = (next: Locale) => {
     if (next === locale) return;
-    router.replace(pathname, { locale: next });
+    // next-intl's usePathname returns the typed template (e.g. '/blog/[slug]')
+    // for dynamic routes. We must pass the resolved params so the router can
+    // fill the template — otherwise it throws "Insufficient params".
+    const { locale: _locale, ...params } = rawParams as Record<string, string | string[]>;
+    router.replace(
+      { pathname, params } as Parameters<typeof router.replace>[0],
+      { locale: next },
+    );
   };
 
   if (variant === 'inline') {
@@ -48,9 +57,9 @@ export function LanguageToggle({ variant = 'pill' }: { variant?: 'pill' | 'inlin
           key={l}
           onClick={() => switchTo(l)}
           className={cn(
-            'rounded-[4px] px-2.5 py-[5px] uppercase transition-colors',
+            'rounded-[4px] px-2.5 py-[5px] uppercase font-semibold transition-colors',
             l === locale
-              ? 'bg-surface text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06)]'
+              ? 'bg-surface text-violet-700 shadow-[0_1px_2px_rgba(0,0,0,0.08)]'
               : 'text-ink-5 hover:text-ink',
           )}
           aria-current={l === locale ? 'page' : undefined}

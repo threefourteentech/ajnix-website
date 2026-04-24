@@ -38,7 +38,7 @@ export function HomeModels() {
         <div
           role="tablist"
           aria-label="Attribution models"
-          className="flex gap-1 overflow-x-auto border-b border-rule"
+          className="flex gap-1 overflow-x-auto overflow-y-hidden border-b border-rule"
         >
           {models.map((m, i) => (
             <button

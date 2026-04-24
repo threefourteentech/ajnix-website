@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { Badge } from '@/components/ui/Badge';
 import type { BlogPost } from '@/lib/blog';
@@ -16,11 +17,21 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
   if (featured) {
     return (
       <Link
-        href={`/blog/${post.slug}`}
+        href={{ pathname: '/blog/[slug]', params: { slug: post.slug } }}
         className="group block overflow-hidden rounded-hero border border-rule bg-surface transition-[border-color,transform,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-ink-6 hover:shadow-card-hover"
       >
         <div className="grid md:grid-cols-[6fr_5fr]">
-          <div className="aspect-[16/9] md:aspect-auto" style={{ background: gradient }} />
+          <div className="relative aspect-[16/9] md:aspect-auto" style={{ background: gradient }}>
+            {post.featuredImage && (
+              <Image
+                src={post.featuredImage.url}
+                alt={post.featuredImage.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            )}
+          </div>
           <div className="p-7 md:p-9">
             <Badge variant="gradient">{post.category}</Badge>
             <h2 className="mt-4 text-[28px] leading-[1.15] tracking-[-0.02em] md:text-[32px]">
@@ -45,10 +56,20 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
 
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={{ pathname: '/blog/[slug]', params: { slug: post.slug } }}
       className="group flex flex-col overflow-hidden rounded-card border border-rule bg-surface transition-[border-color,transform,box-shadow] duration-150 hover:-translate-y-0.5 hover:border-ink-6 hover:shadow-card-hover"
     >
-      <div className="aspect-[16/9]" style={{ background: gradient }} aria-hidden />
+      <div className="relative aspect-[16/9]" style={{ background: gradient }}>
+        {post.featuredImage && (
+          <Image
+            src={post.featuredImage.url}
+            alt={post.featuredImage.alt}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+          />
+        )}
+      </div>
       <div className="flex flex-1 flex-col p-6">
         <Badge variant="gradient" className="self-start">
           {post.category}

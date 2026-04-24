@@ -28,20 +28,19 @@ export function HomeHero() {
         }}
       />
 
-      <div className="relative mx-auto grid w-full max-w-section items-center gap-12 px-6 pb-16 pt-[72px] md:px-8 md:pb-20 md:pt-[88px] lg:grid-cols-[1.1fr_1fr] lg:gap-[72px]">
+      <div className="relative mx-auto grid w-full max-w-section grid-cols-1 items-center gap-12 px-6 pb-16 pt-[72px] md:px-8 md:pb-20 md:pt-[88px] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-[72px]">
         <div>
           <Eyebrow>{t('eyebrow')}</Eyebrow>
           <h1
-            className="mt-[18px] mb-5 text-[40px] sm:text-[52px] lg:text-[64px]"
-            style={{ lineHeight: 1.02, letterSpacing: '-0.03em' }}
+            className="mt-[18px] mb-4 text-[32px] sm:text-[44px] md:text-[52px] lg:text-[64px]"
+            style={{ lineHeight: 1.06, letterSpacing: '-0.03em' }}
           >
-            {t('h1a')}
-            <br />
-            {t('h1b')}
-            <br />
-            <span className="grad-text">{t('h1c')}</span>
+            {t('h1Lead')} <span className="grad-text">{t('h1Highlight')}</span>
+            <span className="block text-ink-4 mt-3 text-[22px] sm:text-[28px] md:text-[32px] lg:text-[38px]" style={{ lineHeight: 1.2 }}>
+              {t('h1Sub')}
+            </span>
           </h1>
-          <p className="max-w-[52ch] text-[18px] leading-[1.45] text-ink-4 md:text-[20px]">
+          <p className="max-w-[60ch] text-[17px] leading-[1.45] text-ink-4 md:text-[19px]">
             {t('subtitle')}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">

@@ -3,30 +3,21 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/cn';
-import type { BlogPost } from '@/lib/blog';
+import type { BlogPost, BlogCategory } from '@/lib/blog';
 import { BlogCard } from './BlogCard';
 
 type Props = {
   posts: BlogPost[];
   featured: BlogPost | null;
+  categories: BlogCategory[];
 };
 
-const categoryKeys = [
-  'Attribution',
-  'WooCommerce',
-  'Marketing',
-  'Privacy',
-  'Tutorials',
-  'Comparisons',
-  'Product',
-] as const;
-
-export function BlogGrid({ posts, featured }: Props) {
+export function BlogGrid({ posts, featured, categories }: Props) {
   const t = useTranslations('blog');
   const [filter, setFilter] = useState<string>('all');
-  const labels = t.raw('categories') as string[];
 
-  const filtered = filter === 'all' ? posts : posts.filter((p) => p.category === filter);
+  const filtered =
+    filter === 'all' ? posts : posts.filter((p) => p.category === filter);
 
   return (
     <div>
@@ -36,12 +27,12 @@ export function BlogGrid({ posts, featured }: Props) {
           active={filter === 'all'}
           onClick={() => setFilter('all')}
         />
-        {categoryKeys.map((k, i) => (
+        {categories.map((c) => (
           <FilterPill
-            key={k}
-            label={labels[i] ?? k}
-            active={filter === k}
-            onClick={() => setFilter(k)}
+            key={c.slug}
+            label={c.name}
+            active={filter === c.name}
+            onClick={() => setFilter(c.name)}
           />
         ))}
       </div>
@@ -59,7 +50,9 @@ export function BlogGrid({ posts, featured }: Props) {
       </div>
 
       {filtered.length === 0 && (
-        <p className="mt-16 text-center text-[15px] text-ink-5">No articles yet in this category.</p>
+        <p className="mt-16 text-center text-[15px] text-ink-5">
+          {t('emptyCategory')}
+        </p>
       )}
     </div>
   );

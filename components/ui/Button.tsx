@@ -40,6 +40,14 @@ type ButtonAsLink = BaseProps & { href: string; target?: string; rel?: string };
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
+export function buttonClasses({
+  variant = 'primary',
+  size = 'md',
+  className,
+}: { variant?: Variant; size?: Size; className?: string } = {}) {
+  return cn(base, variants[variant], sizes[size], className);
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { variant = 'primary', size = 'md', className, children, ...props },
   ref,

@@ -14,10 +14,10 @@ export type BlogPostSeed = {
 
 const articleBody = (kind: 'long' | 'short') => {
   if (kind === 'short') {
-    return `<p>Ajnix gives you honest attribution without the setup circus. Plug the plugin in, connect WooCommerce, and within minutes you see the revenue each channel <em>actually</em> drives — not what last-click insists on.</p>
+    return `<p>Ajnix gives you honest attribution without the setup circus. Plug the plugin in, connect WooCommerce, and within minutes you see the revenue each channel <em>actually</em> drives, not what last-click insists on.</p>
 <h2>Why last-click is lying to you</h2>
-<p>Last-click attribution hands all the credit to whatever brought a visitor to the checkout page. That ignores every touch that came before — the Instagram post that introduced your brand, the newsletter that kept them warm, the comparison article that tipped them over.</p>
-<blockquote>Attribution is no longer a commodity — it's a competitive edge.</blockquote>
+<p>Last-click attribution hands all the credit to whatever brought a visitor to the checkout page. That ignores every touch that came before: the Instagram post that introduced your brand, the newsletter that kept them warm, the comparison article that tipped them over.</p>
+<blockquote>Attribution is no longer a commodity. It's a competitive edge.</blockquote>
 <h2>What changes with multi-touch</h2>
 <p>With six models side by side you stop arguing about which is "right" and start seeing which channels consistently show up across all of them. That's the signal worth funding.</p>
 <h3>Getting started</h3>
@@ -31,12 +31,12 @@ const articleBody = (kind: 'long' | 'short') => {
 <h2>Six models, six truths</h2>
 <p>Ajnix gives you six attribution models side by side:</p>
 <ul>
-<li><strong>Last-touch</strong> — for comparison, and for short purchase cycles.</li>
-<li><strong>First-touch</strong> — where the journey began.</li>
-<li><strong>Linear</strong> — equal credit everywhere.</li>
-<li><strong>Time-decay</strong> — more credit to touches near conversion.</li>
-<li><strong>Position-based</strong> — 40/20/40 across first, middle, last.</li>
-<li><strong>Data-driven</strong> — a Markov model trained on your own journeys.</li>
+<li><strong>Last-touch</strong>, for comparison, and for short purchase cycles.</li>
+<li><strong>First-touch</strong>, where the journey began.</li>
+<li><strong>Linear</strong>, equal credit everywhere.</li>
+<li><strong>Time-decay</strong>, more credit to touches near conversion.</li>
+<li><strong>Position-based</strong>, 40/20/40 across first, middle, last.</li>
+<li><strong>Data-driven</strong>, a Markov model trained on your own journeys.</li>
 </ul>
 <blockquote>Don't pick a model. Pick <em>all six</em> and look at which channels show up across the board.</blockquote>
 <h3>What good looks like</h3>
@@ -121,12 +121,12 @@ export const blogPostsSeed: BlogPostSeed[] = [
     locales: {
       en: {
         title: 'Do you really need a consent banner?',
-        excerpt: 'GDPR, PIPEDA, CCPA — what each actually requires, what they don\'t, and why IP truncation plus email hashing gets you compliant in most stores.',
+        excerpt: 'GDPR, PIPEDA, CCPA, what each actually requires, what they don\'t, and why IP truncation plus email hashing gets you compliant in most stores.',
         content: articleBody('short'),
       },
       fr: {
         title: 'Avez-vous vraiment besoin d\'un bandeau de consentement ?',
-        excerpt: 'RGPD, PIPEDA, CCPA — ce que chacun exige réellement, ce qu\'il n\'exige pas, et pourquoi la troncature IP et le hachage email suffisent dans la plupart des boutiques.',
+        excerpt: 'RGPD, PIPEDA, CCPA, ce que chacun exige réellement, ce qu\'il n\'exige pas, et pourquoi la troncature IP et le hachage email suffisent dans la plupart des boutiques.',
         content: articleBody('short'),
       },
     },

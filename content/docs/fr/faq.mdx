@@ -1,0 +1,237 @@
+---
+title: "Questions fréquentes"
+description: "Réponses aux questions fréquentes sur Ajnix."
+category: "faq"
+updatedAt: "2026-04-23"
+---
+
+<Accordion>
+
+<AccordionItem title="Fonctionne avec HPOS (High-Performance Order Storage) ?">
+
+Oui. Ajnix utilise l'API Orders de WooCommerce, qui est entièrement compatible HPOS. Fonctionne aussi sur les boutiques legacy basées sur les posts.
+
+</AccordionItem>
+
+<AccordionItem title="Ralentit-il ma boutique WooCommerce ?">
+
+Non. Le tracker JavaScript fait 6,8 Ko gzippé et se charge en asynchrone. Aucune requête DB bloquante : toutes les agrégations tournent en tâche de fond (cron quotidien). Impact typique : moins de 10ms sur le Largest Contentful Paint (LCP).
+
+</AccordionItem>
+
+<AccordionItem title="Mes données sont-elles envoyées à des serveurs tiers ?">
+
+Non en version gratuite. Toutes les données restent dans ta base WordPress. Aucun appel réseau sortant depuis PHP.
+
+Le tracker JavaScript est chargé depuis `cdn.ajnix.com` par défaut pour des raisons de performance. Tu peux l'auto-héberger en un toggle : **Ajnix > Settings > Advanced > Self-host tracker**.
+
+En version Pro, tu peux activer une synchronisation optionnelle vers nos serveurs SaaS pour les fonctionnalités avancées (dashboard centralisé, insights IA, conversions server-side). Avec opt-in explicite, jamais par défaut.
+
+</AccordionItem>
+
+<AccordionItem title="Que se passe-t-il si je désinstalle ?">
+
+À la désinstallation, Ajnix propose deux options :
+- **"Tout supprimer"** : supprime toutes les tables et options de la base
+- **"Conserver les données"** : désactive le plugin mais garde l'historique au cas où tu réactives plus tard
+
+Pour une suppression complète immédiate, va dans **Ajnix > Settings > Data > Danger zone** et clique "Purger toutes les données" (demande de taper PURGE).
+
+</AccordionItem>
+
+<AccordionItem title="Compatible avec mon plugin de cache ?">
+
+Oui. Testé et compatible avec :
+- WP Rocket
+- WP Super Cache
+- W3 Total Cache
+- LiteSpeed Cache
+- Cloudflare Page Rules
+- Autoptimize
+
+Le tracker JS se charge en asynchrone et ne nécessite aucun contournement de cache.
+
+</AccordionItem>
+
+<AccordionItem title="Puis-je exclure les admins du tracking ?">
+
+Oui. Par défaut, les utilisateurs avec rôle "administrator" sont exclus.
+
+Pour ajuster :
+1. Va dans **Ajnix > Settings > Exclusions**
+2. Coche/décoche les rôles à exclure
+
+Pour un contrôle avancé, utilise le filter PHP :
+
+```php
+add_filter( 'ajnix_should_track_current_user', function ( $should, $event ) {
+    if ( in_array( 'custom_role', wp_get_current_user()->roles, true ) ) {
+        return false;
+    }
+    return $should;
+}, 10, 2 );
+```
+
+</AccordionItem>
+
+<AccordionItem title="Quels plugins de formulaires sont supportés ?">
+
+**En version gratuite :**
+- Contact Form 7
+- WPForms
+- Gravity Forms
+- Fluent Forms
+
+**En version Pro :**
+Tous les précédents, plus Elementor Pro Forms, Ninja Forms, Forminator, Formidable Forms, WS Form, Caldera Forms.
+
+Pour les plugins non supportés nativement, tu peux tracker les soumissions via la JS API ou le filter `ajnix_detected_forms`.
+
+</AccordionItem>
+
+<AccordionItem title="Différence Free vs Pro ?">
+
+**Version gratuite :**
+- Tracking WooCommerce complet
+- Attribution last-touch
+- Objectifs personnalisés (jusqu'à 5)
+- Coûts manuels (jusqu'à 10)
+- 4 plugins de formulaires principaux
+- 90 jours d'historique détaillé, agrégats illimités
+- Hooks et filters PHP
+- Sites illimités en instances séparées (pas de dashboard consolidé)
+- 1 utilisateur
+
+**Version Pro (99 $/mois, ou 49,50 $/mois à vie pour les 100 premiers) :**
+- 5 modèles d'attribution additionnels (first-touch, linéaire, time-decay, position-based, data-driven ML)
+- Synchronisation automatique des coûts ads (Google, Meta au launch, TikTok et Pinterest dans les 2 mois)
+- Conversions server-side (Meta CAPI, Google Enhanced)
+- Insights IA et détection d'anomalies
+- Temps réel
+- Historique illimité
+- REST API + webhooks
+- 3 sites avec dashboard consolidé, 3 membres d'équipe
+- Support email 24h
+
+**Version Agency (299 $/mois) :**
+- Tout le Pro
+- Sites illimités + dashboard consolidé avancé
+- Membres d'équipe illimités
+- Rapports white-label
+- Sync ads toutes plateformes (+ LinkedIn, Microsoft)
+- Gestion des permissions avancée
+- Support prioritaire SLA 4h
+
+Voir la [page Tarifs](/fr/tarifs) pour le détail complet.
+
+</AccordionItem>
+
+<AccordionItem title="Utilisable sur plusieurs sites ?">
+
+**Version gratuite** : installable sur un nombre illimité de sites WordPress, mais chaque instance est indépendante (pas de dashboard consolidé, données séparées par site).
+
+**Version Pro** : 3 sites inclus avec dashboard consolidé, idéal pour les brands qui opèrent plusieurs boutiques (FR/EN, B2B/B2C, multi-niches). 3 membres d'équipe.
+
+**Version Agency** : sites illimités avec dashboard consolidé avancé, membres illimités, rapports white-label, gestion des permissions granulaire. Pour les agences et les opérations enterprise.
+
+</AccordionItem>
+
+<AccordionItem title="Dois-je installer un bandeau de consentement ?">
+
+Dans la plupart des régions, non. Ajnix est conçu privacy-first :
+- IP anonymisée avant stockage
+- Aucune donnée personnelle identifiable
+- Aucun fingerprinting
+- Respect de Do Not Track
+
+Tu restes conforme PIPEDA, RGPD, CCPA par défaut.
+
+Si tu as déjà un bandeau de consentement (Complianz, CookieYes, Cookiebot, Iubenda), Ajnix peut s'y intégrer via **Ajnix > Settings > Privacy > Respecter le bandeau**.
+
+[Plus de détails](/fr/docs/concepts/privacy-by-design)
+
+</AccordionItem>
+
+<AccordionItem title="Comment Ajnix se compare à MonsterInsights ou GA4 ?">
+
+MonsterInsights et GA4 se concentrent sur l'attribution last-touch et ne décomposent pas le vrai revenu WooCommerce (COGS, frais, profit net).
+
+De plus, ils transmettent tes données à Google Analytics. Ajnix stocke tout dans ta propre base WordPress, sans transfert externe.
+
+Ajnix est conçu spécifiquement pour WooCommerce avec 6 modèles d'attribution, un calcul natif du revenu net, et une conformité privacy par défaut.
+
+Voir la [table comparative détaillée](/fr/plugin-wordpress#comparatif).
+
+</AccordionItem>
+
+<AccordionItem title="Ajnix fonctionne-t-il sans WooCommerce ?">
+
+Oui. Ajnix fonctionne comme un outil d'analytics et d'attribution générique sur n'importe quel site WordPress.
+
+Sans WooCommerce, tu perds la décomposition du revenu e-commerce mais gardes tout le reste :
+- Multi-touch attribution (via objectifs)
+- Objectifs personnalisés
+- UTM builder
+- Intégrations formulaires
+- Hooks PHP
+
+</AccordionItem>
+
+<AccordionItem title="Puis-je migrer depuis un autre plugin analytics ?">
+
+Les événements historiques de ton ancien plugin ne peuvent pas être importés directement dans Ajnix (les schémas de données diffèrent).
+
+Recommandation :
+1. Laisse l'ancien plugin tourner quelques semaines en parallèle
+2. Compare les chiffres pour calibrer
+3. Passe définitivement sur Ajnix une fois satisfait
+
+En Pro, tous tes événements Ajnix sont synchronisés vers notre SaaS à l'upgrade, rétroactivement. Voir [Migration](/fr/docs/guides/migration/depuis-monsterinsights).
+
+</AccordionItem>
+
+<AccordionItem title="WordPress multisite est-il supporté ?">
+
+Partiellement. Chaque site d'un réseau multisite maintient son propre `site_id` et ses propres données. L'agrégation globale entre sites n'est pas supportée en Phase 1.
+
+Pour un dashboard consolidé multi-sites, la version Agency est en développement.
+
+</AccordionItem>
+
+<AccordionItem title="Combien coûte Ajnix Pro ?">
+
+Ajnix est structuré en 3 tiers :
+
+- **Free** : 0 $/mois, sites illimités (instances séparées), 1 membre, features essentielles (attribution last-touch, tracking WC complet, 5 objectifs, 10 coûts manuels)
+- **Pro** : 99 $/mois, 3 sites avec dashboard consolidé, 3 membres (la grande majorité des features Pro)
+- **Agency** : 299 $/mois, sites illimités, membres illimités, rapports white-label, permissions avancées
+
+Les 100 premiers membres de la waitlist bénéficient de **49,50 $/mois à vie** sur le tier Pro (50% de réduction sur le tarif officiel de 99 $/mois).
+
+[Voir les tarifs détaillés](/fr/tarifs) ou [rejoindre la waitlist](/fr/liste-pro).
+
+</AccordionItem>
+
+<AccordionItem title="Ajnix est-il open source ?">
+
+Oui. Ajnix est publié sous licence GPLv2 (comme WordPress). Le code source est disponible sur [GitHub](https://github.com/ajnix/plugin).
+
+Les fonctionnalités Pro sont closed-source (hébergées sur notre SaaS) mais le plugin WordPress de base reste toujours libre et gratuit.
+
+</AccordionItem>
+
+</Accordion>
+
+## Tu n'as pas trouvé ta réponse ?
+
+<Card title="Forum wp.org" href="https://wordpress.org/support/plugin/ajnix/">
+  Questions techniques et bugs : réponse sous 24-48h.
+</Card>
+
+<Card title="Contact business" href="/fr/docs/support/contact">
+  Partenariats, questions commerciales, demandes de démo.
+</Card>
+
+<Card title="Signaler un bug" href="/fr/docs/support/report-bug">
+  Issue GitHub ou forum wp.org.
+</Card>

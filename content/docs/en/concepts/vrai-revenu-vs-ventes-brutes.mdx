@@ -1,0 +1,135 @@
+---
+title: "Net revenue vs gross sales"
+description: "Why Ajnix breaks every order into gross, net, COGS, fees, refunds."
+category: "concepts"
+updatedAt: "2026-04-23"
+---
+
+> When your dashboard shouts "$150,000 in sales this month", how much actually stays in your pocket? Way less than you think.
+
+## The "gross sales" problem
+
+Most analytics tools (GA4, MonsterInsights, the default WooCommerce dashboard) display **gross revenue**. It's the total amount paid by customers.
+
+Typical example:
+
+```
+Gross revenue this month: $150,000
+```
+
+Sounds great. But that number hides:
+- Taxes you owe to the government (not your money)
+- Shipping fees paid by customers (pass-through to carriers)
+- Stripe / PayPal transaction fees (2.9% + $0.30 per transaction)
+- Refunds (you have to give them back)
+- Cost of goods sold (COGS)
+- Discounts applied
+
+Once all that is subtracted, your **real revenue** can be 40-60% lower.
+
+## What Ajnix displays
+
+For every WooCommerce order, Ajnix captures and displays 7 dimensions:
+
+| Dimension | Example | Description |
+|---|---|---|
+| **Gross** | $150 | What the customer pays (WC total) |
+| **Tax** | $22.50 | Applicable taxes (not yours) |
+| **Shipping** | $12 | Shipping fees (pass-through) |
+| **Fees** | $4.65 | Payment fees (Stripe, PayPal, etc.) |
+| **Discount** | $15 | Discounts / coupons applied |
+| **Refunded** | $0 | Refunded amounts (if applicable) |
+| **COGS** | $45 | Cost of goods |
+| **Net** | $51.85 | What actually stays with you |
+
+**Net** is computed automatically:
+```
+Net = Gross - Tax - Shipping - Fees - Refunded - COGS
+```
+
+<Callout type="note">
+You can configure COGS per product in **Ajnix > Costs > Product COGS**. Without COGS, Ajnix will still compute net without deducting material costs, but will flag that the figure is incomplete.
+</Callout>
+
+## Why it changes your decisions
+
+### Concrete example
+
+Imagine two acquisition channels:
+
+```
+Channel A (Google Ads):
+- Gross revenue: $50,000
+- Acquisition cost: $8,000
+- Apparent "ROAS": 6.25x
+```
+
+Looks great. But if we look at real net revenue:
+
+```
+Channel A (Google Ads):
+- Gross revenue: $50,000
+- Taxes (non-recoverable, pass-through): $7,500
+- Shipping (pass-through): $4,000
+- Payment fees (3%): $1,500
+- COGS: $15,000
+- Discounts applied: $3,000
+- Net revenue: $19,000
+- Acquisition cost: $8,000
+- "True ROAS": 2.38x
+```
+
+Drops from 6.25x to 2.38x. If you optimize on apparent ROAS, you'll overinvest in channels that are actually unprofitable.
+
+### With another channel
+
+```
+Channel B (Email marketing):
+- Gross revenue: $30,000
+- Acquisition cost: $500 (email tool)
+- Net revenue: $14,000
+- True ROAS: 28x
+```
+
+Email marketing often looks like a "small channel" in gross reports, but its true ROAS crushes everything else because acquisition costs are near zero.
+
+<Callout type="warning">
+Without a revenue breakdown, you're making decisions on lying numbers. That's the main reason so many e-commerce brands burn Google Ads or Meta Ads budget that's actually unprofitable.
+</Callout>
+
+## Refunds
+
+Ajnix tracks refunds as compensating events. When you refund an order:
+
+- The `refund` event is created automatically via the WooCommerce `woocommerce_order_refunded` hook
+- The refunded amount is subtracted from the period's net revenue
+- The Ecommerce dashboard displays refunds separately for analysis
+
+<Callout type="tip">
+A channel with lots of refunds (e.g., TikTok Ads bringing impulse buyers who regret it) naturally looks less profitable in Ajnix, even if gross revenue is impressive. That's a feature, not a bug.
+</Callout>
+
+## Transaction fees
+
+Ajnix auto-detects payment fees for the major gateways:
+
+- Stripe (via WooCommerce Stripe plugin)
+- PayPal (via WooCommerce PayPal Payments plugin)
+- Square
+- Others: configurable via the `ajnix_transaction_fee_meta_keys` filter
+
+Fees are stored per order and aggregated in ROI reports.
+
+## See also
+
+<Card title="Configure COGS" href="/docs/guides/revenue/configurer-cogs">
+  Set cost of goods per product for precise profit calculation.
+</Card>
+
+<Card title="Calculate true ROAS" href="/docs/guides/revenue/calculer-vrai-roas">
+  Use net revenue to evaluate each channel's profitability.
+</Card>
+
+<Card title="Handle refunds" href="/docs/guides/revenue/gerer-remboursements">
+  How Ajnix handles partial and full refunds.
+</Card>

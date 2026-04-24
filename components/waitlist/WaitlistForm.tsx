@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocale, useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/Input';
@@ -17,12 +17,103 @@ type WaitlistFormProps = {
   variant?: 'hero' | 'banner';
 };
 
-export function WaitlistForm({ initialCounter, source, variant = 'hero' }: WaitlistFormProps) {
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+function loadRecaptcha(siteKey: string): void {
+  if (typeof window === 'undefined') return;
+  if (window.grecaptcha) return;
+  if (document.querySelector('script[data-recaptcha]')) return;
+  const s = document.createElement('script');
+  s.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+  s.async = true;
+  s.defer = true;
+  s.setAttribute('data-recaptcha', 'true');
+  document.head.appendChild(s);
+}
+
+async function getRecaptchaToken(action: string): Promise<string | undefined> {
+  if (!RECAPTCHA_SITE_KEY || typeof window === 'undefined' || !window.grecaptcha) {
+    return undefined;
+  }
+  return new Promise<string>((resolve) => {
+    window.grecaptcha!.ready(async () => {
+      try {
+        const token = await window.grecaptcha!.execute(RECAPTCHA_SITE_KEY, { action });
+        resolve(token);
+      } catch {
+        resolve('');
+      }
+    });
+  });
+}
+
+function useAnimatedCount(target: number): number {
+  const [value, setValue] = useState(target);
+  const fromRef = useRef(target);
+
+  useEffect(() => {
+    const from = fromRef.current;
+    if (from === target) return;
+    const start = performance.now();
+    const duration = 700;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const current = Math.round(from + (target - from) * eased);
+      setValue(current);
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else fromRef.current = target;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+
+  return value;
+}
+
+export function WaitlistForm({ initialCounter, source, variant: _variant = 'hero' }: WaitlistFormProps) {
   const t = useTranslations('waitlist');
   const locale = useLocale() as 'en' | 'fr';
   const [counter, setCounter] = useState(initialCounter);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const animatedCount = useAnimatedCount(counter.count);
+
+  useEffect(() => {
+    if (RECAPTCHA_SITE_KEY) loadRecaptcha(RECAPTCHA_SITE_KEY);
+  }, []);
+
+  useEffect(() => {
+    if (success) return;
+    let cancelled = false;
+    const pull = async () => {
+      try {
+        const res = await fetch('/api/waitlist', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = (await res.json()) as { count: number; target: number };
+        if (!cancelled && typeof json.count === 'number') {
+          setCounter((prev) => (prev.count === json.count ? prev : json));
+        }
+      } catch {
+        /* noop */
+      }
+    };
+    const id = setInterval(pull, 60_000);
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
+  }, [success]);
 
   const {
     register,
@@ -33,10 +124,11 @@ export function WaitlistForm({ initialCounter, source, variant = 'hero' }: Waitl
   const onSubmit = handleSubmit(async ({ email }) => {
     setError(null);
     try {
+      const recaptchaToken = await getRecaptchaToken(source ?? 'waitlist');
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, locale, source }),
+        body: JSON.stringify({ email, locale, source, recaptchaToken }),
       });
       const json = await res.json();
       if (!res.ok || !json.ok) {
@@ -50,7 +142,7 @@ export function WaitlistForm({ initialCounter, source, variant = 'hero' }: Waitl
     }
   });
 
-  const pct = Math.min(100, Math.round((counter.count / counter.target) * 100));
+  const pct = Math.min(100, Math.round((animatedCount / counter.target) * 100));
 
   if (success) {
     return (
@@ -67,6 +159,15 @@ export function WaitlistForm({ initialCounter, source, variant = 'hero' }: Waitl
           </div>
         </div>
         <p className="mt-3 text-[15px] leading-[1.6] text-ink-3">{t('successBody')}</p>
+        <div className="mt-5">
+          <Button
+            href="https://wordpress.org/plugins/ajnix/"
+            variant="primary"
+            size="md"
+          >
+            {t('successPluginCta')}
+          </Button>
+        </div>
       </div>
     );
   }
@@ -76,11 +177,7 @@ export function WaitlistForm({ initialCounter, source, variant = 'hero' }: Waitl
       <form
         noValidate
         onSubmit={onSubmit}
-        className={
-          variant === 'hero'
-            ? 'flex flex-col gap-3 sm:flex-row'
-            : 'flex flex-col gap-3 sm:flex-row'
-        }
+        className="flex flex-col gap-3 sm:flex-row"
       >
         <Input
           type="email"
@@ -113,13 +210,14 @@ export function WaitlistForm({ initialCounter, source, variant = 'hero' }: Waitl
       <div className="mt-5">
         <div className="flex items-baseline justify-between font-mono text-[12px] text-ink-5">
           <span>
-            {counter.count} {t('claimed', { total: counter.target })}
+            <span className="tabular-nums text-ink-2">{animatedCount}</span>{' '}
+            {t('claimed', { total: counter.target })}
           </span>
           <span>{t('launching')}</span>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-rule-2">
           <div
-            className="h-full rounded-full bg-ajx-gradient transition-[width] duration-500"
+            className="h-full rounded-full bg-ajx-gradient transition-[width] duration-700 ease-out"
             style={{ width: `${pct}%` }}
           />
         </div>

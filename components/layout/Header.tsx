@@ -29,7 +29,6 @@ export function Header() {
   const nav = [
     { href: '/wordpress-plugin', label: t('product') },
     { href: '/blog', label: t('blog') },
-    { href: '/pricing', label: t('pricing') },
     { href: '/docs', label: t('docs') },
   ] as const;
 
@@ -52,7 +51,7 @@ export function Header() {
           scrolled ? 'py-3' : 'py-[18px]',
         )}
       >
-        <Link href="/" aria-label="Ajnix — home" className="inline-flex items-center">
+        <Link href="/" aria-label="Ajnix home" className="inline-flex items-center">
           <Image
             src="/ajnix-logo.svg"
             alt="Ajnix"
@@ -83,9 +82,6 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageToggle />
-          <Button variant="ghost" size="sm" disabled aria-disabled className="opacity-60 cursor-not-allowed">
-            {t('signIn')}
-          </Button>
           <Button
             variant="primary"
             size="sm"

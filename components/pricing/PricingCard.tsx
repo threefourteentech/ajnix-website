@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
 type Tier = {
+  key: 'free' | 'pro' | 'agency';
   name: string;
   price: string;
   earlyBird: string | null;
@@ -15,19 +16,21 @@ export function PricingCard({
   tier,
   monthly,
   href,
+  popularLabel,
 }: {
   tier: Tier;
   monthly: string;
   href: string;
+  popularLabel: string;
 }) {
-  const isFree = tier.name.toLowerCase() === 'free';
+  const isFree = tier.key === 'free';
   return (
     <Card gradientBorder={tier.highlight} className="relative flex flex-col p-7">
       {tier.highlight && (
         <div
-          className="absolute -top-3 right-6 rounded-[4px] bg-ajx-gradient px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-white"
+          className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[4px] bg-ajx-gradient px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-white"
         >
-          POPULAR
+          {popularLabel}
         </div>
       )}
       <div
@@ -62,12 +65,12 @@ export function PricingCard({
           <li
             key={f}
             className={`flex items-start gap-2.5 text-[14px] leading-[1.45] ${
-              i === 0 && tier.name !== 'Free'
+              i === 0 && !isFree
                 ? 'font-medium text-ink-5'
                 : 'text-ink-2'
             }`}
           >
-            {(i > 0 || tier.name === 'Free') && (
+            {(i > 0 || isFree) && (
               <svg
                 width="14"
                 height="14"

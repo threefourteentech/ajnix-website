@@ -21,6 +21,7 @@ export async function generateMetadata({
 }
 
 type Tier = {
+  key: 'free' | 'pro' | 'agency';
   name: string;
   price: string;
   earlyBird: string | null;
@@ -28,6 +29,12 @@ type Tier = {
   cta: string;
   highlight?: boolean;
   features: string[];
+};
+
+const CTA_HREFS: Record<Tier['key'], string> = {
+  free: 'https://wordpress.org/plugins/ajnix/',
+  pro: '/pro-waitlist',
+  agency: '/contact',
 };
 
 export default async function PricingPage({
@@ -40,12 +47,6 @@ export default async function PricingPage({
   const t = await getTranslations({ locale, namespace: 'pricing' });
   const tiers = t.raw('tiers') as Tier[];
   const faq = t.raw('faq') as { q: string; a: string }[];
-
-  const ctaHref = (name: string) => {
-    if (name === 'Free') return 'https://wordpress.org/plugins/ajnix/';
-    if (name === 'Agency') return '/contact';
-    return '/pro-waitlist';
-  };
 
   return (
     <>
@@ -60,13 +61,14 @@ export default async function PricingPage({
             {t('subtitle')}
           </p>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-14 grid max-w-[1120px] gap-6 md:grid-cols-3">
             {tiers.map((tier) => (
               <PricingCard
-                key={tier.name}
+                key={tier.key}
                 tier={tier}
                 monthly={t('monthly')}
-                href={ctaHref(tier.name)}
+                href={CTA_HREFS[tier.key]}
+                popularLabel={t('popular')}
               />
             ))}
           </div>
@@ -74,10 +76,12 @@ export default async function PricingPage({
 
         <section className="border-y border-rule bg-canvas">
           <Section as="div">
-            <h2 className="max-w-[22ch] text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px]">
-              {t('faqTitle')}
-            </h2>
-            <Faq items={faq} className="mt-10 max-w-[820px]" />
+            <div className="mx-auto max-w-[820px] text-center">
+              <h2 className="text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px]">
+                {t('faqTitle')}
+              </h2>
+              <Faq items={faq} className="mt-10 text-left" />
+            </div>
           </Section>
         </section>
       </main>

@@ -1,0 +1,112 @@
+---
+title: "Verify that tracking works"
+description: "Make sure Ajnix is capturing your visitors and events."
+tier: "free"
+category: "getting-started"
+updatedAt: "2026-04-23"
+---
+
+> Time: 1 minute. No code required.
+
+## Fast method (visual)
+
+1. Open your site in a **private (incognito) tab**
+2. Visit 2-3 pages
+3. Go to **Ajnix > Overview** in your WordPress admin
+4. Check that "Visitors today" shows at least 1
+
+If yes, tracking works. You can stop here.
+
+## Technical method (developer tools)
+
+For a deeper check:
+
+1. Open your site in an incognito tab
+2. Open the browser's developer tools (F12 or cmd+option+I)
+3. Go to the **Network** tab
+4. Filter by "track" or "ajnix"
+5. Navigate between a few pages on your site
+6. You should see POST requests to `/wp-json/ajnix/v1/track` with status 200
+
+<Callout type="tip">
+In the console, type `ajnix('ready', () => console.log('Ajnix OK'))`. If you see "Ajnix OK", the tracker has initialized.
+</Callout>
+
+## Verify specific events
+
+### Page view
+
+Automatic on every page. Visible in **Ajnix > Events** with `event_name = page_view`.
+
+### WooCommerce purchase
+
+If WooCommerce is active:
+
+1. Place a test order (or use your staging environment)
+2. Move the order to "Completed" status
+3. Go to **Ajnix > Ecommerce**
+4. You should see the order under "Recent sales"
+
+The purchase is tracked **server-side** via the WooCommerce `woocommerce_order_status_completed` hook, not from JavaScript. That guarantees it's always captured, even if the user has an adblocker.
+
+### Form submission
+
+For Contact Form 7, WPForms, Gravity Forms, Fluent Forms:
+
+1. Go to **Ajnix > Goals**
+2. Look for "Detected goals" (auto-detection of existing forms)
+3. Activate a goal for a test form
+4. Submit the form on your site
+5. Verify that the `form_submit` event shows up in **Ajnix > Events**
+
+## What prevents tracking?
+
+### You're excluded from your own tracking
+
+By default, Ajnix does NOT track users logged in as admin. That's intentional to avoid polluting your data with your own visits.
+
+To test as yourself:
+- Either log out
+- Or use an incognito tab
+- Or go to **Ajnix > Settings > Exclusions** and uncheck "Exclude admins"
+
+### Staging environment detected
+
+If your site is on a staging domain (containing "staging", "dev", ".local", "localhost"), Ajnix automatically disables tracking.
+
+To force tracking on staging, go to **Ajnix > Settings > Environment** and turn on "Track this environment".
+
+### Consent plugin active
+
+If you have Complianz, CookieYes, Cookiebot, or Iubenda, Ajnix respects their state by default. If the visitor hasn't accepted marketing/analytics cookies, the tracker doesn't load.
+
+To test:
+- Use an incognito tab to reset consent
+- Or temporarily disable the integration under **Ajnix > Settings > Privacy > Respect the consent banner**
+
+### Adblocker
+
+The JavaScript tracker can be blocked by uBlock Origin, AdGuard, Brave. In that case:
+
+- JS events (page_view, clicks, scroll) are lost
+- But server events (WooCommerce purchases, form submits) are **still** tracked
+
+<Callout type="note">
+Ajnix isn't on any known adblocker blocklist. If you see blocking, please report it on the [wp.org forum](https://wordpress.org/support/plugin/ajnix/).
+</Callout>
+
+### Cache issue
+
+If you have an aggressive cache plugin (WP Rocket, WP Super Cache, W3 Total Cache, LiteSpeed), the Ajnix script should load normally since it's async and doesn't require any cache bypass.
+
+If in doubt, clear the cache and refresh.
+
+## See also
+
+<Card title="Troubleshooting: events don't show up" href="/docs/guides/troubleshooting/events-ne-remontent-pas">
+  Detailed guide for when tracking seems broken.
+</Card>
+
+<Card title="Configure WooCommerce" href="/docs/guides/tracking/configurer-woocommerce">
+  Specific setup to unlock e-commerce tracking.
+</Card>

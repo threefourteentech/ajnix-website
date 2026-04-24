@@ -21,7 +21,7 @@ export const organizationJsonLd = {
   description:
     'The first WordPress plugin with real multi-touch attribution for WooCommerce.',
   sameAs: [],
-  founder: { '@type': 'Person', name: 'Eric St-Amant' },
+  founder: { '@type': 'Person', name: 'Éric St-Amant' },
 };
 
 export const websiteJsonLd = {

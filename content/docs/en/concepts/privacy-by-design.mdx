@@ -1,0 +1,132 @@
+---
+title: "Privacy by design"
+description: "How Ajnix stays GDPR-, PIPEDA- and CCPA-compliant without a consent banner."
+category: "concepts"
+updatedAt: "2026-04-23"
+---
+
+> Ajnix is designed not to collect personal data. In most regions, you don't need a consent banner.
+
+## What does Ajnix store?
+
+### Events (page views, clicks, conversions)
+
+- `event_id`: random UUID
+- `visitor_id`: random UUID, stored client-side via cookie / localStorage
+- `session_id`: random UUID
+- `timestamp`
+- `visited URL`
+- `referrer` (if available)
+- `device_type` (desktop, mobile, tablet)
+- `country` + `region` (IP geolocation before truncation)
+
+### What Ajnix does NOT store
+
+- **Full IP address**: IP is truncated before writing to the database (IPv4 /24, IPv6 /48). Even the site admin can't retrieve it.
+- **Email, first name, last name**: never stored with events.
+- **Form contents**: Ajnix captures the fact that a form was submitted, but not the values filled in.
+- **Fingerprinting**: no canvas fingerprinting, no device fingerprinting.
+- **Third-party cookies**: Ajnix only uses first-party cookies on your own domain.
+
+## Why no consent banner (in most cases)
+
+GDPR (article 6) allows data processing **without consent** if:
+
+1. The data doesn't allow identifying a physical person
+2. Processing is necessary for the legitimate interest of the company
+
+Ajnix satisfies both conditions:
+
+1. **Anonymity**: random UUID + truncated IP = impossible to identify a physical visitor. Collected data is statistical.
+2. **Legitimate interest**: analyzing marketing performance is a recognized legitimate interest.
+
+<Callout type="note">
+This analysis is aligned with the positioning of Plausible, Fathom, Simple Analytics and other privacy-first tools that operate without a consent banner in Europe. Several data protection authorities (CNIL in France, ICO in the UK) have published guidelines validating this approach for anonymized tools.
+</Callout>
+
+## When you DO need a banner
+
+You may still need a banner if:
+
+- You use other tools that track (Facebook Pixel, Google Analytics, etc.)
+- Your customers are mainly in Germany or the UK (stricter local interpretations)
+- You activate Pro identification features (email hashing for CRM matching)
+- Your own lawyer recommends it
+
+In that case, Ajnix integrates natively with the main CMPs:
+
+- **Cookiebot**
+- **CookieYes**
+- **Complianz**
+- **Iubenda**
+- Custom event (if you use another CMP)
+
+Activation: **Ajnix > Settings > Privacy > Respect the consent banner**.
+
+When enabled, the Ajnix tracker only loads if the visitor accepts "analytics" or "marketing" cookies.
+
+## GDPR, PIPEDA, CCPA compliance
+
+Ajnix satisfies the principles of:
+
+### GDPR (Europe)
+
+- **Data minimization**: only what's necessary
+- **Pseudonymization**: UUIDs instead of real identifiers
+- **Right to erasure**: "Purge all data" button in settings
+- **Right of access**: export via REST API or CSV exports
+- **Processing register**: public documentation on the Privacy page
+
+### PIPEDA (Canada)
+
+- Implied consent for anonymized processing
+- Data stored only on your server (no cross-border transfer)
+- Breach notification (via changelog)
+
+### CCPA (California, USA)
+
+- No "sale" of personal data (Ajnix has no data to sell)
+- "Do Not Track" right respected: the tracker checks `navigator.doNotTrack` and disables itself when it's on
+
+## "Delete all my data" button
+
+In **Ajnix > Settings > Data > Danger zone**, you can trigger a complete wipe:
+
+- All `wp_ajnix_*` tables are emptied
+- Plugin options are reset
+- The `site_id` is regenerated
+
+To prevent accidents, the confirmation requires typing **PURGE** literally.
+
+## Self-hosting the JavaScript tracker
+
+By default, the JS tracker is served from `cdn.ajnix.com` for global performance (CDN). Some strict jurisdictions may require all assets to be self-hosted.
+
+Solution: **Ajnix > Settings > Advanced > Self-host tracker**. A toggle that replaces the CDN URL with a local plugin path. No extra configuration required.
+
+## Security audit
+
+Ajnix was audited per Epic 16.4 of our internal security checklist. Key points:
+
+- No outbound PHP calls to external servers
+- 56 `$wpdb->prepare()` invocations on sensitive queries (SQL injection protection)
+- 100 req/min/IP rate limiting on ingestion endpoints
+- CSRF via WordPress nonces on every admin action
+- No `eval()`, `extract()`, `unserialize()` on user input
+- Strict JSON schema validation on event payloads
+
+[See the full audit](/docs/security/vue-ensemble)
+
+## See also
+
+<Card title="PII handling" href="/docs/security/pii-handling">
+  Technical details on how Ajnix avoids storing personal data.
+</Card>
+
+<Card title="Integrate a consent banner" href="/docs/guides/integrations/cookiebot">
+  Setup with the main CMPs.
+</Card>
+
+<Card title="Report a vulnerability" href="/docs/security/report-a-vulnerability">
+  Dedicated security contact.
+</Card>

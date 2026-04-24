@@ -1,0 +1,152 @@
+---
+title: "Les événements ne remontent pas"
+description: "Troubleshooting : pourquoi Ajnix ne capture rien et comment réparer."
+tier: "free"
+category: "troubleshooting"
+updatedAt: "2026-04-23"
+---
+
+> Si tu vois 0 visiteurs ou 0 événements malgré du trafic réel, suis cette checklist dans l'ordre.
+
+## Checklist rapide
+
+1. [ ] Tester en mode incognito
+2. [ ] Vérifier que le plugin est actif
+3. [ ] Vérifier l'exclusion des admins
+4. [ ] Vérifier la détection d'environnement
+5. [ ] Vérifier le consent banner
+6. [ ] Vérifier les adblockers
+7. [ ] Vérifier les conflits de plugin
+8. [ ] Vérifier les logs PHP
+
+## 1. Tester en mode incognito
+
+Ton navigateur principal peut avoir :
+- Un cache qui sert une vieille version sans le tracker
+- Un adblocker actif
+- Des cookies qui t'identifient comme admin
+
+Ouvre ton site dans un onglet privé (Cmd+Shift+N sur Chrome, Cmd+Shift+P sur Firefox/Safari), navigue 2-3 pages, puis vérifie **Ajnix > Overview**.
+
+Si le tracking fonctionne en incognito mais pas en navigation normale : le problème vient de ton navigateur (cache, adblocker, ou tu es tracké comme admin).
+
+## 2. Vérifier que le plugin est actif
+
+Va dans **Extensions > Extensions installées** et vérifie qu'Ajnix est "Activé" (pas "Désactivé").
+
+## 3. Vérifier l'exclusion des admins
+
+Par défaut, Ajnix exclut les utilisateurs connectés avec rôle "administrator" du tracking. C'est voulu pour ne pas polluer les données.
+
+Pour tester en tant qu'admin :
+- Soit déconnecte-toi
+- Soit utilise un onglet privé
+- Soit va dans **Ajnix > Settings > Exclusions** et retire "administrator" de la liste
+
+<Callout type="tip">
+Reste déconnecté pendant les tests et utilise un onglet privé. Sinon tu risques de croire que le tracking est cassé alors qu'il t'exclut juste.
+</Callout>
+
+## 4. Vérifier la détection d'environnement
+
+Ajnix désactive automatiquement le tracking dans les environnements staging/dev détectés via :
+
+- URLs contenant `staging`, `dev`, `.local`, `localhost`, `.test`
+- IPs privées (10.x.x.x, 192.168.x.x, 172.16-31.x.x)
+- Hosts courants : `wpengine-staging.com`, `*.kinsta.cloud`, `*.flywheel.io`
+
+Pour forcer le tracking sur un environnement staging :
+
+1. Va dans **Ajnix > Settings > Environnement**
+2. Confirme que "Environnement détecté" est "staging"
+3. Active "Tracker cet environnement"
+
+## 5. Vérifier le consent banner
+
+Si tu as Complianz, CookieYes, Cookiebot, ou Iubenda, Ajnix respecte automatiquement leur état.
+
+Pour tester :
+
+1. Ouvre ton site en onglet privé
+2. Refuse les cookies dans le bandeau
+3. Navigue quelques pages
+4. Aucun événement ne remontera (comportement normal)
+
+Pour débugger :
+
+1. Va dans **Ajnix > Settings > Privacy**
+2. Vérifie le statut "Consentement détecté"
+3. Si tu veux ignorer le CMP temporairement, désactive "Respecter le bandeau de consentement"
+
+## 6. Vérifier les adblockers
+
+Teste dans un navigateur sans adblocker (Chrome sans extensions, par exemple).
+
+Les adblockers modernes (uBlock Origin, AdGuard, Brave) bloquent parfois les trackers analytics, même les privacy-friendly.
+
+<Callout type="note">
+Même si le tracker JS est bloqué par l'adblocker, les événements serveur (WooCommerce purchases, form submits côté PHP) sont **toujours** trackés. Vérifie ton dashboard Ecommerce.
+</Callout>
+
+## 7. Vérifier les conflits de plugin
+
+Désactive temporairement les autres plugins analytics / tracking (MonsterInsights, Analytify, GA Google Analytics, etc.).
+
+Vérifie ensuite si Ajnix track.
+
+Si oui, réactive les plugins un par un pour identifier le conflit.
+
+## 8. Vérifier les logs PHP
+
+### Activer le debug log WordPress
+
+Dans ton `wp-config.php`, ajoute :
+
+```php
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+```
+
+Le fichier de log est à `wp-content/debug.log`.
+
+### Chercher les erreurs Ajnix
+
+Après quelques visites test, ouvre le log et cherche "ajnix" :
+
+```bash
+grep -i ajnix wp-content/debug.log
+```
+
+Erreurs courantes :
+
+**`ajnix_store_failed`** : problème d'écriture en base. Vérifier que les tables existent et que l'utilisateur MySQL a les droits INSERT.
+
+**`ajnix_rate_limit`** : tu envoies plus de 100 req/min depuis une même IP (rare, mais possible si tu fais du stress test).
+
+**`ajnix_site_id_mismatch`** : le `site_id` envoyé par le tracker ne correspond pas à celui enregistré. Peut arriver si tu as cloné le site vers un nouveau domaine sans gérer le staging.
+
+## Aide supplémentaire
+
+Si après cette checklist le tracking ne fonctionne toujours pas :
+
+1. Va sur le [forum wp.org](https://wordpress.org/support/plugin/ajnix/)
+2. Crée un post avec :
+   - Version de WordPress
+   - Version de PHP
+   - Liste des plugins actifs
+   - Le thème utilisé
+   - Contenu du `debug.log` (extraits "ajnix")
+   - Capture d'écran de la page Ajnix Overview
+
+Nous répondons dans les 24-48h.
+
+## Voir aussi
+
+<Card title="Chiffres ne correspondent pas à WC" href="/fr/docs/guides/troubleshooting/chiffres-ne-correspondent-pas-au-wc">
+  Cas spécifique des commandes WooCommerce non trackées.
+</Card>
+
+<Card title="Conflits de plugin" href="/fr/docs/guides/troubleshooting/conflit-de-plugin">
+  Liste des incompatibilités connues.
+</Card>

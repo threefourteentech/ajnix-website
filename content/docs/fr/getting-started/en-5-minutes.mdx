@@ -1,0 +1,118 @@
+---
+title: "En 5 minutes, de l'installation au premier insight"
+description: "Tutorial complet : installation, premier objectif, premier rapport d'attribution."
+tier: "free"
+category: "getting-started"
+updatedAt: "2026-04-23"
+---
+
+> Ce tutorial te fait passer de zéro à un premier rapport d'attribution exploitable en moins de 5 minutes. Aucune compétence technique requise.
+
+## Ce que tu vas faire
+
+1. Installer Ajnix (2 min)
+2. Vérifier le tracking (30 sec)
+3. Définir ton premier objectif (1 min)
+4. Voir tes premières données (30 sec)
+5. Interpréter ton premier rapport (1 min)
+
+## Étape 1 : Installer Ajnix
+
+Va dans **Extensions > Ajouter une extension**, cherche "Ajnix", clique Installer puis Activer.
+
+Si tu es perdu, voir le [guide d'installation détaillé](/fr/docs/getting-started/installation).
+
+## Étape 2 : Vérifier le tracking
+
+Une fois Ajnix activé, ouvre ton site dans un onglet privé (incognito) et visite quelques pages.
+
+Retourne dans **Ajnix > Overview** dans ton admin WordPress. Tu devrais voir :
+
+- Compteur "Visiteurs aujourd'hui" : au moins 1
+- Compteur "Sessions aujourd'hui" : au moins 1
+- Graphique de trafic avec les pages visitées
+
+<Callout type="tip">
+Si rien ne remonte après 2 minutes, essaye de vider le cache de ton site et de rafraîchir la page Overview.
+</Callout>
+
+## Étape 3 : Définir ton premier objectif
+
+Un objectif ("goal") est une action qui compte comme conversion dans Ajnix. Exemples :
+- Soumission d'un formulaire de contact
+- Visite d'une page spécifique (ex : /merci)
+- Clic sur un bouton de CTA
+- Scroll à 75% d'un article de blog
+
+### Créer un objectif URL
+
+Le plus simple pour commencer. On va tracker les visites sur une page de remerciement.
+
+1. Va dans **Ajnix > Goals**
+2. Clique sur **Nouvel objectif**
+3. Sélectionne le type **URL visitée**
+4. Remplis :
+   - **Nom** : "Soumission contact"
+   - **Pattern** : `/merci`
+   - **Mode** : "contient"
+   - **Valeur** : 0 (ou une estimation monétaire si c'est un lead)
+5. Clique **Activer** puis **Enregistrer**
+
+<Callout type="note">
+Tu as jusqu'à 5 objectifs actifs en version gratuite. Pour plus, il faudra passer en Pro.
+</Callout>
+
+## Étape 4 : Voir tes premières données
+
+Va visiter `/merci` sur ton site (en mode incognito si tu es déjà tracké).
+
+Retourne dans **Ajnix > Attribution** ou **Ajnix > Goals**. Tu verras :
+
+- 1 conversion enregistrée sur l'objectif "Soumission contact"
+- La source marketing qui a amené cette conversion (direct, organic, referral, ou le canal de ton UTM)
+
+## Étape 5 : Interpréter ton premier rapport
+
+Le dashboard Attribution te montre :
+
+- **Total des conversions** : combien de fois ton objectif a été atteint
+- **Revenu total** : somme des valeurs des conversions (pour WooCommerce, c'est le revenu des achats)
+- **Top sources** : les canaux qui ont apporté le plus de conversions
+- **Top campagnes** : les campagnes UTM qui ont converti
+
+### Exemple d'interprétation
+
+Si tu vois :
+- 100 conversions totales
+- Google Ads : 64 conversions
+- Email : 24 conversions
+- Organic : 12 conversions
+
+Ce modèle (last-touch par défaut) dit que **le dernier clic avant la conversion était Google Ads dans 64% des cas**.
+
+<Callout type="warning">
+Ce modèle cache beaucoup. Un visiteur a peut-être découvert ta marque via Meta il y a 3 semaines, revenu via email, et finalement cliqué sur une annonce Google Ads pour acheter. Le last-touch crédite 100% à Google, alors que Meta et email ont joué un rôle critique.
+
+C'est pour ça que le multi-touch attribution (en version Pro) change tout. [Voir les 5 autres modèles](/fr/docs/concepts/modeles-attribution).
+</Callout>
+
+## Ce que tu as maintenant
+
+- Ajnix installé et actif
+- Tracking fonctionnel sur tout ton site
+- 1 objectif défini et en train de capturer des conversions
+- Premier rapport d'attribution lisible
+
+## Prochaines étapes recommandées
+
+<Card title="Configurer WooCommerce" href="/fr/docs/guides/tracking/configurer-woocommerce">
+  Si tu as une boutique, débloquer le tracking des commandes et du vrai revenu.
+</Card>
+
+<Card title="Intégrer tes formulaires" href="/fr/docs/guides/tracking/integrer-un-formulaire">
+  Tracker automatiquement les soumissions de CF7, WPForms, Gravity, Fluent.
+</Card>
+
+<Card title="Comprendre l'attribution multi-touch" href="/fr/docs/concepts/attribution-multi-touch">
+  Pourquoi le last-touch ment et comment les autres modèles révèlent la vérité.
+</Card>

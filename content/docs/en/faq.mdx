@@ -1,0 +1,237 @@
+---
+title: "Frequently asked questions"
+description: "Answers to common questions about Ajnix."
+category: "faq"
+updatedAt: "2026-04-23"
+---
+
+<Accordion>
+
+<AccordionItem title="Works with HPOS (High-Performance Order Storage)?">
+
+Yes. Ajnix uses the WooCommerce Orders API, which is fully HPOS-compatible. Also works on legacy post-based stores.
+
+</AccordionItem>
+
+<AccordionItem title="Does it slow down my WooCommerce store?">
+
+No. The JavaScript tracker is 6.8 KB gzipped and loads async. No blocking DB queries: all aggregations run as background tasks (daily cron). Typical impact: less than 10ms on Largest Contentful Paint (LCP).
+
+</AccordionItem>
+
+<AccordionItem title="Is my data sent to third-party servers?">
+
+No on the free version. All data stays in your WordPress database. No outbound PHP network calls.
+
+The JavaScript tracker is loaded from `cdn.ajnix.com` by default for performance. You can self-host with a toggle: **Ajnix > Settings > Advanced > Self-host tracker**.
+
+On the Pro version, you can enable optional sync to our SaaS servers for advanced features (centralized dashboard, AI insights, server-side conversions). Explicit opt-in, never by default.
+
+</AccordionItem>
+
+<AccordionItem title="What happens if I uninstall?">
+
+On uninstall, Ajnix offers two options:
+- **"Delete everything"**: drops all tables and options from the database
+- **"Keep data"**: deactivates the plugin but keeps history in case you reactivate later
+
+For immediate complete removal, go to **Ajnix > Settings > Data > Danger zone** and click "Purge all data" (requires typing PURGE).
+
+</AccordionItem>
+
+<AccordionItem title="Compatible with my cache plugin?">
+
+Yes. Tested and compatible with:
+- WP Rocket
+- WP Super Cache
+- W3 Total Cache
+- LiteSpeed Cache
+- Cloudflare Page Rules
+- Autoptimize
+
+The JS tracker loads async and doesn't require any cache bypass.
+
+</AccordionItem>
+
+<AccordionItem title="Can I exclude admins from tracking?">
+
+Yes. By default, users with the "administrator" role are excluded.
+
+To adjust:
+1. Go to **Ajnix > Settings > Exclusions**
+2. Check/uncheck the roles to exclude
+
+For advanced control, use the PHP filter:
+
+```php
+add_filter( 'ajnix_should_track_current_user', function ( $should, $event ) {
+    if ( in_array( 'custom_role', wp_get_current_user()->roles, true ) ) {
+        return false;
+    }
+    return $should;
+}, 10, 2 );
+```
+
+</AccordionItem>
+
+<AccordionItem title="Which form plugins are supported?">
+
+**On the free version:**
+- Contact Form 7
+- WPForms
+- Gravity Forms
+- Fluent Forms
+
+**On Pro:**
+All of the above, plus Elementor Pro Forms, Ninja Forms, Forminator, Formidable Forms, WS Form, Caldera Forms.
+
+For plugins not natively supported, you can track submissions via the JS API or the `ajnix_detected_forms` filter.
+
+</AccordionItem>
+
+<AccordionItem title="Difference between Free and Pro?">
+
+**Free:**
+- Full WooCommerce tracking
+- Last-touch attribution
+- Custom goals (up to 5)
+- Manual costs (up to 10)
+- 4 main form plugins
+- 90 days of detailed history, unlimited aggregates
+- PHP hooks and filters
+- Unlimited sites as separate instances (no consolidated dashboard)
+- 1 user
+
+**Pro ($99/month, or $49.50/month for life for the first 100):**
+- 5 additional attribution models (first-touch, linear, time-decay, position-based, data-driven ML)
+- Automatic ad cost sync (Google, Meta at launch, TikTok and Pinterest within 2 months)
+- Server-side conversions (Meta CAPI, Google Enhanced)
+- AI insights and anomaly detection
+- Real-time
+- Unlimited history
+- REST API + webhooks
+- 3 sites with consolidated dashboard, 3 team members
+- 24h email support
+
+**Agency ($299/month):**
+- Everything in Pro
+- Unlimited sites + advanced consolidated dashboard
+- Unlimited team members
+- White-label reports
+- Ads sync across all platforms (+ LinkedIn, Microsoft)
+- Advanced permissions management
+- Priority support, 4h SLA
+
+See the [Pricing page](/pricing) for the full breakdown.
+
+</AccordionItem>
+
+<AccordionItem title="Can I use it on multiple sites?">
+
+**Free**: installable on an unlimited number of WordPress sites, but each instance is independent (no consolidated dashboard, data is siloed per site).
+
+**Pro**: 3 sites included with consolidated dashboard, ideal for brands running multiple stores (FR/EN, B2B/B2C, multi-niche). 3 team members.
+
+**Agency**: unlimited sites with advanced consolidated dashboard, unlimited members, white-label reports, granular permissions. For agencies and enterprise ops.
+
+</AccordionItem>
+
+<AccordionItem title="Do I need to install a consent banner?">
+
+In most regions, no. Ajnix is designed privacy-first:
+- Anonymized IP before storage
+- No personally identifiable data
+- No fingerprinting
+- Do Not Track respected
+
+You stay PIPEDA, GDPR, CCPA compliant by default.
+
+If you already have a consent banner (Complianz, CookieYes, Cookiebot, Iubenda), Ajnix can integrate with it via **Ajnix > Settings > Privacy > Respect the banner**.
+
+[More details](/docs/concepts/privacy-by-design)
+
+</AccordionItem>
+
+<AccordionItem title="How does Ajnix compare to MonsterInsights or GA4?">
+
+MonsterInsights and GA4 focus on last-touch attribution and don't break down real WooCommerce revenue (COGS, fees, net profit).
+
+They also send your data to Google Analytics. Ajnix stores everything in your own WordPress database, with no external transfer.
+
+Ajnix is built specifically for WooCommerce with 6 attribution models, native net revenue calculation, and privacy compliance by default.
+
+See the [detailed comparison table](/wordpress-plugin#comparatif).
+
+</AccordionItem>
+
+<AccordionItem title="Does Ajnix work without WooCommerce?">
+
+Yes. Ajnix works as a generic analytics and attribution tool on any WordPress site.
+
+Without WooCommerce, you lose e-commerce revenue breakdown but keep everything else:
+- Multi-touch attribution (via goals)
+- Custom goals
+- UTM builder
+- Form integrations
+- PHP hooks
+
+</AccordionItem>
+
+<AccordionItem title="Can I migrate from another analytics plugin?">
+
+Historical events from your old plugin can't be imported directly into Ajnix (data schemas differ).
+
+Recommendation:
+1. Run the old plugin for a few weeks in parallel
+2. Compare numbers to calibrate
+3. Switch to Ajnix once satisfied
+
+On Pro, all your Ajnix events are synced to our SaaS on upgrade, retroactively. See [Migration](/docs/guides/migration/depuis-monsterinsights).
+
+</AccordionItem>
+
+<AccordionItem title="Is WordPress multisite supported?">
+
+Partially. Each site in a multisite network keeps its own `site_id` and its own data. Cross-site aggregation isn't supported in Phase 1.
+
+For a multi-site consolidated dashboard, the Agency version is in development.
+
+</AccordionItem>
+
+<AccordionItem title="How much does Ajnix Pro cost?">
+
+Ajnix has 3 tiers:
+
+- **Free**: $0/month, unlimited sites (separate instances), 1 member, essential features (last-touch attribution, full WC tracking, 5 goals, 10 manual costs)
+- **Pro**: $99/month, 3 sites with consolidated dashboard, 3 members (most Pro features)
+- **Agency**: $299/month, unlimited sites, unlimited members, white-label reports, advanced permissions
+
+The first 100 waitlist members get **$49.50/month for life** on the Pro tier (50% off the $99/month launch price).
+
+[See detailed pricing](/pricing) or [join the waitlist](/pro-waitlist).
+
+</AccordionItem>
+
+<AccordionItem title="Is Ajnix open source?">
+
+Yes. Ajnix is published under GPLv2 (like WordPress). Source code is available on [GitHub](https://github.com/ajnix/plugin).
+
+Pro features are closed-source (hosted on our SaaS) but the base WordPress plugin stays free and open forever.
+
+</AccordionItem>
+
+</Accordion>
+
+## Didn't find your answer?
+
+<Card title="wp.org forum" href="https://wordpress.org/support/plugin/ajnix/">
+  Technical questions and bugs: reply within 24-48h.
+</Card>
+
+<Card title="Business contact" href="/docs/support/contact">
+  Partnerships, commercial questions, demo requests.
+</Card>
+
+<Card title="Report a bug" href="/docs/support/report-bug">
+  GitHub issue or wp.org forum.
+</Card>

@@ -1,0 +1,132 @@
+---
+title: "Privacy by design"
+description: "Comment Ajnix reste conforme RGPD, PIPEDA et CCPA sans bandeau de consentement."
+category: "concepts"
+updatedAt: "2026-04-23"
+---
+
+> Ajnix est conçu pour ne pas collecter de données personnelles. Dans la plupart des régions, tu n'as pas besoin de bandeau de consentement.
+
+## Qu'est-ce qu'Ajnix stocke ?
+
+### Événements (page views, clicks, conversions)
+
+- `event_id` : UUID aléatoire
+- `visitor_id` : UUID aléatoire, stocké côté client via cookie / localStorage
+- `session_id` : UUID aléatoire
+- `timestamp`
+- `URL visitée`
+- `referrer` (si disponible)
+- `device_type` (desktop, mobile, tablet)
+- `country` + `region` (géolocalisation IP avant troncation)
+
+### Ce qu'Ajnix ne stocke PAS
+
+- **Adresse IP complète** : l'IP est tronquée avant écriture en base (IPv4 /24, IPv6 /48). Même l'administrateur du site ne peut pas la retrouver.
+- **Email, nom, prénom** : jamais stockés avec les événements.
+- **Contenu des formulaires** : Ajnix capture le fait qu'un formulaire est soumis, mais pas les valeurs remplies.
+- **Fingerprinting** : aucun canvas fingerprinting, aucun device fingerprinting.
+- **Cookies tiers** : Ajnix utilise uniquement des cookies first-party, sur ton propre domaine.
+
+## Pourquoi pas de bandeau de consentement (dans la plupart des cas)
+
+Le RGPD (article 6) autorise le traitement de données **sans consentement** si :
+
+1. Les données ne permettent pas d'identifier une personne physique
+2. Le traitement est nécessaire à l'intérêt légitime de l'entreprise
+
+Ajnix satisfait les deux conditions :
+
+1. **Anonymat** : UUID aléatoires + IP tronquée = impossible d'identifier un visiteur physique. Les données collectées sont statistiques.
+2. **Intérêt légitime** : analyser la performance marketing est un intérêt légitime reconnu.
+
+<Callout type="note">
+Cette analyse est alignée avec le positionnement de Plausible, Fathom, Simple Analytics et d'autres outils privacy-first qui opèrent sans bandeau de consentement en Europe. Plusieurs autorités de protection des données (CNIL en France, ICO au Royaume-Uni) ont publié des lignes directrices validant cette approche pour les outils anonymisés.
+</Callout>
+
+## Quand tu AS besoin d'un bandeau
+
+Tu peux quand même avoir besoin d'un bandeau si :
+
+- Tu utilises d'autres outils qui trackent (Facebook Pixel, Google Analytics, etc.)
+- Tes clients sont principalement en Allemagne ou au Royaume-Uni (interprétations locales plus strictes)
+- Tu actives les fonctionnalités Pro d'identification (email hashing pour CRM matching)
+- Ton propre avocat te recommande de le faire
+
+Dans ce cas, Ajnix s'intègre nativement avec les principaux CMPs :
+
+- **Cookiebot**
+- **CookieYes**
+- **Complianz**
+- **Iubenda**
+- Custom event (si tu as un autre CMP)
+
+Activation : **Ajnix > Settings > Privacy > Respecter le bandeau de consentement**.
+
+Quand c'est activé, le tracker Ajnix ne se charge que si le visiteur accepte les cookies de catégorie "analytics" ou "marketing".
+
+## Conformité RGPD, PIPEDA, CCPA
+
+Ajnix satisfait les principes de :
+
+### RGPD (Europe)
+
+- **Minimisation des données** : seulement ce qui est nécessaire
+- **Pseudonymisation** : UUID au lieu d'identifiants réels
+- **Droit à l'effacement** : bouton "Purger toutes les données" dans les settings
+- **Droit d'accès** : export via REST API ou exports CSV
+- **Registre de traitement** : documentation publique dans la page Privacy
+
+### PIPEDA (Canada)
+
+- Consentement présumé pour traitement anonymisé
+- Données stockées uniquement sur ton serveur (pas de transfert transfrontalier)
+- Notification en cas de brèche (via changelog)
+
+### CCPA (Californie, USA)
+
+- Aucun "sale" de données personnelles (Ajnix n'a pas de données à vendre)
+- Droit "Do Not Track" respecté : le tracker vérifie `navigator.doNotTrack` et se désactive si activé
+
+## Bouton "Supprimer toutes mes données"
+
+Dans **Ajnix > Settings > Data > Danger zone**, tu peux déclencher une suppression complète :
+
+- Toutes les tables `wp_ajnix_*` sont vidées
+- Les options plugin sont réinitialisées
+- Le `site_id` est régénéré
+
+Pour éviter les accidents, la confirmation demande de taper le mot **PURGE** littéralement.
+
+## Auto-hébergement du tracker JavaScript
+
+Par défaut, le tracker JS est servi depuis `cdn.ajnix.com` pour des raisons de performance globale (CDN). Certaines juridictions strictes peuvent exiger que tous les assets soient auto-hébergés.
+
+Solution : **Ajnix > Settings > Advanced > Self-host tracker**. Un toggle qui remplace l'URL du CDN par un chemin local du plugin. Aucune configuration supplémentaire nécessaire.
+
+## Audit de sécurité
+
+Ajnix a été audité selon l'Épic 16.4 de notre checklist de sécurité interne. Les points clés :
+
+- Aucun appel PHP sortant vers des serveurs externes
+- 56 invocations `$wpdb->prepare()` sur les queries sensibles (protection SQL injection)
+- Rate limiting 100 req/min/IP sur les endpoints d'ingestion
+- CSRF via nonces WordPress sur toutes les actions admin
+- Aucun `eval()`, `extract()`, `unserialize()` sur input utilisateur
+- Validation JSON schema stricte sur les payloads d'événements
+
+[Voir l'audit complet](/fr/docs/security/vue-ensemble)
+
+## Voir aussi
+
+<Card title="PII handling" href="/fr/docs/security/pii-handling">
+  Détails techniques sur comment Ajnix évite de stocker des données personnelles.
+</Card>
+
+<Card title="Intégrer un bandeau de consentement" href="/fr/docs/guides/integrations/cookiebot">
+  Setup avec les principaux CMPs.
+</Card>
+
+<Card title="Signaler une vulnérabilité" href="/fr/docs/security/report-a-vulnerability">
+  Contact sécurité dédié.
+</Card>

@@ -1,0 +1,118 @@
+---
+title: "Multi-touch attribution"
+description: "Why last-click is a lie and how multi-touch changes your decisions."
+category: "concepts"
+updatedAt: "2026-04-23"
+---
+
+> Attribution answers one question: "who deserves credit for this sale?" But depending on the model you pick, the answer changes radically.
+
+## The problem
+
+Imagine a real customer journey:
+
+```
+Day 1: Marie discovers your brand via a Meta ad.
+Day 3: She comes back via your email newsletter.
+Day 5: She searches "your product review" on Google and clicks an organic result.
+Day 7: She clicks a Google Ads ad and buys.
+```
+
+**Which channel deserves credit for the sale?**
+
+- Google Analytics 4 (and most tools by default) says: **Google Ads, 100%**.
+- But if you'd cut Meta 7 days ago, Marie would never have heard of you.
+- If you'd stopped your newsletter, she'd have forgotten you.
+- If you hadn't ranked on SEO, she wouldn't have found the reviews.
+
+That's **the last-click lie**.
+
+## What is multi-touch attribution?
+
+Multi-touch attribution distributes credit for a conversion **across multiple touchpoints** in the customer journey, instead of attributing everything to a single one.
+
+With Marie's same journey:
+
+| Model | Meta | Email | Google Organic | Google Ads |
+|---|---|---|---|---|
+| Last-touch (GA4 default) | 0% | 0% | 0% | 100% |
+| First-touch | 100% | 0% | 0% | 0% |
+| Linear | 25% | 25% | 25% | 25% |
+| Time-decay | 10% | 20% | 30% | 40% |
+| Position-based | 40% | 10% | 10% | 40% |
+| Data-driven (ML) | 35% | 25% | 10% | 30% |
+
+**Same journey, 6 different realities.** The model you pick determines where you put your marketing budget next month.
+
+## Why it changes your decisions
+
+If you believe Google Ads drives 100% of your sales (last-touch view):
+- You increase Google Ads budget
+- You cut Meta because "it doesn't convert"
+- You stop the newsletter
+
+3 months later: your Google Ads sales drop, because nobody is discovering your brand anymore. You broke your top-of-funnel.
+
+**Multi-touch reveals the true contribution of each channel.** You stop cutting discovery channels that, on the surface, "don't convert directly".
+
+## How Ajnix implements attribution
+
+Ajnix captures every **touchpoint** a visitor has:
+
+- Landing URL with UTMs
+- Source, medium, campaign (auto-classification)
+- Click IDs from 6 platforms: Google (`gclid`), Meta (`fbclid`), TikTok (`ttclid`), Microsoft (`msclkid`), LinkedIn (`li_fat_id`), X (`twclid`)
+- Referrer, landing page, device, timestamp
+
+A visitor can have multiple touchpoints across multiple sessions. When they convert, Ajnix looks at every touchpoint in a 30-day window and applies the chosen attribution model.
+
+### Free version: last-touch
+
+By default, Ajnix credits 100% to the last touchpoint before conversion (30-day window). That's the most common model, used by GA4 and most tools.
+
+### Pro version: 5 additional models
+
+- **First-touch**: 100% to the first discovered channel
+- **Linear**: equal credit across every touchpoint
+- **Time-decay**: more credit to touchpoints closer to conversion
+- **Position-based**: 40% to first, 40% to last, 20% split in the middle
+- **Data-driven (ML)**: Markov algorithm trained on your own journeys
+
+[See the details for each model](/docs/concepts/modeles-attribution)
+
+## Which model should you pick?
+
+There's no single right answer. It depends on your business.
+
+### Last-touch is enough if
+
+- Short purchase cycle (minutes to hours)
+- Only one main acquisition channel
+- Little retargeting, little email marketing
+- Impulse product (a $20 fashion accessory)
+
+### Multi-touch is essential if
+
+- Long purchase cycle (several days or weeks)
+- Multiple active channels (Meta + Google + email + SEO)
+- Active retargeting
+- Considered purchase (>$100, or B2B)
+- You want to optimize a channel mix
+
+<Callout type="tip">
+My recommendation: compare multiple models for the same period. If top channels differ a lot between models, that's a sign your journey is complex and multi-touch brings real value.
+</Callout>
+
+## See also
+
+<Card title="The 6 models in detail" href="/docs/concepts/modeles-attribution">
+  Deep dive into each model with visual examples.
+</Card>
+
+<Card title="Choose your model" href="/docs/guides/attribution/choisir-son-modele">
+  Decision matrix based on your business.
+</Card>
+
+<Card title="Touchpoints vs sessions" href="/docs/concepts/touchpoints-vs-sessions">
+  Understand the difference to read your reports properly.
+</Card>

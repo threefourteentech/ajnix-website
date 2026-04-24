@@ -1,9 +1,9 @@
 import { useTranslations } from 'next-intl';
+import { EyeOff, Settings2, LayoutGrid } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
-import { GradientShape } from '@/components/ui/GradientShape';
 
 type Problem = { h: string; b: string };
-const shapes = ['circle', 'diamond', 'square'] as const;
+const icons = [EyeOff, Settings2, LayoutGrid] as const;
 
 export function HomeProblem() {
   const t = useTranslations('home');
@@ -18,13 +18,25 @@ export function HomeProblem() {
         {t('problemLede')}
       </p>
       <div className="mt-14 grid gap-8 md:grid-cols-3">
-        {problems.map((p, i) => (
-          <div key={i} className="border-t border-rule pt-6">
-            <GradientShape shape={shapes[i]} />
-            <h3 className="mb-2 mt-[18px] text-[20px] font-semibold">{p.h}</h3>
-            <p className="text-[15px] leading-[1.6] text-ink-4">{p.b}</p>
-          </div>
-        ))}
+        {problems.map((p, i) => {
+          const Icon = icons[i];
+          return (
+            <div key={i} className="border-t border-rule pt-6">
+              <div
+                className="inline-flex size-11 items-center justify-center rounded-[10px] text-white"
+                style={{
+                  background: 'var(--ajx-gradient)',
+                  boxShadow: '0 4px 14px -4px rgba(99,102,241,.5)',
+                }}
+                aria-hidden
+              >
+                <Icon size={22} strokeWidth={2} />
+              </div>
+              <h3 className="mb-2 mt-[18px] text-[20px] font-semibold">{p.h}</h3>
+              <p className="text-[15px] leading-[1.6] text-ink-4">{p.b}</p>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );

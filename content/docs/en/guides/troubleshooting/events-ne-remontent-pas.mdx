@@ -1,0 +1,152 @@
+---
+title: "Events aren't showing up"
+description: "Troubleshooting: why Ajnix captures nothing and how to fix it."
+tier: "free"
+category: "troubleshooting"
+updatedAt: "2026-04-23"
+---
+
+> If you see 0 visitors or 0 events despite real traffic, work through this checklist in order.
+
+## Quick checklist
+
+1. [ ] Test in incognito mode
+2. [ ] Verify the plugin is active
+3. [ ] Check admin exclusion
+4. [ ] Check environment detection
+5. [ ] Check the consent banner
+6. [ ] Check adblockers
+7. [ ] Check plugin conflicts
+8. [ ] Check PHP logs
+
+## 1. Test in incognito mode
+
+Your main browser may have:
+- Cache serving an old version without the tracker
+- An active adblocker
+- Cookies identifying you as admin
+
+Open your site in an incognito tab (Cmd+Shift+N on Chrome, Cmd+Shift+P on Firefox/Safari), navigate 2-3 pages, then check **Ajnix > Overview**.
+
+If tracking works in incognito but not in normal browsing: the problem is your browser (cache, adblocker, or you're being tracked as admin).
+
+## 2. Verify the plugin is active
+
+Go to **Plugins > Installed Plugins** and check that Ajnix shows as "Active" (not "Inactive").
+
+## 3. Check admin exclusion
+
+By default, Ajnix excludes logged-in users with the "administrator" role from tracking. That's intentional to avoid polluting data.
+
+To test as admin:
+- Either log out
+- Or use an incognito tab
+- Or go to **Ajnix > Settings > Exclusions** and remove "administrator" from the list
+
+<Callout type="tip">
+Stay logged out during tests and use an incognito tab. Otherwise you may think tracking is broken when it's just excluding you.
+</Callout>
+
+## 4. Check environment detection
+
+Ajnix automatically disables tracking in staging/dev environments detected via:
+
+- URLs containing `staging`, `dev`, `.local`, `localhost`, `.test`
+- Private IPs (10.x.x.x, 192.168.x.x, 172.16-31.x.x)
+- Common hosts: `wpengine-staging.com`, `*.kinsta.cloud`, `*.flywheel.io`
+
+To force tracking on a staging environment:
+
+1. Go to **Ajnix > Settings > Environment**
+2. Confirm that "Detected environment" is "staging"
+3. Turn on "Track this environment"
+
+## 5. Check the consent banner
+
+If you have Complianz, CookieYes, Cookiebot, or Iubenda, Ajnix automatically respects their state.
+
+To test:
+
+1. Open your site in an incognito tab
+2. Refuse cookies on the banner
+3. Browse a few pages
+4. No events will be reported (expected behavior)
+
+To debug:
+
+1. Go to **Ajnix > Settings > Privacy**
+2. Check the "Detected consent" status
+3. If you want to ignore the CMP temporarily, turn off "Respect the consent banner"
+
+## 6. Check adblockers
+
+Test in a browser without an adblocker (e.g., Chrome with no extensions).
+
+Modern adblockers (uBlock Origin, AdGuard, Brave) sometimes block analytics trackers, even privacy-friendly ones.
+
+<Callout type="note">
+Even if the JS tracker is blocked by an adblocker, server events (WooCommerce purchases, PHP-side form submits) are **always** tracked. Check your Ecommerce dashboard.
+</Callout>
+
+## 7. Check plugin conflicts
+
+Temporarily disable other analytics / tracking plugins (MonsterInsights, Analytify, GA Google Analytics, etc.).
+
+Then check if Ajnix is tracking.
+
+If yes, reactivate plugins one by one to identify the conflict.
+
+## 8. Check PHP logs
+
+### Enable the WordPress debug log
+
+In your `wp-config.php`, add:
+
+```php
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+```
+
+The log file is at `wp-content/debug.log`.
+
+### Search for Ajnix errors
+
+After a few test visits, open the log and grep for "ajnix":
+
+```bash
+grep -i ajnix wp-content/debug.log
+```
+
+Common errors:
+
+**`ajnix_store_failed`**: database write problem. Check that the tables exist and the MySQL user has INSERT privileges.
+
+**`ajnix_rate_limit`**: you're sending more than 100 req/min from a single IP (rare, but possible during stress tests).
+
+**`ajnix_site_id_mismatch`**: the `site_id` sent by the tracker doesn't match the one on record. Can happen if you cloned the site to a new domain without handling staging.
+
+## Additional help
+
+If after this checklist tracking still doesn't work:
+
+1. Go to the [wp.org forum](https://wordpress.org/support/plugin/ajnix/)
+2. Create a post with:
+   - WordPress version
+   - PHP version
+   - List of active plugins
+   - Theme you're using
+   - Contents of `debug.log` (ajnix excerpts)
+   - Screenshot of the Ajnix Overview page
+
+We reply within 24-48h.
+
+## See also
+
+<Card title="Numbers don't match WooCommerce" href="/docs/guides/troubleshooting/chiffres-ne-correspondent-pas-au-wc">
+  Specific case of WooCommerce orders not being tracked.
+</Card>
+
+<Card title="Plugin conflicts" href="/docs/guides/troubleshooting/conflit-de-plugin">
+  List of known incompatibilities.
+</Card>

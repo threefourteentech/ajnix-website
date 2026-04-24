@@ -1,0 +1,118 @@
+---
+title: "From install to first insight in 5 minutes"
+description: "Full tutorial: installation, first goal, first attribution report."
+tier: "free"
+category: "getting-started"
+updatedAt: "2026-04-23"
+---
+
+> This tutorial takes you from zero to a usable first attribution report in under 5 minutes. No technical skills required.
+
+## What you'll do
+
+1. Install Ajnix (2 min)
+2. Verify tracking (30 sec)
+3. Define your first goal (1 min)
+4. See your first data (30 sec)
+5. Read your first report (1 min)
+
+## Step 1: Install Ajnix
+
+Go to **Plugins > Add New**, search for "Ajnix", click Install then Activate.
+
+If you're lost, see the [detailed installation guide](/docs/getting-started/installation).
+
+## Step 2: Verify tracking
+
+Once Ajnix is activated, open your site in a private (incognito) tab and visit a few pages.
+
+Go back to **Ajnix > Overview** in your WordPress admin. You should see:
+
+- "Visitors today" counter: at least 1
+- "Sessions today" counter: at least 1
+- Traffic graph with the pages visited
+
+<Callout type="tip">
+If nothing shows up after 2 minutes, try clearing your site's cache and refreshing the Overview page.
+</Callout>
+
+## Step 3: Define your first goal
+
+A goal is an action that counts as a conversion in Ajnix. Examples:
+- Contact form submission
+- Visit to a specific page (e.g., /thank-you)
+- Click on a CTA button
+- Scroll to 75% of a blog post
+
+### Create a URL goal
+
+The easiest to start with. We'll track visits to a thank-you page.
+
+1. Go to **Ajnix > Goals**
+2. Click **New goal**
+3. Select the type **URL visited**
+4. Fill in:
+   - **Name**: "Contact submission"
+   - **Pattern**: `/thank-you`
+   - **Mode**: "contains"
+   - **Value**: 0 (or a monetary estimate if it's a lead)
+5. Click **Activate** then **Save**
+
+<Callout type="note">
+You can have up to 5 active goals on the free version. For more, you'll need to upgrade to Pro.
+</Callout>
+
+## Step 4: See your first data
+
+Visit `/thank-you` on your site (in incognito mode if you're already tracked).
+
+Go back to **Ajnix > Attribution** or **Ajnix > Goals**. You'll see:
+
+- 1 conversion recorded on the "Contact submission" goal
+- The marketing source that drove this conversion (direct, organic, referral, or your UTM channel)
+
+## Step 5: Read your first report
+
+The Attribution dashboard shows you:
+
+- **Total conversions**: how many times your goal was hit
+- **Total revenue**: sum of conversion values (for WooCommerce, that's purchase revenue)
+- **Top sources**: the channels that brought the most conversions
+- **Top campaigns**: the UTM campaigns that converted
+
+### Example interpretation
+
+If you see:
+- 100 total conversions
+- Google Ads: 64 conversions
+- Email: 24 conversions
+- Organic: 12 conversions
+
+This model (last-touch by default) says that **the last click before conversion was Google Ads 64% of the time**.
+
+<Callout type="warning">
+This model hides a lot. A visitor may have discovered your brand via Meta 3 weeks ago, returned via email, and finally clicked a Google Ads ad to buy. Last-touch credits 100% to Google, while Meta and email played a critical role.
+
+That's why multi-touch attribution (Pro) changes everything. [See the 5 other models](/docs/concepts/modeles-attribution).
+</Callout>
+
+## What you have now
+
+- Ajnix installed and active
+- Working tracking across your site
+- 1 goal defined and capturing conversions
+- First readable attribution report
+
+## Recommended next steps
+
+<Card title="Configure WooCommerce" href="/docs/guides/tracking/configurer-woocommerce">
+  If you have a shop, unlock order tracking and real revenue.
+</Card>
+
+<Card title="Integrate your forms" href="/docs/guides/tracking/integrer-un-formulaire">
+  Auto-track submissions from CF7, WPForms, Gravity, Fluent.
+</Card>
+
+<Card title="Understand multi-touch attribution" href="/docs/concepts/attribution-multi-touch">
+  Why last-touch lies and how other models reveal the truth.
+</Card>

@@ -43,6 +43,18 @@ export async function generateMetadata({
       locale: locale === 'fr' ? 'fr_FR' : 'en_US',
       alternateLocale: locale === 'fr' ? 'en_US' : 'fr_FR',
       siteName: t('siteName'),
+      images: [
+        {
+          url: locale === 'fr' ? '/og_image_fr.png' : '/og_image_en.png',
+          width: 1200,
+          height: 630,
+          alt: t('siteName'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: [locale === 'fr' ? '/og_image_fr.png' : '/og_image_en.png'],
     },
   };
 }

@@ -1,0 +1,135 @@
+---
+title: "Vrai revenu vs ventes brutes"
+description: "Pourquoi Ajnix décompose chaque commande en gross, net, COGS, frais, remboursements."
+category: "concepts"
+updatedAt: "2026-04-23"
+---
+
+> Quand ton dashboard annonce "150 000 $ de ventes ce mois", combien reste vraiment dans ta poche ? Beaucoup moins que ce que tu penses.
+
+## Le problème des "ventes brutes"
+
+La plupart des outils analytics (GA4, MonsterInsights, le dashboard WooCommerce par défaut) affichent le **revenu brut** (gross). C'est la somme totale payée par les clients.
+
+Exemple typique :
+
+```
+Revenu brut ce mois : 150 000 $
+```
+
+Ça sonne bien. Mais ce chiffre cache :
+- Les taxes que tu dois au gouvernement (pas ton argent)
+- Les frais de shipping payés par les clients (pass-through au transporteur)
+- Les frais de transaction Stripe / PayPal (2,9% + 0,30 $ par transaction)
+- Les remboursements (tu dois les rendre)
+- Le coût des marchandises vendues (COGS)
+- Les discounts appliqués
+
+Une fois tout ça soustrait, ton **vrai revenu** peut être 40-60% plus bas.
+
+## Ce qu'Ajnix affiche
+
+Pour chaque commande WooCommerce, Ajnix capture et affiche 7 dimensions :
+
+| Dimension | Exemple | Description |
+|---|---|---|
+| **Gross** | 150 $ | Ce que le client paye (total WC) |
+| **Tax** | 22,50 $ | Taxes applicables (pas à toi) |
+| **Shipping** | 12 $ | Frais de livraison (pass-through) |
+| **Fees** | 4,65 $ | Frais de paiement (Stripe, PayPal, etc.) |
+| **Discount** | 15 $ | Remises / coupons appliqués |
+| **Refunded** | 0 $ | Montants remboursés (si applicable) |
+| **COGS** | 45 $ | Coût des marchandises |
+| **Net** | 51,85 $ | Ce qui te reste vraiment |
+
+Le **net** est calculé automatiquement :
+```
+Net = Gross - Tax - Shipping - Fees - Refunded - COGS
+```
+
+<Callout type="note">
+Tu peux configurer le COGS par produit dans **Ajnix > Costs > Product COGS**. Sans COGS, Ajnix calculera le net sans déduire les coûts matériels, mais te signalera que le chiffre est incomplet.
+</Callout>
+
+## Pourquoi ça change tes décisions
+
+### Exemple concret
+
+Imagine deux canaux d'acquisition :
+
+```
+Canal A (Google Ads) :
+- Gross revenue : 50 000 $
+- Coût d'acquisition : 8 000 $
+- "ROAS" apparent : 6.25x
+```
+
+Semble excellent. Mais si on regarde le vrai revenu net :
+
+```
+Canal A (Google Ads) :
+- Gross revenue : 50 000 $
+- Taxes (non-récupérables, pass-through) : 7 500 $
+- Shipping (pass-through) : 4 000 $
+- Fees de paiement (3%) : 1 500 $
+- COGS : 15 000 $
+- Discounts appliqués : 3 000 $
+- Net revenue : 19 000 $
+- Coût d'acquisition : 8 000 $
+- "Vrai ROAS" : 2.38x
+```
+
+Passe de 6.25x à 2.38x. Si tu optimises sur le ROAS apparent, tu vas surinvestir dans des canaux en réalité peu profitables.
+
+### Avec un autre canal
+
+```
+Canal B (Email marketing) :
+- Gross revenue : 30 000 $
+- Coût d'acquisition : 500 $ (outil email)
+- Net revenue : 14 000 $
+- Vrai ROAS : 28x
+```
+
+Email marketing apparaît souvent comme "petit canal" dans les rapports gross, mais son vrai ROAS écrase les autres parce que les coûts d'acquisition sont quasi nuls.
+
+<Callout type="warning">
+Sans décomposition du revenu, tu prends des décisions sur des chiffres mensongers. C'est la principale raison pour laquelle tant d'e-commerces brûlent du budget Google Ads ou Meta Ads qui ne sont, en réalité, pas rentables.
+</Callout>
+
+## Remboursements
+
+Ajnix track les remboursements comme des événements compensatoires. Quand tu rembourses une commande :
+
+- L'événement `refund` est créé automatiquement via le hook WooCommerce `woocommerce_order_refunded`
+- Le montant remboursé est soustrait du revenu net de la période
+- Le dashboard Ecommerce affiche les remboursements séparément pour analyse
+
+<Callout type="tip">
+Un canal avec beaucoup de remboursements (ex : TikTok Ads qui amène des acheteurs impulsifs qui regrettent) apparaît naturellement moins rentable dans Ajnix, même si le revenu brut est impressionnant. C'est une feature, pas un bug.
+</Callout>
+
+## Frais de transaction
+
+Ajnix détecte automatiquement les frais de paiement pour les gateways principaux :
+
+- Stripe (via plugin WooCommerce Stripe)
+- PayPal (via plugin WooCommerce PayPal Payments)
+- Square
+- Autres : configurable via le filter `ajnix_transaction_fee_meta_keys`
+
+Les frais sont stockés par commande et agrégés dans les rapports de ROI.
+
+## Voir aussi
+
+<Card title="Configurer les COGS" href="/fr/docs/guides/revenue/configurer-cogs">
+  Définir le coût des marchandises par produit pour un calcul de profit précis.
+</Card>
+
+<Card title="Calculer le vrai ROAS" href="/fr/docs/guides/revenue/calculer-vrai-roas">
+  Utiliser le revenu net pour évaluer la rentabilité de chaque canal.
+</Card>
+
+<Card title="Gérer les remboursements" href="/fr/docs/guides/revenue/gerer-remboursements">
+  Comment Ajnix handle les refunds partiels et totaux.
+</Card>

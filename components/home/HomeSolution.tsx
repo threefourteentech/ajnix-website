@@ -5,7 +5,6 @@ import {
   DashboardVisual,
   PrivacyVisual,
   OnboardingVisual,
-  AttributionMiniTable,
 } from './FeatureVisuals';
 
 type Feature = { kicker: string; h: string; b: string };
@@ -43,7 +42,6 @@ export function HomeSolution() {
                     {f.h}
                   </h3>
                   <p className="text-[16px] leading-[1.55] text-ink-4 md:text-[17px]">{f.b}</p>
-                  {i === 0 && <AttributionMiniTable />}
                 </div>
                 <div className={reverse ? 'lg:order-1' : 'lg:order-2'}>
                   {visuals[i]}

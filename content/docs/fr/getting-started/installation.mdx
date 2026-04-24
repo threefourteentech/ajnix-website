@@ -1,0 +1,92 @@
+---
+title: "Installer Ajnix"
+description: "Installation du plugin Ajnix depuis WordPress.org ou par upload manuel."
+tier: "free"
+category: "getting-started"
+updatedAt: "2026-04-23"
+---
+
+> Temps estimé : 2 minutes. Pas de compte à créer, pas de clé API, rien à configurer.
+
+## Prérequis
+
+- WordPress 5.8 ou plus récent
+- PHP 7.4 ou plus récent
+- MySQL 5.7+ ou MariaDB 10.3+ avec moteur **InnoDB** (par défaut sur tous les hébergeurs modernes)
+- Droits admin sur ton site WordPress
+
+<Callout type="note">
+WooCommerce est optionnel mais recommandé. Il débloque automatiquement le dashboard Ecommerce, l'attribution du revenu, et le tracking des remboursements.
+</Callout>
+
+## Option 1 : Depuis WordPress.org (recommandé)
+
+1. Dans ton admin WordPress, va dans **Extensions > Ajouter une extension**
+2. Cherche "Ajnix" dans la barre de recherche
+3. Clique sur **Installer** sur la carte Ajnix
+4. Clique sur **Activer**
+
+C'est fait. Tu es automatiquement redirigé vers **Ajnix > Overview** avec une checklist de setup.
+
+## Option 2 : Upload du .zip
+
+Si tu as téléchargé le .zip manuellement :
+
+1. Va dans **Extensions > Ajouter une extension**
+2. Clique sur **Téléverser une extension** en haut de la page
+3. Choisis le fichier `ajnix.zip`
+4. Clique sur **Installer maintenant**
+5. Clique sur **Activer l'extension**
+
+## Vérification
+
+Après activation, tu devrais voir :
+
+- Un nouvel item **Ajnix** dans la sidebar admin WordPress (avec une icône violette)
+- Une page d'accueil Overview avec une checklist de setup
+- Si WooCommerce est actif, une section Ecommerce déjà prête à tracker
+
+<Callout type="tip">
+Si tu ne vois pas le menu Ajnix, vérifie que le plugin est bien activé dans **Extensions > Extensions installées**.
+</Callout>
+
+## Ce qui se passe à l'activation
+
+Sous le capot, Ajnix :
+
+- Crée 10 tables MySQL préfixées `wp_ajnix_` dans ta base
+- Génère un `site_id` UUID v4 unique pour ton site (stable à vie, même si tu changes de domaine)
+- Détecte automatiquement l'environnement (production vs staging)
+- S'intègre aux plugins de consentement installés (Complianz, CookieYes, Cookiebot, Iubenda)
+- Détecte les plugins de formulaires installés (Contact Form 7, WPForms, Gravity Forms, Fluent Forms)
+
+<Callout type="note">
+Aucun appel réseau sortant pendant l'activation. Ajnix ne contacte aucun serveur externe depuis PHP. Le tracker JavaScript est chargé depuis `cdn.ajnix.com` par défaut mais peut être self-hosté en un toggle.
+</Callout>
+
+## Prochaines étapes
+
+<Card title="Vérifier le tracking" href="/fr/docs/getting-started/verifier-tracking">
+  S'assurer que les événements remontent bien depuis ton site.
+</Card>
+
+<Card title="Définir ton premier objectif" href="/fr/docs/getting-started/premier-objectif">
+  Transformer une action utilisateur en conversion trackable.
+</Card>
+
+## Troubleshooting
+
+### "Le plugin ne s'active pas"
+
+Vérifie :
+- Ta version PHP (7.4 minimum). Voir dans **Outils > Site Health > Infos**.
+- Ta version WordPress (5.8 minimum).
+- Que ton hébergeur utilise InnoDB (standard chez tous les hébergeurs modernes).
+
+### "Erreur de création des tables"
+
+Tu n'as probablement pas les droits de création de tables sur ta base MySQL. Contacte ton hébergeur ou installe sur un hébergement standard (OVH, Bluehost, SiteGround, Kinsta, WP Engine, etc.).
+
+### Autres problèmes
+
+Voir [Troubleshooting](/fr/docs/guides/troubleshooting/events-ne-remontent-pas) ou le [forum wp.org](https://wordpress.org/support/plugin/ajnix/).

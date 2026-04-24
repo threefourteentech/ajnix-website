@@ -14,20 +14,14 @@ const integrations = [
 const productLinks: { label: string; href: string }[] = [
   { label: 'features', href: '/wordpress-plugin#features' },
   { label: 'pricing', href: '/pricing' },
-  { label: 'changelog', href: '/changelog' },
-  { label: 'roadmap', href: '/roadmap' },
-  { label: 'status', href: '/status' },
 ];
 
 const resourceLinks: { label: string; href: string }[] = [
   { label: 'blog', href: '/blog' },
   { label: 'docs', href: '/docs' },
-  { label: 'guides', href: '/guides' },
-  { label: 'comparisons', href: '/vs-monsterinsights' },
 ];
 
 const companyLinks: { label: string; href: string }[] = [
-  { label: 'about', href: '/about' },
   { label: 'privacy', href: '/privacy' },
   { label: 'terms', href: '/terms' },
   { label: 'contact', href: '/contact' },
@@ -53,7 +47,7 @@ export function Footer() {
       <div className="mx-auto w-full max-w-section px-6 pb-8 pt-[72px] md:px-8">
         <div className="grid gap-10 md:grid-cols-5 md:gap-12">
           <div className="md:col-span-1">
-            <Link href="/" aria-label="Ajnix — home" className="inline-flex items-center">
+            <Link href="/" aria-label="Ajnix home" className="inline-flex items-center">
               <Image src="/ajnix-logo.svg" alt="Ajnix" width={138} height={32} className="h-8 w-auto" />
             </Link>
             <p className="mt-3 max-w-[28ch] text-[14px] leading-[1.5] text-ink-4">{t('tag')}</p>
@@ -70,7 +64,7 @@ export function Footer() {
             <ul className="m-0 list-none p-0">
               {integrations.map((i) => (
                 <li key={i.name} className="py-1.5 text-[14px] text-ink-3">
-                  <Link href={`/wordpress-plugin#${i.name.toLowerCase().replace(' ', '-')}`} className="inline-flex items-center hover:text-ink">
+                  <Link href={{ pathname: '/wordpress-plugin', hash: i.name.toLowerCase().replace(' ', '-') }} className="inline-flex items-center hover:text-ink">
                     {i.name}
                     {i.pro && (
                       <span
@@ -87,9 +81,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-rule pt-6 font-mono text-[13px] text-ink-5 md:flex-row md:items-center">
-          <div>
-            {t('copyright')} · {t('madeIn')} <span aria-hidden>🇨🇦</span>
-          </div>
+          <div>{t('copyright')}</div>
           <LanguageToggle variant="inline" />
         </div>
       </div>
@@ -113,7 +105,7 @@ function FooterCol({
       </h4>
       <ul className="m-0 list-none p-0">
         {items.map((label, i) => {
-          const href = hrefs[i]?.href ?? '#';
+          const href = (hrefs[i]?.href ?? '/') as Parameters<typeof Link>[0]['href'];
           return (
             <li key={label} className="py-1.5 text-[14px] text-ink-3">
               <Link href={href} className="transition-colors hover:text-ink">
