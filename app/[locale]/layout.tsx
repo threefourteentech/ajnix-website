@@ -5,6 +5,10 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { routing, type Locale } from '@/i18n/routing';
 import { SwKill } from '@/components/system/SwKill';
+import {
+  GoogleTagManagerScript,
+  GoogleTagManagerNoScript,
+} from '@/components/system/GoogleTagManager';
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
@@ -74,7 +78,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${interTight.variable} ${plexMono.variable}`}>
+      <head>
+        <GoogleTagManagerScript />
+      </head>
       <body>
+        <GoogleTagManagerNoScript />
         <SwKill />
         <a href="#main" className="ajx-skip-link">
           {t('skipToContent')}
