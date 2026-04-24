@@ -1,7 +1,7 @@
 import { Card } from '@/components/ui/Card';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 
-const channels = ['Instagram', 'Google', 'Email', 'Direct', 'Checkout'];
+const channels = ['Google Ads', 'Meta Ads', 'Email', 'Direct', 'Organic'];
 const colors = ['#6366f1', '#7c64f5', '#9168f8', '#a058f7', '#a855f7'];
 
 export function ModelDiagram({ dist, label }: { dist: number[]; label: string }) {

@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+import { sendMail } from '@/lib/mailer';
 
 const submitSchema = z.object({
   name: z.string().trim().min(2).max(200),
@@ -119,6 +120,31 @@ export async function POST(req: Request) {
     console.log(
       `[contact] new message from=${entry.email} topic="${entry.topic}" locale=${entry.locale}`,
     );
+
+    const subject = `[Ajnix contact] ${entry.topic} — ${entry.name}`;
+    const text = [
+      `From: ${entry.name} <${entry.email}>`,
+      `Topic: ${entry.topic}`,
+      `Locale: ${entry.locale}`,
+      `Received: ${entry.createdAt}`,
+      '',
+      entry.message,
+    ].join('\n');
+    const escape = (s: string) =>
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const html = `
+      <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px;line-height:1.55;color:#111">
+        <p><strong>From:</strong> ${escape(entry.name)} &lt;<a href="mailto:${escape(entry.email)}">${escape(entry.email)}</a>&gt;</p>
+        <p><strong>Topic:</strong> ${escape(entry.topic)} · <strong>Locale:</strong> ${entry.locale}</p>
+        <hr style="border:none;border-top:1px solid #eee;margin:16px 0"/>
+        <div style="white-space:pre-wrap">${escape(entry.message)}</div>
+      </div>
+    `;
+
+    const mail = await sendMail({ subject, text, html, replyTo: entry.email });
+    if (!mail.sent) {
+      console.warn(`[contact] mail not sent (${mail.reason}); entry persisted`);
+    }
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('[contact] write failed', err);

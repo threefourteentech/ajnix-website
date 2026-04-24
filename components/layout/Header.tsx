@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
 import { Button } from '@/components/ui/Button';
-import { WordPressMark } from '@/components/ui/Icon';
 import { LanguageToggle } from './LanguageToggle';
 import { cn } from '@/lib/cn';
 
@@ -82,13 +81,8 @@ export function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LanguageToggle />
-          <Button
-            variant="primary"
-            size="sm"
-            href="https://wordpress.org/plugins/ajnix/"
-          >
-            <WordPressMark />
-            {t('installFree')}
+          <Button variant="primary" size="sm" href="/pro-waitlist">
+            {t('joinProWaitlist')}
           </Button>
         </div>
 
@@ -115,13 +109,8 @@ export function Header() {
           </nav>
           <div className="mt-6 flex items-center justify-between">
             <LanguageToggle />
-            <Button
-              variant="primary"
-              size="sm"
-              href="https://wordpress.org/plugins/ajnix/"
-            >
-              <WordPressMark />
-              {t('installFree')}
+            <Button variant="primary" size="sm" href="/pro-waitlist">
+              {t('joinProWaitlist')}
             </Button>
           </div>
         </div>

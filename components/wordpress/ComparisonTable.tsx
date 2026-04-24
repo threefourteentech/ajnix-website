@@ -1,8 +1,30 @@
+import { useTranslations } from 'next-intl';
 import { Checkmark, CrossMark } from '@/components/ui/Icon';
 
 type Row = string[]; // [feature, ajnix, monsterinsights, ga4, wcAnalytics]
 
-function Cell({ value, isAjnix }: { value: string; isAjnix: boolean }) {
+type Labels = { pro: string; free: string; partial: string };
+
+function Cell({ value, isAjnix, labels }: { value: string; isAjnix: boolean; labels: Labels }) {
+  const withBadge = (kind: 'pro' | 'free') => (
+    <span className="inline-flex items-center gap-1.5">
+      <span className={isAjnix ? 'text-indigo-700' : 'text-ok'}>
+        <Checkmark size={16} />
+      </span>
+      <span
+        className={
+          kind === 'pro'
+            ? 'rounded-[3px] bg-ajx-gradient px-1.5 py-0.5 font-mono text-[9px] font-semibold tracking-[0.08em] text-white'
+            : 'rounded-[3px] border border-rule bg-canvas px-1.5 py-0.5 font-mono text-[9px] font-semibold tracking-[0.08em] text-ink-4'
+        }
+      >
+        {(kind === 'pro' ? labels.pro : labels.free).toUpperCase()}
+      </span>
+    </span>
+  );
+
+  if (value === 'yes-pro') return withBadge('pro');
+  if (value === 'yes-free') return withBadge('free');
   if (value === 'yes') {
     return (
       <span className={isAjnix ? 'text-indigo-700' : 'text-ok'}>
@@ -18,7 +40,7 @@ function Cell({ value, isAjnix }: { value: string; isAjnix: boolean }) {
     );
   }
   if (value === 'partial') {
-    return <span className="font-medium text-warn">Partial</span>;
+    return <span className="font-medium text-warn">{labels.partial}</span>;
   }
   return <span>{value}</span>;
 }
@@ -30,6 +52,12 @@ export function ComparisonTable({
   header: string[];
   rows: Row[];
 }) {
+  const t = useTranslations('wp.compareLabels');
+  const labels: Labels = {
+    pro: t('pro'),
+    free: t('free'),
+    partial: t('partial'),
+  };
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[720px] border-collapse text-[14px]">
@@ -68,7 +96,7 @@ export function ComparisonTable({
                     }
                   >
                     <div className="flex items-center">
-                      <Cell value={cell} isAjnix={isAjnix} />
+                      <Cell value={cell} isAjnix={isAjnix} labels={labels} />
                     </div>
                   </td>
                 );

@@ -57,19 +57,26 @@ const FEATURE_ICONS: Record<string, LucideIcon> = {
 const phpSnippet = `<?php
 /**
  * Extend Ajnix attribution with a custom source.
+ * Use ajnix_event_data (mutation) not ajnix_track_event (bool gate).
  */
-add_filter( 'ajnix_track_event', function ( array $event ) {
+add_filter( 'ajnix_event_data', function ( array $event, string $event_name ) {
   if ( isset( $_COOKIE['partner_ref'] ) ) {
-    $event['source']  = 'partner';
-    $event['medium']  = 'referral';
-    $event['campaign'] = sanitize_text_field( $_COOKIE['partner_ref'] );
+    $event['source']   = 'partner';
+    $event['medium']   = 'referral';
+    $event['campaign'] = sanitize_text_field( wp_unslash( $_COOKIE['partner_ref'] ) );
   }
   return $event;
-} );
+}, 10, 2 );
 
-// React to orders server-side
-add_action( 'ajnix_order_attributed', function ( $order_id, $attribution ) {
-  do_action( 'my_crm_sync', $order_id, $attribution['models'] );
+// React to orders server-side: ajnix_after_track_conversion fires only
+// for events with is_conversion=1 (WC purchases + goal conversions).
+add_action( 'ajnix_after_track_conversion', function ( array $event, string $event_name ) {
+  if ( 'purchase' !== $event_name ) {
+    return;
+  }
+  $order_id    = $event['order_id'] ?? null;
+  $attribution = ajnix_get_attribution( $event['event_id'], 'last_touch' );
+  do_action( 'my_crm_sync', $order_id, $attribution );
 }, 10, 2 );
 `;
 
@@ -241,10 +248,12 @@ export default async function WordPressPluginPage({
 
         <section className="border-y border-rule bg-canvas">
           <Section as="div">
-            <h2 className="max-w-[22ch] text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px]">
-              {t('faqTitle')}
-            </h2>
-            <Faq items={faq} className="mt-10 max-w-[820px]" />
+            <div className="mx-auto max-w-[820px]">
+              <h2 className="mx-auto max-w-[22ch] text-center text-[32px] leading-[1.1] tracking-[-0.025em] md:text-[40px]">
+                {t('faqTitle')}
+              </h2>
+              <Faq items={faq} className="mt-10" />
+            </div>
           </Section>
         </section>
 

@@ -7,17 +7,18 @@ import {
   MessageSquare,
   ShoppingBag,
   Package,
-  BarChart3,
   Palette,
   Plug,
   Users,
   Wrench,
   Settings,
   Bell,
+  type LucideIcon,
 } from 'lucide-react';
 import { AttributionPreview } from '@/components/attribution/AttributionPreview';
+import { AjnixMark, WordPressMark } from '@/components/ui/Icon';
 
-const SIDEBAR_ICONS = [
+const SIDEBAR_ICONS: (LucideIcon | typeof AjnixMark)[] = [
   LayoutDashboard,
   FileText,
   ImageIcon,
@@ -25,13 +26,13 @@ const SIDEBAR_ICONS = [
   MessageSquare,
   ShoppingBag,
   Package,
-  BarChart3,
+  AjnixMark,
   Palette,
   Plug,
   Users,
   Wrench,
   Settings,
-] as const;
+];
 
 export function BrowserMock() {
   const t = useTranslations('wp');
@@ -61,11 +62,11 @@ export function BrowserMock() {
         style={{ background: '#1d2327', height: 32 }}
       >
         <span
-          className="inline-flex size-5 items-center justify-center rounded-sm font-bold text-white"
+          className="inline-flex size-5 items-center justify-center rounded-sm text-white"
           aria-hidden
-          style={{ background: '#2271b1', fontSize: 11 }}
+          style={{ background: '#2271b1' }}
         >
-          W
+          <WordPressMark size={14} />
         </span>
         <span className="truncate font-medium text-white">{siteName}</span>
         <span className="inline-flex items-center gap-1 text-[#a7aaad]">

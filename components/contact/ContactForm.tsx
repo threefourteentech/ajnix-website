@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Checkmark } from '@/components/ui/Icon';
+import { RecaptchaNotice } from '@/components/ui/RecaptchaNotice';
 import { cn } from '@/lib/cn';
 
 type FormValues = {
@@ -227,6 +228,8 @@ export function ContactForm() {
           {serverError}
         </p>
       )}
+
+      <RecaptchaNotice className="text-[11px] leading-[1.5] text-ink-6" />
     </form>
   );
 }

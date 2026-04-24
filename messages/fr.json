@@ -18,12 +18,15 @@
     "contactTitle": "Contact Ajnix",
     "contactDescription": "Écrivez à l'équipe Ajnix. Questions, support, partenariats, presse — nous lisons chaque message et répondons sous un jour ouvré."
   },
+  "recaptcha": {
+    "notice": "Ce site est protégé par reCAPTCHA. La <privacy>politique de confidentialité</privacy> et les <terms>conditions d'utilisation</terms> de Google s'appliquent."
+  },
   "nav": {
     "product": "Produit",
     "blog": "Blog",
     "pricing": "Tarifs",
     "docs": "Docs",
-    "installFree": "Installer"
+    "joinProWaitlist": "Rejoindre la liste Pro"
   },
   "footer": {
     "tag": "Attribution multi-touch pour WooCommerce. Fabriqué au Canada 🇨🇦",
@@ -47,7 +50,7 @@
     "subtitle": "Le seul plugin WordPress qui fait de la vraie attribution multi-touch pour WooCommerce. Voyez l'impact réel de Google Ads, Meta, email et SEO sur vos ventes, pas juste le dernier clic.",
     "ctaPrimary": "Installer sur WordPress, Gratuit",
     "ctaSecondary": "Voir la démo →",
-    "trustLine": "Gratuit à vie · Sans carte · Conforme RGPD",
+    "trustLine": "Gratuit à vie · Sans carte · PIPEDA · RGPD · CCPA",
     "problemTitle": "Le mensonge du dernier clic vous coûte des ventes",
     "problemLede": "Vous dépensez en pub, mais vous ne savez pas ce qui marche. GA4 vous ment, vos plateformes se contredisent, et vos vrais gagnants restent invisibles.",
     "problems": [
@@ -61,7 +64,7 @@
       { "kicker": "01 · ATTRIBUTION", "h": "6 modèles d'attribution, côte à côte", "b": "Comparez Last-touch, First-touch, Linéaire, Time-decay, Position et le modèle Data-driven (ML). La même conversion, des crédits différents. Choisissez le modèle qui correspond à votre réalité." },
       { "kicker": "02 · WOOCOMMERCE", "h": "Vrai revenu, pas juste des vues", "b": "COGS, frais de transaction, remboursements, profit net. Pas seulement les ventes brutes. Calculé nativement depuis WooCommerce, zéro config." },
       { "kicker": "03 · VIE PRIVÉE", "h": "Conforme dès l'installation", "b": "IP anonymisée, email jamais stocké en clair, pas de bandeau cookies requis dans la plupart des régions. PIPEDA, RGPD, CCPA prêts." },
-      { "kicker": "04 · SETUP", "h": "De l'installation aux insights en moins de 5 minutes", "b": "Installez le plugin, vérifiez le tracking, définissez votre premier objectif, voyez les données arriver. Sans GTM, sans code, sans consultants." }
+      { "kicker": "04 · SETUP", "h": "De l'installation aux premiers insights en moins d'1h", "b": "Installez le plugin, vérifiez le tracking, définissez votre premier objectif, voyez les données arriver. Sans GTM, sans code, sans consultants." }
     ],
     "modelsTitle": "6 modèles, 6 vérités sur vos campagnes",
     "modelsLede": "Chaque modèle distribue le crédit différemment entre les points de contact. Celui que vous choisissez change quelles campagnes ont l'air de \"marcher\".",
@@ -136,8 +139,11 @@
           "Conversions server-side (Meta CAPI, Google Enhanced) : jusqu'à 3 destinations",
           "Visiteurs et événements en temps réel",
           "Insights IA et détection d'anomalies",
+          "Historique illimité",
           "3 sites avec dashboard consolidé",
-          "3 membres d'équipe"
+          "3 membres d'équipe",
+          "REST API + webhooks",
+          "Support email 24 h"
         ]
       },
       {
@@ -152,7 +158,7 @@
           "Tout le Pro, plus :",
           "Sites illimités avec dashboard avancé",
           "Membres d'équipe illimités",
-          "Sync ads toutes plateformes (+ LinkedIn, Microsoft)",
+          "Sync ads multi-account (plusieurs comptes par plateforme)",
           "Rapports white-label",
           "Gestion des permissions avancée",
           "Support prioritaire SLA 4 h"
@@ -160,7 +166,7 @@
       }
     ],
     "ctaTitle": "Prêt à voir votre vrai ROI ?",
-    "ctaSubtitle": "Installez le plugin WordPress gratuit, ou rejoignez la liste Pro pour 50 % de réduction à vie.",
+    "ctaSubtitle": "Installez le plugin WordPress gratuit, ou rejoignez la liste Pro pour bloquer 49,50 $/mois à vie (au lieu de 99 $).",
     "ctaPrimary2": "Installer sur WordPress, Gratuit",
     "ctaSecondary2": "Rejoindre la liste Pro"
   },
@@ -170,7 +176,7 @@
     "h1b": "fonctionne vraiment",
     "subtitle": "Vraie attribution multi-touch. Revenu WooCommerce natif. Respect de la vie privée par défaut. Conçu pour les e-commerçants, pas pour les experts GA4.",
     "ctaPrimary": "Installer depuis WP.org",
-    "ctaSecondary": "Voir la démo 90s",
+    "ctaSecondary": "Voir la démo",
     "badges": ["PIPEDA · RGPD · CCPA", "2 min d'installation", "Open source"],
     "previewTitle": "Votre dashboard d'attribution, directement dans WordPress",
     "previewLede": "Pas un onglet externe. Pas un iframe. Un vrai dashboard admin WordPress avec vos données WooCommerce.",
@@ -195,32 +201,34 @@
     "steps": [
       { "n": "01", "h": "Installer", "b": "Cherchez \"Ajnix\" dans votre admin WordPress ou téléversez le .zip. Activez. WooCommerce détecté automatiquement." },
       { "n": "02", "h": "Vérifier", "b": "Ouvrez n'importe quelle page de votre boutique. Ajnix confirme le tracking en temps réel. Sans GTM, sans code." },
-      { "n": "03", "h": "Analyser", "b": "Premières données dans l'heure. Insights actionnables sous 24h." }
+      { "n": "03", "h": "Analyser", "b": "Données agrégées dès le lendemain. Tendances visibles après 7 jours." }
     ],
     "featuresTitle": "Tout ce que l'analytique WooCommerce devrait être",
     "features": [
       { "icon": "ShoppingCart", "h": "Tracking WooCommerce natif", "b": "Commandes, COGS, frais, remboursements, profit net. Pas greffé via GA4." },
-      { "icon": "Network", "h": "Attribution multi-touch", "b": "6 modèles dont un data-driven (ML). Voyez quels canaux génèrent vraiment des ventes." },
+      { "icon": "Network", "h": "Attribution multi-touch", "b": "Last-touch en gratuit. 5 modèles additionnels (first-touch, linéaire, time-decay, position, data-driven ML) en Pro." },
       { "icon": "Link2", "h": "Builder de liens UTM", "b": "Générez des UTM cohérents en un clic. Préréglages sauvegardés par campagne." },
       { "icon": "Target", "h": "Builder d'objectifs", "b": "Soumissions de formulaires, clics de boutons, profondeur de scroll. Builder visuel, sans code." },
       { "icon": "Package", "h": "Suivi du COGS produit", "b": "Coût des marchandises par produit. Profit net par canal, par produit, par campagne." },
-      { "icon": "Receipt", "h": "Coûts marketing manuels", "b": "Ajoutez vos dépenses pub à la main ou par CSV, même sans intégrations Google Ads ou Meta. Vrai ROAS natif." },
-      { "icon": "Inbox", "h": "Intégrations formulaires", "b": "Support natif gratuit : Contact Form 7, WPForms, Gravity Forms, Fluent Forms. Plus en Pro." },
+      { "icon": "Receipt", "h": "Coûts marketing manuels", "b": "Ajoutez vos dépenses pub à la main, même sans intégrations Google Ads ou Meta. Vrai ROAS natif." },
+      { "icon": "Inbox", "h": "Intégrations formulaires", "b": "Support natif gratuit : Contact Form 7, WPForms, Gravity Forms, Fluent Forms. Plus de plugins de formulaires en Pro (Elementor Pro Forms en priorité, autres à suivre)." },
       { "icon": "ShieldCheck", "h": "Privacy-first", "b": "IP anonymisée, email jamais stocké en clair, aucun fingerprinting. Pas de bandeau cookies requis dans la plupart des régions." },
       { "icon": "Code2", "h": "API développeur", "b": "Hooks et filters WordPress en free. REST API et webhooks en Pro. Étendez tout." }
     ],
     "comparisonTitle": "Comment Ajnix se compare",
+    "compareLabels": { "pro": "Pro", "free": "Gratuit", "partial": "Partiel" },
     "comparisonHeader": ["Fonctionnalité", "Ajnix", "MonsterInsights", "GA4", "WC Analytics"],
     "comparisonRows": [
-      ["Prix", "Gratuit (Pro 99 $/mois, 49,50 $/mois à vie pour 100 premiers)", "99 $/an", "Gratuit", "Gratuit"],
-      ["Vraie attribution multi-touch", "yes", "no", "no", "no"],
+      ["Attribution last-touch", "yes", "yes", "yes", "yes"],
+      ["Attribution multi-touch (6 modèles)", "yes-pro", "no", "partial", "no"],
       ["WooCommerce natif", "yes", "partial", "no", "yes"],
       ["Privacy-first par défaut", "yes", "no", "no", "yes"],
+      ["Conformité Loi 25 / RGPD", "yes", "no", "no", "partial"],
       ["Aucun bandeau de consentement", "yes", "no", "no", "yes"],
-      ["6 modèles d'attribution", "yes", "no", "partial", "no"],
       ["COGS / profit net", "yes", "no", "no", "partial"],
-      ["Server-side conversions (Meta CAPI, Google Enhanced)", "yes", "no", "partial", "no"],
-      ["Multi-currency (conversion FX automatique)", "yes", "no", "no", "partial"],
+      ["Server-side conversions (Meta CAPI, Google Enhanced)", "yes-pro", "no", "partial", "no"],
+      ["Multi-currency awareness (notice)", "yes-free", "no", "no", "no"],
+      ["Multi-currency conversion FX auto", "yes-pro", "no", "no", "no"],
       ["UI native française", "yes", "no", "partial", "partial"],
       ["Données stockées sur votre serveur", "yes", "no", "no", "yes"],
       ["Aucun transfert vers Google", "yes", "no", "no", "yes"]
@@ -230,18 +238,18 @@
     "faqTitle": "Questions fréquentes",
     "faq": [
       { "q": "Fonctionne avec HPOS (High-Performance Order Storage) ?", "a": "Oui. Ajnix utilise l'API Orders de WooCommerce, qui est entièrement compatible HPOS. Fonctionne aussi sur les boutiques legacy basées sur les posts." },
-      { "q": "Ralentit-il ma boutique WooCommerce ?", "a": "Non. Le tracker JavaScript fait moins de 15 Ko gzippé et se charge en asynchrone. Aucune requête DB bloquante : toutes les agrégations tournent en tâche de fond (cron quotidien). Nos sites de test montrent un impact inférieur à 10 ms sur le LCP." },
-      { "q": "Mes données sont-elles envoyées à des serveurs tiers ?", "a": "Non en version gratuite. Toutes les données restent dans votre base WordPress. En version Pro, vous pouvez activer une synchronisation optionnelle vers nos serveurs SaaS pour les fonctionnalités avancées (dashboard centralisé, insights IA, conversions server-side). Avec opt-in explicite, jamais par défaut." },
-      { "q": "Que se passe-t-il si je désinstalle ?", "a": "À la désinstallation, Ajnix propose deux options : \"Tout supprimer\" (supprime toutes les tables et options de la base) ou \"Conserver les données\" (désactive le plugin mais garde l'historique au cas où vous réactivez plus tard)." },
-      { "q": "Compatible avec mon plugin de cache ?", "a": "Oui. Testé et compatible avec WP Rocket, WP Super Cache, W3 Total Cache, LiteSpeed Cache, et Cloudflare Page Rules. Le tracker JS se charge en asynchrone et ne nécessite aucun contournement de cache." },
-      { "q": "Puis-je exclure les admins du tracking ?", "a": "Oui, via un toggle dans les réglages. Pour un contrôle avancé, utilisez le filter PHP ajnix_should_track_current_user pour exclure des rôles spécifiques ou des utilisateurs précis." },
-      { "q": "Quels plugins de formulaires sont supportés ?", "a": "En version gratuite : Contact Form 7, WPForms, Gravity Forms, Fluent Forms. En version Pro : tous les précédents plus Elementor Pro Forms, Ninja Forms, Forminator, Formidable Forms, WS Form, Caldera Forms." },
-      { "q": "Différence Gratuit vs Pro ?", "a": "La version gratuite offre le tracking WooCommerce complet, l'attribution last-touch, les objectifs personnalisés (jusqu'à 5), les coûts manuels (jusqu'à 10), les 4 plugins de formulaires principaux, et 90 jours d'historique détaillé. La version Pro (99 $/mois, ou 49,50 $/mois à vie pour les 100 premiers) ajoute les 5 autres modèles d'attribution, la synchronisation automatique des coûts ads, les conversions server-side, les insights IA, le temps réel, l'historique illimité, et couvre jusqu'à 3 sites avec 3 membres d'équipe (dashboard consolidé). Pour les agences ou les brands avec plusieurs marques (au-delà de 3 sites), il y a le tier Agence (299 $/mois) avec sites et membres illimités plus rapports white-label." },
-      { "q": "Utilisable sur plusieurs sites ?", "a": "Oui. La version gratuite est installable sur un nombre illimité de sites WordPress (chaque instance est indépendante, avec ses propres données, pas de dashboard consolidé). La version Pro (99 $/mois) permet de gérer jusqu'à 3 sites avec un dashboard consolidé unique et 3 membres d'équipe, idéal pour les brands qui opèrent plusieurs boutiques (FR/EN, B2B/B2C, multi-niches). Pour les agences ou les opérations plus grandes, le tier Agence (299 $/mois) inclut des sites illimités, des membres illimités, et des rapports white-label." },
-      { "q": "Dois-je installer un bandeau de consentement ?", "a": "Dans la plupart des régions, non. Ajnix est conçu privacy-first : IP anonymisée, aucune donnée personnelle identifiable stockée, aucun fingerprinting. Vous restez conforme PIPEDA, RGPD, et CCPA par défaut. Si vous avez déjà un bandeau de consentement (Complianz, CookieYes, Cookiebot, Iubenda), Ajnix peut s'y intégrer via une option dédiée." },
-      { "q": "Comment Ajnix se compare à MonsterInsights ou GA4 ?", "a": "MonsterInsights et GA4 se concentrent sur l'attribution last-touch et ne décomposent pas le vrai revenu WooCommerce (COGS, frais, profit net). Ajnix est conçu spécifiquement pour WooCommerce avec 6 modèles d'attribution, un calcul natif du revenu net, et une conformité privacy par défaut. Voir la table comparative plus haut pour les détails." },
-      { "q": "Ajnix fonctionne-t-il sans WooCommerce ?", "a": "Oui. Ajnix fonctionne comme un outil d'analytics et d'attribution générique sur n'importe quel site WordPress. Sans WooCommerce, vous perdez la décomposition du revenu ecommerce mais gardez tout le reste : multi-touch attribution, objectifs personnalisés, UTM builder, intégrations formulaires, hooks PHP." },
-      { "q": "Puis-je migrer depuis un autre plugin analytics ?", "a": "Les événements historiques de votre ancien plugin ne peuvent pas être importés dans Ajnix (les schémas de données diffèrent). Nous recommandons de laisser l'ancien plugin tourner quelques semaines en parallèle pour comparer, puis de passer définitivement sur Ajnix. En Pro, tous vos événements Ajnix sont synchronisés vers notre SaaS à l'upgrade, rétroactivement." }
+      { "q": "Ralentit-il ma boutique WooCommerce ?", "a": "Non. Le tracker JavaScript fait moins de 10 Ko gzippé et se charge en asynchrone. Aucune requête DB bloquante : toutes les agrégations tournent en tâche de fond (cron quotidien)." },
+      { "q": "Mes données sont-elles envoyées à des serveurs tiers ?", "a": "Non, vos données marketing (visiteurs, conversions, revenu, attribution) restent entièrement dans votre base WordPress. Aucune télémétrie, aucun envoi automatique de données analytiques vers Ajnix ou un tiers.\n\nDeux exceptions mineures, documentées :\n• Le tracker JS (6,6 Ko gzippé) charge par défaut depuis cdn.ajnix.com pour la vitesse globale. Un toggle self-host dans Settings → Advanced le sert depuis votre plugin si vous préférez aucune connexion tierce.\n• Au moment de la désactivation, une modale optionnelle demande pourquoi vous partez. Si vous cochez la case et soumettez, un payload anonyme (versions, raison, hash du site_id) est envoyé, jamais de données marketing ni d'URL.\n\nEn version Pro, vous pourrez activer une synchronisation optionnelle vers nos serveurs SaaS pour les fonctionnalités avancées (dashboard centralisé, insights IA, conversions server-side). Opt-in explicite, jamais par défaut." },
+      { "q": "Que se passe-t-il si je désinstalle ?", "a": "Par défaut, la suppression du plugin purge toutes ses tables et options de votre base.\n\nSi vous prévoyez de réactiver plus tard et voulez conserver l'historique, activez \"Conserver les données à la désinstallation\" dans Réglages → Données avant de supprimer : les 11 tables d'analytique, vos objectifs, coûts, liens sauvegardés et réglages resteront intacts. La réinstallation reprendra exactement où vous étiez.\n\nLa simple désactivation, elle, est toujours non destructive." },
+      { "q": "Compatible avec mon plugin de cache ?", "a": "Oui. Le tracker est conçu pour vivre en harmonie avec n'importe quel plugin de cache full-page : il s'injecte en async dans wp_head, ne pose aucun cookie serveur pendant le rendu, et toute la variabilité par visiteur (visitor_id, session, UTM, clickID) se construit côté client après que le HTML est déjà mis en cache. Compatible par architecture avec WP Rocket, WP Super Cache, W3 Total Cache, LiteSpeed Cache, Cloudflare (Page Rules, Full Page Cache, Rocket Loader).\n\nUne seule précaution pour les optimisations agressives : si vous activez \"Combine JS\" ou \"Minify JS\" dans votre plugin de cache, ajoutez le script inline ajnix-tracker-bootstrap à la liste d'exclusions, sinon la concaténation peut écraser la file d'attente ajnix()." },
+      { "q": "Puis-je exclure les admins du tracking ?", "a": "Oui, via un toggle dans Réglages → Tracking. Vous pouvez aussi exclure n'importe quel rôle WordPress (éditeur, contributeur, rôles custom) ou des patterns d'URL (par exemple /staging/*).\n\nPour un contrôle avancé par code, deux filtres PHP : ajnix_should_track_current_user pour filtrer à l'ingestion, ajnix_should_inject_tracker pour empêcher le script de se charger." },
+      { "q": "Quels plugins de formulaires sont supportés ?", "a": "En version gratuite : Contact Form 7, WPForms, Gravity Forms, Fluent Forms. Auto-détectés, aucune configuration nécessaire. Cochez le formulaire dans le Goal Builder et chaque soumission devient une conversion trackée.\n\nLa version Pro ajoutera Elementor Pro Forms, Ninja Forms, Forminator, Formidable Forms et WS Form au moment du launch." },
+      { "q": "Différence Gratuit vs Pro ?", "a": "Version gratuite : tracking WooCommerce complet, attribution last-touch, 5 objectifs personnalisés, 10 coûts manuels, les 4 plugins de formulaires principaux (Contact Form 7, WPForms, Gravity, Fluent), 90 jours d'events bruts (les dashboards KPIs restent complets au-delà grâce aux agrégats illimités).\n\nVersion Pro : ajoute les 5 autres modèles d'attribution (first-touch, linéaire, time-decay, position-based, data-driven ML), la synchronisation automatique des coûts Google Ads et Meta Ads, les conversions server-side (Meta CAPI, Google Enhanced), les insights IA et la détection d'anomalies, le temps réel, l'historique illimité. Couvre jusqu'à 3 sites.\n\nPour les agences ou brands au-delà de 3 sites, le tier Agence ajoute sites et membres illimités, rapports white-label et permissions granulaires." },
+      { "q": "Utilisable sur plusieurs sites ?", "a": "Oui. La version gratuite est installable sur un nombre illimité de sites WordPress. Chaque instance est indépendante avec ses propres données, sans dashboard consolidé entre les sites.\n\nLa version Pro couvrira jusqu'à 3 sites avec un dashboard consolidé unique et 3 membres d'équipe, idéal pour les brands qui opèrent plusieurs boutiques (FR/EN, B2B/B2C, multi-niches). Le dashboard consolidé est fourni via l'interface Ajnix cloud qui accompagne Pro.\n\nPour les agences ou les brands au-delà de 3 sites, le tier Agence inclut des sites et membres illimités, des rapports white-label et des permissions granulaires." },
+      { "q": "Dois-je installer un bandeau de consentement ?", "a": "Ajnix est conçu privacy-first : IP tronquée avant stockage (IPv4 /24, IPv6 /48), aucune PII (emails, noms, valeurs de formulaires) stockée avec les événements, aucun fingerprinting utilisé pour identifier les visiteurs.\n\nCela vous place par défaut dans une excellente position pour la conformité PIPEDA (Canada) et CCPA (Californie), sans bandeau requis. Pour l'UE (RGPD + ePrivacy), la plupart des autorités recommandent un bandeau de consentement pour tout analytics : Ajnix s'intègre en un dropdown avec Complianz, CookieYes, Cookiebot et Iubenda, et défère son chargement jusqu'à l'accord \"analytics\" du visiteur." },
+      { "q": "Comment Ajnix se compare à MonsterInsights ou GA4 ?", "a": "Trois différenciateurs concrets :\n\n1. Vos données restent chez vous. GA4 stocke tout chez Google (serveurs US). MonsterInsights n'est qu'une interface WordPress au-dessus de GA4, donc même problème. Ajnix stocke tout dans votre base WordPress, zéro transfert vers un tiers. Important pour la conformité RGPD si vos visiteurs sont européens.\n\n2. Décomposition native du revenu WooCommerce. GA4 voit le revenu brut via les ecommerce events, mais ne connaît ni vos COGS, ni vos frais Stripe ou PayPal, ni vos remboursements. Ajnix calcule gross, net, COGS, fees et profit directement depuis WC, sans configuration.\n\n3. Setup en 2 minutes. GA4 demande GTM + Enhanced Ecommerce + Goals + Conversions + plusieurs heures de paramétrage. Ajnix est auto-détecté dès l'activation du plugin.\n\nBonus : aucun sampling (GA4 échantillonne au-dessus de 10M events par mois) et 6 modèles d'attribution incluant un modèle data-driven (ML) en Pro, comparables à GA4 mais avec vos propres données non agrégées.\n\nVoir la table comparative plus haut pour les détails." },
+      { "q": "Ajnix fonctionne-t-il sans WooCommerce ?", "a": "Oui. Ajnix est un outil d'analytics et d'attribution générique sur n'importe quel site WordPress. Sans WooCommerce, vous perdez la décomposition automatique du revenu e-commerce (gross/net/COGS/frais/remboursements) et la page Ecommerce dédiée, mais vous gardez :\n\n• Le tracking complet (pages, sessions, touchpoints, UTM, clickIDs)\n• L'attribution last-touch (multi-touch en Pro)\n• Les objectifs personnalisés (URL, clic, soumission de formulaire, événement custom, scroll, temps sur page)\n• Le générateur UTM avec QR codes\n• Les intégrations formulaires natives (Contact Form 7, WPForms, Gravity Forms, Fluent Forms)\n• Les hooks PHP pour extension\n\nSi vous vendez via Gumroad, Stripe direct, Lemon Squeezy, Paddle ou tout autre système externe à WooCommerce, vous pouvez quand même tracker le revenu via la fonction ajnix_track_conversion(slug, $value) appelée depuis un webhook entrant. Les modèles d'attribution fonctionnent alors comme en e-commerce." },
+      { "q": "Puis-je migrer depuis un autre plugin analytics ?", "a": "Les événements historiques de votre ancien plugin (MonsterInsights, GA4, Matomo…) ne peuvent pas être importés dans Ajnix : les schémas de données diffèrent trop.\n\nNotre recommandation : laissez l'ancien plugin tourner quelques semaines en parallèle, comparez les chiffres pour calibrer, puis basculez définitivement sur Ajnix une fois satisfait.\n\nQuand la version Pro lancera, la synchronisation vers notre cloud couvrira vos nouveaux événements dès l'activation, plus l'historique encore disponible dans votre base WordPress (90 jours d'events bruts, 180 jours de sessions, toutes vos conversions et agrégats). Au-delà de ces fenêtres, les données ayant déjà été purgées par la rétention gratuite ne peuvent pas être reconstituées." }
     ],
     "ctaTitle": "Installez Ajnix en moins de 2 minutes",
     "ctaSubtitle": "Gratuit pour toujours, sans carte de crédit, sans consultants.",
@@ -268,11 +276,11 @@
     "unlocksTitle": "Ce que Pro débloque",
     "unlocks": [
       { "icon": "git-branch", "h": "5 modèles d'attribution", "b": "First-touch, Linéaire, Time-decay, Position-based, et Data-driven (machine learning)." },
-      { "icon": "zap", "h": "Sync ads native", "b": "Récupère les dépenses publicitaires depuis Google et Meta au lancement (TikTok et Pinterest dans les 2 mois). ROAS auto-matché par canal." },
+      { "icon": "zap", "h": "Sync ads native", "b": "Récupère les dépenses publicitaires depuis Google et Meta au lancement. TikTok et Pinterest arrivent peu après le launch Pro. ROAS auto-matché par canal." },
       { "icon": "activity", "h": "Visiteurs en temps réel", "b": "Flux d'événements live. Voyez qui est sur votre boutique, ce qu'ils font, ce qui vient de convertir." },
       { "icon": "git-merge", "h": "Sankey du parcours client", "b": "Visualisez chaque parcours que vos clients prennent à travers les canaux et points de contact." },
       { "icon": "sparkles", "h": "Insights IA et alertes", "b": "Détection d'anomalies sur les métriques clés. Alertes Slack et email quand quelque chose compte." },
-      { "icon": "bar-chart-3", "h": "Cohortes, funnels, heatmaps", "b": "Les analyses avancées (cohortes, funnels, heatmaps) directement sur vos données d'attribution, au même endroit." },
+      { "icon": "bar-chart-3", "h": "Cohortes et funnels", "b": "Analyses avancées (cohortes, funnels) directement sur vos données d'attribution, au même endroit." },
       { "icon": "shield-check", "h": "Conversions server-side", "b": "Meta CAPI et Google Enhanced Conversions sans code. Contournez adblockers et iOS 14.5, récupérez les conversions perdues." }
     ],
     "unlocksCtaTitle": "Comparer Gratuit, Pro et Agence",
@@ -281,7 +289,7 @@
       { "h": "50 % À VIE", "b": "Bloqué pour la durée de votre compte, même après l'augmentation de prix." },
       { "h": "ACCÈS PRIORITAIRE", "b": "Place beta dès que Pro est prêt. Pas de file, pas de gatekeeping." },
       { "h": "INFLUENCEZ LA ROADMAP", "b": "Ligne directe avec le fondateur. Votre feedback façonne ce qui sort en premier." },
-      { "h": "PRO BETA GRATUITE", "b": "Utilisez Ajnix Pro gratuitement pendant toute la beta. Ne payez rien jusqu'à la sortie de la V1 officielle." }
+      { "h": "PRO BETA GRATUITE", "b": "Utilisez Ajnix Pro gratuitement pendant toute la beta fermée (~4-6 semaines). Vous ne payez 49,50 $/mois qu'au moment de la sortie V1." }
     ],
     "matrixTitle": "Gratuit vs Pro vs Agence",
     "matrixCategories": [
@@ -291,7 +299,6 @@
           ["Commandes WooCommerce + COGS", "yes", "yes", "yes"],
           ["Formulaires et objectifs personnalisés", { "v": "yes", "note": "4 plugins + 5 objectifs" }, { "v": "yes", "note": "tous plugins + illimité" }, "yes"],
           ["Coûts marketing manuels", { "v": "yes", "note": "10 max" }, { "v": "yes", "note": "illimité" }, "yes"],
-          ["Visiteurs en temps réel", "no", "yes", "yes"],
           ["Conversions server-side (Meta CAPI, Google Enhanced)", "no", { "v": "yes", "note": "3 destinations max" }, { "v": "yes", "note": "illimité + multi-account" }],
           ["Multi-currency (conversion FX automatique)", { "v": "partial", "note": "exclusion + notice" }, "yes", "yes"],
           ["Consent Mode v2 / LDU flag", "no", "yes", "yes"]
@@ -309,8 +316,9 @@
         "name": "Tableaux de bord",
         "rows": [
           ["Détail canaux + campagnes", "yes", "yes", "yes"],
+          ["Visiteurs en temps réel", "no", "yes", "yes"],
           ["Sankey du parcours client", "no", "yes", "yes"],
-          ["Cohortes + funnels + heatmaps", "no", "yes", "yes"],
+          ["Cohortes + funnels", "no", "yes", "yes"],
           ["Dashboard multi-sites consolidé", "no", { "v": "yes", "note": "jusqu'à 3 sites" }, { "v": "yes", "note": "sites illimités + permissions avancées" }],
           ["Rapports white-label", "no", "no", "yes"]
         ]
@@ -319,7 +327,6 @@
         "name": "Sync ads",
         "rows": [
           ["Google + Meta", "no", "yes", "yes"],
-          ["TikTok + Pinterest + LinkedIn + Microsoft", "no", { "v": "partial", "note": "TikTok + Pinterest" }, "yes"],
           ["Custom event mapping (par destination)", "no", "no", "yes"]
         ]
       },
@@ -349,10 +356,11 @@
     "founderStory": "Pendant des années, j'ai géré des campagnes publicitaires, collaboré avec des media buyers, et livré des systèmes de tracking de conversion pour des clients qui voulaient comprendre leur ROI marketing.\n\nLe constat était toujours le même. Personne ne sait vraiment d'où viennent les ventes.\n\nMeta s'attribue systématiquement le mérite. Google Ads raconte une autre histoire. WooCommerce affiche encore un autre chiffre. Les trois plateformes se contredisent, et l'e-commerçant au milieu se retrouve à prendre des décisions budgétaires basées sur des données fragmentées.\n\nEt la majorité de ces boutiques tournent sur WordPress, un écosystème qui n'a jamais vraiment eu d'outil d'attribution sérieux. WooCommerce Analytics fait du last-touch et s'arrête là. GA4 ment et exige des semaines de configuration. Les outils enterprise comme Northbeam ou Hyros tournent autour de 500 $/mois, inaccessibles pour la majorité des boutiques qui font moins de 100 k$ de GMV mensuel.\n\nJ'ai construit Ajnix pour combler ce vide. Comprendre la vraie corrélation entre dépenses publicitaires et ventes en ligne. Voir quel canal génère réellement la conversion. Répondre à des questions concrètes : est-ce que mes clients découvrent ma marque via Google Ads puis convertissent après un retargeting Meta ? Quel canal est le vrai déclencheur, et lequel se contente de récolter le crédit à la fin du parcours ?\n\nAjnix répond à ça, directement dans WordPress, avec 6 modèles d'attribution, le vrai revenu net décomposé, et une conformité privacy par défaut. Pas de consultants, pas d'usines à gaz, pas de 500 $/mois.\n\nConstruit au Canada, pour des e-commerçants qui veulent arrêter de deviner.",
     "secondCtaTitle": "Réservez votre place avant que les 100 premières soient prises",
     "secondCtaSubtitle": "49,50 $/mois à vie au lieu de 99 $/mois. Lancement bientôt.",
+    "secondCtaNote": "Au-delà de 100 places, la waitlist reste ouverte avec accès prioritaire au lancement (sans remise à vie).",
     "secondCtaFallback": "Ou installez le plugin gratuit →"
   },
   "pricing": {
-    "title": "Tarification simple pour chaque étape",
+    "title": "Tarifs simples. Plugin gratuit à vie.",
     "subtitle": "Commencez gratuitement avec le plugin WordPress. Passez au Pro quand vous voulez l'attribution multi-touch complète, la sync ads et les conversions server-side.",
     "earlyBirdBanner": "49,50 $/mois à vie pour les 100 premiers membres de la liste",
     "monthly": "/mois",
@@ -371,9 +379,9 @@
           "Tracking WooCommerce complet (COGS, frais, remboursements, net)",
           "Sites illimités (instances séparées)",
           "Jusqu'à 5 objectifs personnalisés",
-          "Coûts marketing manuels (jusqu'à 10)",
+          "Jusqu'à 10 coûts marketing manuels",
           "Intégrations formulaires (CF7, WPForms, Gravity, Fluent)",
-          "90 jours d'historique d'événements"
+          "Jusqu'à 90 jours d'historique d'événements"
         ]
       },
       {
@@ -392,9 +400,11 @@
           "Visiteurs et événements en temps réel",
           "Insights IA et détection d'anomalies",
           "Historique d'événements illimité",
+          "Tous les plugins de formulaires supportés",
           "3 sites avec dashboard consolidé",
           "3 membres d'équipe",
-          "Support prioritaire sous 24 h"
+          "REST API + webhooks",
+          "Support email 24 h"
         ]
       },
       {
@@ -408,10 +418,9 @@
           "Tout le Pro, plus :",
           "Sites illimités avec dashboard avancé",
           "Membres d'équipe illimités",
-          "Sync ads toutes plateformes (+ LinkedIn, Microsoft)",
+          "Sync ads multi-account (plusieurs comptes par plateforme)",
           "Rapports white-label",
           "Gestion des permissions avancée",
-          "Accès API",
           "Support prioritaire SLA 4 h"
         ]
       }
@@ -421,9 +430,10 @@
       { "q": "Le plugin WordPress est-il vraiment gratuit pour toujours ?", "a": "Oui. Le plugin WordPress Ajnix (attribution last-touch + tracking WooCommerce complet + objectifs personnalisés + coûts manuels) restera toujours gratuit, sur un nombre illimité de sites (instances séparées, sans dashboard consolidé)." },
       { "q": "Comment fonctionne la réduction early-bird ?", "a": "Les 100 premières personnes qui rejoignent la liste d'attente Pro obtiennent 49,50 $/mois à vie au lieu de 99 $/mois, et gardent ce tarif tant que leur compte est actif." },
       { "q": "Quelle est la différence entre Free et Pro ?", "a": "Free couvre le tracking WooCommerce, l'attribution last-touch, 5 objectifs et 10 coûts manuels, sur sites illimités mais indépendants. Pro ajoute les 5 autres modèles d'attribution, l'import automatique des coûts Google Ads et Meta, les conversions server-side, les insights IA, le temps réel, et couvre 3 sites dans un dashboard consolidé avec 3 membres d'équipe." },
-      { "q": "Quand choisir Agence ?", "a": "Agence est conçu pour les agences et les brands qui opèrent plus de 3 sites ou ont besoin de rapports white-label, de permissions avancées, ou de sync ads élargie (LinkedIn, Microsoft). Sites et membres d'équipe illimités, SLA support 4 h." },
+      { "q": "Quand choisir Agence ?", "a": "Agence est conçu pour les agences et les brands qui opèrent plus de 3 sites ou ont besoin de rapports white-label, de permissions avancées, ou de sync ads multi-account (plusieurs comptes par plateforme)." },
+      { "q": "Comment fonctionne la beta Pro ?", "a": "Les 100 premiers de la waitlist obtiennent un accès gratuit à la beta fermée pendant 4 à 6 semaines après le lancement. Pendant la beta, aucun paiement. À la sortie de la V1 officielle, vous avez le choix : activer votre abonnement à 49,50 $/mois (tarif bloqué à vie tant que l'abonnement reste actif) ou ne pas continuer. Aucun engagement, pas de carte demandée avant la V1." },
       { "q": "Puis-je changer de palier plus tard ?", "a": "Oui, upgrade ou downgrade à tout moment. Facturation au prorata." },
-      { "q": "Proposez-vous une facturation annuelle ?", "a": "Oui. La facturation annuelle donne environ 17 % de réduction (2 mois offerts). Disponible au lancement." }
+      { "q": "Proposez-vous une facturation annuelle ?", "a": "Oui. La facturation annuelle donne environ 17 % de réduction (2 mois offerts). Les early bird peuvent choisir mensuel (49,50 $/mois) ou annuel (495 $/an, économie de 99 $). Disponible au lancement V1." }
     ]
   },
   "blog": {

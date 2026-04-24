@@ -50,7 +50,7 @@ export function Faq({
               role="region"
               aria-labelledby={buttonId}
               hidden={!isOpen}
-              className="pb-5 pr-10 text-[15px] leading-[1.65] text-ink-4 md:text-[16px]"
+              className="whitespace-pre-line pb-5 pr-10 text-[15px] leading-[1.65] text-ink-4 md:text-[16px]"
             >
               {item.a}
             </div>

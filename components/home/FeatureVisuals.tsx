@@ -79,9 +79,17 @@ export function PrivacyVisual() {
 
   return (
     <Card className="p-7">
-      <div className="grid grid-cols-3 items-center gap-2">
-        {steps.map((s, i) => (
-          <div key={s.label} className="flex items-center">
+      <div className="relative grid grid-cols-3 items-center">
+        <div
+          aria-hidden
+          className="absolute left-[16.667%] right-[16.667%] top-1/2 h-0.5 -translate-y-1/2 bg-rule"
+        />
+        <div
+          aria-hidden
+          className="absolute left-[16.667%] top-1/2 h-0.5 w-1/3 -translate-y-1/2 bg-ajx-gradient opacity-60"
+        />
+        {steps.map((s) => (
+          <div key={s.label} className="relative z-10 flex justify-center">
             <div
               className={
                 s.variant === 'plain'
@@ -93,13 +101,6 @@ export function PrivacyVisual() {
             >
               <Icon d={s.icon} size={22} />
             </div>
-            {i < steps.length - 1 && (
-              <div className="relative h-0.5 flex-1 bg-rule">
-                {i === 0 && (
-                  <div className="absolute inset-0 opacity-60 bg-ajx-gradient" />
-                )}
-              </div>
-            )}
           </div>
         ))}
       </div>

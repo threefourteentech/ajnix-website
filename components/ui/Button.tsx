@@ -1,6 +1,7 @@
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { forwardRef } from 'react';
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { Link as LocalizedLink } from '@/i18n/routing';
 import { cn } from '@/lib/cn';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'white' | 'outline-white';
@@ -57,15 +58,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   if ('href' in props && props.href) {
     const { href, target, rel } = props;
     const isExternal = href.startsWith('http');
+    if (isExternal) {
+      return (
+        <NextLink
+          href={href}
+          className={classes}
+          target={target ?? '_blank'}
+          rel={rel ?? 'noopener noreferrer'}
+        >
+          {children}
+        </NextLink>
+      );
+    }
     return (
-      <Link
-        href={href}
+      <LocalizedLink
+        href={href as Parameters<typeof LocalizedLink>[0]['href']}
         className={classes}
-        target={target ?? (isExternal ? '_blank' : undefined)}
-        rel={rel ?? (isExternal ? 'noopener noreferrer' : undefined)}
+        target={target}
+        rel={rel}
       >
         {children}
-      </Link>
+      </LocalizedLink>
     );
   }
 

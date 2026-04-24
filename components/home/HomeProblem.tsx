@@ -5,6 +5,18 @@ import { Section } from '@/components/ui/Section';
 type Problem = { h: string; b: string };
 const icons = [EyeOff, Settings2, LayoutGrid] as const;
 
+function renderWithBold(text: string) {
+  return text.split(/\*\*([^*]+)\*\*/g).map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-ink-2">
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function HomeProblem() {
   const t = useTranslations('home');
   const problems = t.raw('problems') as Problem[];
@@ -33,7 +45,7 @@ export function HomeProblem() {
                 <Icon size={22} strokeWidth={2} />
               </div>
               <h3 className="mb-2 mt-[18px] text-[20px] font-semibold">{p.h}</h3>
-              <p className="text-[15px] leading-[1.6] text-ink-4">{p.b}</p>
+              <p className="text-[15px] leading-[1.6] text-ink-4">{renderWithBold(p.b)}</p>
             </div>
           );
         })}

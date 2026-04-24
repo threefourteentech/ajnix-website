@@ -302,6 +302,9 @@ export default async function ProWaitlistPage({
             <p className="mx-auto mt-4 max-w-[52ch] text-[16px] text-ink-4 md:text-[17px]">
               {t('secondCtaSubtitle')}
             </p>
+            <p className="mx-auto mt-2 max-w-[56ch] text-[13px] text-ink-5 md:text-[14px]">
+              {t('secondCtaNote')}
+            </p>
             <div className="mx-auto mt-8 max-w-[520px] text-left">
               <WaitlistForm initialCounter={counter} source="waitlist-banner" variant="banner" />
             </div>

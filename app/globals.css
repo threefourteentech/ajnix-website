@@ -268,3 +268,9 @@
   background: var(--canvas);
   color: var(--ink-2);
 }
+
+/* Hide the reCAPTCHA v3 floating badge globally — the Google T&C
+   notice is shown inline inside each form (required by Google). */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}

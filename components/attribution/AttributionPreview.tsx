@@ -27,9 +27,9 @@ const models: Model[] = [
     active: true,
     channels: [
       { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.64 },
-      { name: 'Email', color: COLORS.Email, share: 0.24 },
-      { name: 'Meta', color: COLORS.Meta, share: 0.10 },
-      { name: 'Organic', color: COLORS.Organic, share: 0.02 },
+      { name: 'Email', color: COLORS.Email, share: 0.18 },
+      { name: 'Meta', color: COLORS.Meta, share: 0.12 },
+      { name: 'Organic', color: COLORS.Organic, share: 0.06 },
     ],
   },
   {
@@ -37,10 +37,10 @@ const models: Model[] = [
     sub: 'Pro',
     active: false,
     channels: [
-      { name: 'Organic', color: COLORS.Organic, share: 0.41 },
-      { name: 'Meta', color: COLORS.Meta, share: 0.28 },
-      { name: 'Email', color: COLORS.Email, share: 0.20 },
-      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.11 },
+      { name: 'Organic', color: COLORS.Organic, share: 0.58 },
+      { name: 'Meta', color: COLORS.Meta, share: 0.22 },
+      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.12 },
+      { name: 'Email', color: COLORS.Email, share: 0.08 },
     ],
   },
   {
@@ -50,8 +50,8 @@ const models: Model[] = [
     channels: [
       { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.30 },
       { name: 'Email', color: COLORS.Email, share: 0.25 },
-      { name: 'Meta', color: COLORS.Meta, share: 0.25 },
-      { name: 'Organic', color: COLORS.Organic, share: 0.20 },
+      { name: 'Meta', color: COLORS.Meta, share: 0.23 },
+      { name: 'Organic', color: COLORS.Organic, share: 0.22 },
     ],
   },
   {
@@ -59,10 +59,10 @@ const models: Model[] = [
     sub: 'Pro',
     active: false,
     channels: [
-      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.45 },
-      { name: 'Email', color: COLORS.Email, share: 0.28 },
-      { name: 'Meta', color: COLORS.Meta, share: 0.20 },
-      { name: 'Organic', color: COLORS.Organic, share: 0.07 },
+      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.52 },
+      { name: 'Email', color: COLORS.Email, share: 0.22 },
+      { name: 'Meta', color: COLORS.Meta, share: 0.18 },
+      { name: 'Organic', color: COLORS.Organic, share: 0.08 },
     ],
   },
   {
@@ -70,10 +70,10 @@ const models: Model[] = [
     sub: 'Pro',
     active: false,
     channels: [
-      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.35 },
-      { name: 'Email', color: COLORS.Email, share: 0.25 },
-      { name: 'Organic', color: COLORS.Organic, share: 0.25 },
-      { name: 'Meta', color: COLORS.Meta, share: 0.15 },
+      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.38 },
+      { name: 'Organic', color: COLORS.Organic, share: 0.36 },
+      { name: 'Email', color: COLORS.Email, share: 0.14 },
+      { name: 'Meta', color: COLORS.Meta, share: 0.12 },
     ],
   },
   {
@@ -81,10 +81,10 @@ const models: Model[] = [
     sub: 'Pro · ML',
     active: false,
     channels: [
-      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.37 },
+      { name: 'Google Ads', color: COLORS['Google Ads'], share: 0.42 },
       { name: 'Email', color: COLORS.Email, share: 0.30 },
-      { name: 'Meta', color: COLORS.Meta, share: 0.24 },
-      { name: 'Organic', color: COLORS.Organic, share: 0.09 },
+      { name: 'Meta', color: COLORS.Meta, share: 0.18 },
+      { name: 'Organic', color: COLORS.Organic, share: 0.10 },
     ],
   },
 ];
@@ -147,9 +147,20 @@ export function AttributionPreview({ compact = false }: { compact?: boolean }) {
                   {m.sub === 'Free' ? t('planFree') : t('planPro')}
                 </span>
               </div>
-              <div className="font-mono text-[12px] font-semibold leading-tight tracking-[-0.01em] text-ink-2 sm:text-[13px]">
-                <span className="block truncate">{dominant.name}</span>
-                <span className="text-ink">{dominantPct}%</span>
+              <div className="font-mono leading-tight tracking-[-0.01em]">
+                <div className="flex items-baseline justify-between gap-2 text-[12px] font-semibold text-ink-2 sm:text-[13px]">
+                  <span className="truncate">{dominant.name}</span>
+                  <span className="text-ink">{dominantPct}%</span>
+                </div>
+                {m.channels.slice(1).map((c) => (
+                  <div
+                    key={c.name}
+                    className="mt-0.5 flex items-baseline justify-between gap-2 text-[10px] text-ink-5"
+                  >
+                    <span className="truncate">{c.name}</span>
+                    <span>{Math.round(c.share * 100)}%</span>
+                  </div>
+                ))}
               </div>
               <div className="mt-2.5 flex h-1.5 gap-0.5 overflow-hidden rounded-[2px]">
                 {CHANNELS.map((cn) => {

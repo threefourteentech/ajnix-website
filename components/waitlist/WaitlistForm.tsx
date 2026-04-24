@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Checkmark } from '@/components/ui/Icon';
+import { RecaptchaNotice } from '@/components/ui/RecaptchaNotice';
 
 type FormValues = { email: string };
 
@@ -226,6 +227,8 @@ export function WaitlistForm({ initialCounter, source, variant: _variant = 'hero
       <div className="mt-4 font-mono text-[12px] tracking-[0.04em] text-ink-5">
         {t('trustLine')}
       </div>
+
+      <RecaptchaNotice className="mt-3 text-[11px] leading-[1.5] text-ink-6" />
     </div>
   );
 }
